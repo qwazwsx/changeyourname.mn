@@ -40,7 +40,7 @@ function update(e) {
     // Save to localStorage
     localStorage.setItem(id, isChecked);
 
-    document.querySelector(`label.${id}`).classList.toggle('checked', checkbox.checked);
+    document.querySelector(`label.${id}`)?.classList?.toggle?.('checked', checkbox.checked);
 
     document.querySelectorAll(`input[type="checkbox"][id]#${id}`).forEach(cb => {
         cb.checked = checkbox.checked;
