@@ -1,0 +1,236 @@
+html{scroll-behavior: smooth;}
+
+body {
+    color: black;
+    background: linear-gradient(to bottom, #ff7096d4, /* cherry blossom pink */ #ffb347d4, /* warm peachy orange */ #fdfd66d4, /* banana yellow */ #80f28fd4, /* spring green */ #5edbffd4, /* clear blue */ #709effd4, /* soft indigo */ #b586ffd4 /* rich lavender */);
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    animation: moveGradient 120s ease-in-out infinite;
+    /* background-size: 100% 200%; /* Double the height to allow movement */
+    */
+}
+
+body {
+    opacity: 0;
+    transition: opacity .3s ease-in;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+body.fade-in {
+    opacity: 1;
+}
+
+b {
+    /* color:#444; */
+}
+
+@keyframes moveGradient {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    50% {
+        background-position: 0% 100%;
+    }
+
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+div.header {
+    text-align: center;
+}
+
+h1,h2,h3,h4,h5 {
+    margin-bottom: 5px;
+}
+
+div.header .subtitle * {
+    font-weight: 300;
+    font-size: 20px;
+}
+
+div.intro ol {
+    font-style: italic;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 10px solid #ffffff2b;
+    margin: 1em 0;
+    padding: 0;
+    border-radius: 10px;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.assumptions p {
+    display: none;
+}
+
+.assumptions p.visible {
+    display: block;
+}
+
+label.header {
+    font-size: 30px;
+    /* transform: scale(.98); */
+    display: block;
+    transition: transform .3s ease;
+    width: fit-content;
+    user-select: none;
+    cursor: pointer;
+}
+
+label.header input {
+    height: 50px;
+    width: 50px;
+}
+
+label.header p {
+    display: inline;
+    /* padding-bottom: 71px; */
+    top: -.5em;
+    position: relative;
+    font-weight: 800;
+}
+
+.note {
+    margin-left: 10%;
+    margin-right: 10%;
+    background-color: #ffffff7a;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.obtainForms li {
+    /* padding-bottom: 5px; */
+}
+
+.obtainForms p.subinfo {
+    margin: 0px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+label.header:active {
+    /* scale: .98; */
+    transform: scale(.98) !important;
+}
+
+label.header:hover {
+    transform: scale(1.02);
+}
+
+a:hover {
+    color: #2b2b2b;
+    font-weight: 500;
+    /* animation: soft-wiggle 0.4s ease-in-out; */
+}
+
+a {
+    position: relative;
+    display: inline-block;
+    color: #3f3f3f;
+    transition: color .3s ease, font-weight .3s ease;
+    /* color: #333; */
+}
+
+a::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    opacity: .5;
+    background: linear-gradient(90deg, #ffffff70, #ffffff);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+}
+
+a:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+/* @keyframes soft-wiggle {
+  0%, 100% {
+    transform: rotate(0deg) translate(0, 0);
+  }
+  25% {
+    transform: rotate(.75deg) translate(1px, -0.5px);
+  }
+  50% {
+    transform: rotate(-.75deg) translate(-1px, 1px);
+  }
+  75% {
+    transform: rotate(.5deg) translate(0.5px, -1px);
+  }
+} */
+
+.tableofcontents label.header a {
+    font-size: 20px !important;
+    top: -0.15em;
+    font-weight: 800;
+}
+
+.tableofcontents label.header input {
+    height: 20px;
+    width: 20px;
+}
+
+label.header a {
+    /* font-size: initial; */
+    /* font-weight: 400; */
+}
+
+input[type="checkbox"] {
+    /* background-color: transparent; */
+    /* accent-color: #f0f8ff; */
+}
+
+.footer {
+    /* position: absolute; */
+    text-align: center;
+    /* top: 0px; */
+}
+
+div#confetti {
+    user-select: none;
+    pointer-events: none;
+}
+
+html.celebrate {
+    background-image: url('images/spin.gif');
+}
+
+.tableofcontents .checked a{
+    font-weight: 400 !important;
+}
+
+img.img {
+    display: block;
+    margin: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    margin-bottom: 40px;
+}
+
+img.emoji {
+    width: 20px;
+    height: 20px;
+}
+
+h2 img.emoji {
+    width: 40px;
+    height: 40px;
+}
