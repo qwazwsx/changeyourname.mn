@@ -263,3 +263,9 @@ a.form-generator {
     align-content: center;
     justify-content: center;
 }
+
+.section {
+    background-color: #ffffff3b;
+    padding: 5px;
+    border-radius: 10px;
+}
