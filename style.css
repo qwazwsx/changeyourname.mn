@@ -9,7 +9,7 @@ body {
     font-variation-settings: "wdth" 100;
     animation: moveGradient 120s ease-in-out infinite;
     /* background-size: 100% 200%; /* Double the height to allow movement */
-    */
+    
 }
 
 body {
@@ -141,6 +141,7 @@ a {
     color: #3f3f3f;
     transition: color .3s ease, font-weight .3s ease;
     /* color: #333; */
+    font-size: 16px;
 }
 
 a::after {
