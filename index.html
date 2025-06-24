@@ -299,7 +299,8 @@
             </label>
         </h2>
 
-        <p>You have three options for obtaining and filling out the forms you need. They are ordered by how much time and effort they require.</p>
+        <p>You have three options for obtaining and filling out the forms you need. They are ordered by how much time
+            and effort they require.</p>
         <ol>
             <li>Use the Automatic Form Generator <b>(recommended)</b></li>
             <p>Simply enter your information once and the website will auto fill all three PDFs for you</p>
@@ -786,20 +787,88 @@
 
         <p>
             After the hearing, the judge will sign the order. You can get a certified copy of this order from the court
-            for a small fee (~$14). This is a physical copy, sealed in an envelope, that can be used for official
+            for a small fee (~$14). This is a physical copy, stamped with an embossed seal, that can be used for
+            official
             purposes. You will need this to change your name on your birth certificate, social security card, and
             driver's license.
         </p>
         <p>
-            You can request certified copies of the order by mail, in person, or online. If you are requesting them by
-            mail, you will need to include a check for the fee and a self-addressed stamped envelope. If you are
-            requesting them in person, you can pay with cash, check, or card.
+            You can request certified copies of the order by mail, in person, or online.
+        </p>
 
+        <h2>Requesting In Person</h2>
 
+        <ol>
+            <li>Find where your county records office is.</li>
+            <ul>
+                <li>
+                    <a href="https://www.mncourts.gov/Help-Topics/Copy-Request.aspx#tabForms" target="_blank"
+                        rel="noopener">Check the Copy Request County List for county specific information.</a>
+                </li>
+                <li>Search your county's page for information on where the County Records Office is.</li>
+                <li>For Hennepin county, the Records Office is located in the Hennepin County Government Center
+                    at 300 South 6th Street room A250. Go past the security check and continue straight forwards to the
+                    Records Office.</li>
+            </ul>
+            <li>Show up</li>
+            <ul>
+                <li>Bring your case number</li>
+                <li>Bring cash to pay the fees, in case credit cards are not accepted</li>
+                <ul>
+                    <li>Hennepin county is able to accept debit and credit cards and there is an ATM in the US Bank
+                        building across the skyway should you need it.</li>
+                </ul>
+                <li>Bring Photo ID, in case it is required</li>
+                <li>If you want to expedite the process, bring a printed version of the <a
+                        href="pdfs/Copy_Request_Form.pdf" target="_blank" rel="noopener">Copy
+                        Request Form</a></li>
+            </ul>
+            <li>Tell the clerk you are looking for certified copies</li>
+            <ul>
+                <li>If you filled out the Copy Request Form, present it now to expedite the process.</li>
+                <li>They will ask for the name of the Petitioner (the name you originally filed with, your deadname)
+                </li>
+                <li>They will ask for your case number and potentially the date of the order</li>
+                <li>They will ask how many copies you want</li>
+                <li>They will ask for payment of ~$14 per certified copy</li>
+            </ul>
+        </ol>
 
+        <h2>Requesting Online (to receive copies via mail)</h2>
 
-            <!-- <a>Further Reading.</a> -->
-            <!-- https://www.mncourts.gov/Help-Topics/Copy-Request.aspx -->
+        <ol>
+            <li>Fill out the <a href="pdfs/Copy_Request_Form.pdf" target="_blank" rel="noopener">Statewide Copy Request
+                    Form</a> or <a href="https://www.mncourts.gov/Help-Topics/Copy-Request.aspx#tabForms"
+                    target="_blank" rel="noopener">find your county specific one here</a></li>
+            <ul>
+                <li>Use your previous legal name (deadname) under "Plaintiff/Petitioner"</li>
+            </ul>
+            <li><a href="https://minnesota.tylertech.cloud/OfsWeb/" target="_blank" rel="noopener">Log into the eFile system</a></li>
+            <li>Under the header <i>"My Filing Activity"</i>, click <i>"Accepted"</i></li>
+            <li>Find your case, it's probably the only one listed.</li>
+            <li>Click <i>Actions > File into Case</i></li>
+            <li>To avoid confusion, do not change the party information to your new name.</li>
+            <li>Under filings, fill out the following:</li>
+            <img class="img" src="images/eFile_certifiedCopy.png" width="500px" alt="eFile Filings Tab" />
+            <ul>
+                <li>Filing Code: "Copy Request"</li>
+                <li>Description: "Copy Request Form"</li>
+                <li>Client Reference Number: 4</li>
+                <li>Comments to Court: "Public"</li>
+                <li>Courtesy Copies: enter your email address</li>
+                <li>Upload the completed copy request form as a PDF</li>
+                <li>Optional Services and Fees: add as many certified copies as you need.</li>
+            </ul>
+            <li>Select a payment account</li>
+            <li>Click Summary to move to the next step</li>
+            <li>Submit your filing</li>
+        </ol>
+
+        <h2>Requesting via Mail</h2>
+
+        <a href="https://www.mncourts.gov/Help-Topics/Copy-Request.aspx#tabForms" target="_blank"
+                        rel="noopener">Find more information on requesting copies via mail here</a>.
+
     </div>
 
     <hr>
@@ -849,6 +918,19 @@
 
         gtag('config', 'G-ZQTGQ207FY');
     </script>
+    <script type="importmap">
+      {
+        "imports": {
+          "@material/web/": "https://esm.run/@material/web/"
+        }
+      }
+    </script>
+    <script type="module">
+    import '@material/web/all.js';
+    import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
+
+    document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+  </script>
 </body>
 
 </html>
