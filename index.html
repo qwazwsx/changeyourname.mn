@@ -3,14 +3,19 @@
 <!-- <bark>bark</bark> -->
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.8.1/tsparticles.confetti.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@twemoji/api@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.8.1/tsparticles.confetti.bundle.min.js"
+        defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@twemoji/api@latest/dist/twemoji.min.js" crossorigin="anonymous"
+        defer></script>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
 
     <link rel="icon" type="image/x-icon" href="images/favicon.png">
     <title>Trans Name Change Guide - Change Your Legal Name in Minnesota</title>
@@ -385,7 +390,8 @@
         <p><a href="https://www.mncourts.gov/GetForms.aspx?c=27" target="_blank" rel="noopener">Download the forms
                 required from the court website here.</a> You will need to either print and scan these or edit them
             using the PDF software of your choosing. <b>If you have been married or divorced, have children, have a
-                criminal history, or own land, this is the option you will be required to choose</b>. The Automatic Form
+                criminal history, or own land, this is the option you will be required to choose</b>. You may use the
+            automatic or interactive forms above as a starting point. The Automatic Form
             Generator and modified PDF files have only been prepared to fit the most common cases. <a
                 href="limitations.html" target="_blank">(why?)</a> For various technical (and some Adobe) reasons,
             editing PDFs is really challenging. I recommend avoiding this option if you can.</p>
@@ -496,7 +502,7 @@
                 href="https://www.mncourts.gov/eFS-Support" target="_blank" rel="noopener">eFS support center</a>.</p>
 
 
-        <img class="img" src="images/eFile_home.png" width="800px" alt="eFile Home Page" />
+        <amp-img class="img" src="images/eFile_home.png" width="800px" height="422px" alt="eFile Home Page"></amp-img>
         <b>Setup Your Account</b>
         <ol>
             <li><a href="https://minnesota.tylertech.cloud/ofsweb" target="_blank" rel="noopener">Register for an
@@ -507,8 +513,10 @@
 
         <hr>
 
-        <img class="img" src="images/eFile_header.png" width="800px" alt="eFile New Case Envelope Header" />
-        <img class="img" src="images/eFile_name.png" width="800px" alt="eFile Party Information" />
+        <amp-img class="img" src="images/eFile_header.png" width="800px" height="300px"
+            alt="eFile New Case Envelope Header"></amp-img>
+        <amp-img class="img" src="images/eFile_name.png" width="800px" height="800px"
+            alt="eFile Party Information"></amp-img>
         <b>Create a new case envelope</b>
         <ol>
             <li>Click "Start a New Case"</li>
@@ -518,7 +526,8 @@
 
         <hr>
 
-        <img class="img" src="images/eFile_docs.png" width="800px" alt="eFile Upload Documents" />
+        <amp-img class="img" src="images/eFile_docs.png" width="800px" height="800px"
+            alt="eFile Upload Documents"></amp-img>
         <b>Upload your Documents (1/3)
         </b>
         <ol>
@@ -559,7 +568,8 @@
             <li>Click save.</li>
         </ol>
 
-        <img class="img" src="images/eFile_allDocuments.png" width="800px" alt="eFile Uploaded Documents" />
+        <amp-img class="img" src="images/eFile_allDocuments.png" width="800px" height="230px"
+            alt="eFile Uploaded Documents"></amp-img>
 
         <hr>
 
@@ -843,7 +853,8 @@
             <ul>
                 <li>Use your previous legal name (deadname) under "Plaintiff/Petitioner"</li>
             </ul>
-            <li><a href="https://minnesota.tylertech.cloud/OfsWeb/" target="_blank" rel="noopener">Log into the eFile system</a></li>
+            <li><a href="https://minnesota.tylertech.cloud/OfsWeb/" target="_blank" rel="noopener">Log into the eFile
+                    system</a></li>
             <li>Under the header <i>"My Filing Activity"</i>, click <i>"Accepted"</i></li>
             <li>Find your case, it's probably the only one listed.</li>
             <li>Click <i>Actions > File into Case</i></li>
@@ -866,8 +877,8 @@
 
         <h2>Requesting via Mail</h2>
 
-        <a href="https://www.mncourts.gov/Help-Topics/Copy-Request.aspx#tabForms" target="_blank"
-                        rel="noopener">Find more information on requesting copies via mail here</a>.
+        <a href="https://www.mncourts.gov/Help-Topics/Copy-Request.aspx#tabForms" target="_blank" rel="noopener">Find
+            more information on requesting copies via mail here</a>.
 
     </div>
 
@@ -910,7 +921,7 @@
 
     <script src="script.js"></script>
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZQTGQ207FY"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZQTGQ207FY" defer></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
@@ -925,12 +936,15 @@
         }
       }
     </script>
-    <script type="module">
-    import '@material/web/all.js';
-    import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
+    <script>
+        twemoji.parse(document.body)
+    </script>
+    <!-- <script type="module">
+        import '@material/web/all.js';
+        import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
 
-    document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
-  </script>
+        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script> -->
 </body>
 
 </html>
