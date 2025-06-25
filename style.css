@@ -218,7 +218,7 @@ html.celebrate {
     font-weight: 400 !important;
 }
 
-img.img {
+amp-img.img {
     display: block;
     margin: auto;
     border-radius: 15px;
