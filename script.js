@@ -74,7 +74,7 @@ function loadSavedStates() {
 
     let inputs = document.querySelectorAll('.tableofcontents input')
     // let links = document.querySelectorAll('.tableofcontents a')
-    
+
     inputs.forEach((input, i) => {
         if (input.checked) {
             input.parentElement.classList.add('checked');
@@ -123,30 +123,30 @@ document.querySelector('#celebrateButton').addEventListener('click', () => {
         }, 2500)
         audio.play();
         audio.volume = .05
-    }else{
+    } else {
         document.querySelector('html').classList.remove('celebrate');
         audio.pause()
         audio.currentTime = 0;
     }
-   
+
 })
 
 
-function registerConfettiHooks(){
-// Celebrate with confetti and sound when the hearing checkbox is checked
-const audio = new Audio('celebrate.mp3');
-document.querySelectorAll('input#hearing').forEach(input => {
-    input.addEventListener('change', (e) => {
-        // alert(1)
-        if (e.target.checked) {
-            
-        } else {
-            audio.pause();
-            audio.currentTime = 0;
-        }
+function registerConfettiHooks() {
+    // Celebrate with confetti and sound when the hearing checkbox is checked
+    const audio = new Audio('celebrate.mp3');
+    document.querySelectorAll('input#hearing').forEach(input => {
+        input.addEventListener('change', (e) => {
+            // alert(1)
+            if (e.target.checked) {
+
+            } else {
+                audio.pause();
+                audio.currentTime = 0;
+            }
+        })
+
     })
-
-})
 
 }
 
@@ -195,11 +195,55 @@ function fire(particleRatio, opts) {
 }
 
 
-navigator.mediaSession.setActionHandler('play', function() { /* Code excerpted. */ });
-navigator.mediaSession.setActionHandler('pause', function() { /* Code excerpted. */ });
-navigator.mediaSession.setActionHandler('seekbackward', function() { /* Code excerpted. */ });
-navigator.mediaSession.setActionHandler('seekforward', function() { /* Code excerpted. */ });
-navigator.mediaSession.setActionHandler('previoustrack', function() { /* Code excerpted. */ });
-navigator.mediaSession.setActionHandler('nexttrack', function() { /* Code excerpted. */ });
+navigator.mediaSession.setActionHandler('play', function () { /* Code excerpted. */ });
+navigator.mediaSession.setActionHandler('pause', function () { /* Code excerpted. */ });
+navigator.mediaSession.setActionHandler('seekbackward', function () { /* Code excerpted. */ });
+navigator.mediaSession.setActionHandler('seekforward', function () { /* Code excerpted. */ });
+navigator.mediaSession.setActionHandler('previoustrack', function () { /* Code excerpted. */ });
+navigator.mediaSession.setActionHandler('nexttrack', function () { /* Code excerpted. */ });
 
 
+const REDIRECT_URL = "https://www.google.com";
+const OPEN_URL = "https://en.wikipedia.org/wiki/Special:Random";
+let escCounter = 0;
+let tapCounter = 0;
+let escapeTimeout;
+let tapTimeout;
+
+function redirectNow() {
+    window.open(OPEN_URL, '_blank');
+    location.replace(REDIRECT_URL);
+}
+
+// ESCAPE HANDLER (Desktop)
+document.addEventListener('keyup', function (e) {
+    if (e.key === 'Escape' || e.code === 'Escape') {
+        escCounter++;
+        clearTimeout(escapeTimeout);
+        escapeTimeout = setTimeout(() => {
+            escCounter = 0;
+        }, 1000);
+
+        if (escCounter >= 3) {
+            redirectNow();
+        }
+    }
+});
+
+// TOUCH HANDLER (Mobile)
+document.addEventListener('touchstart', function (e) {
+    if (e.touches.length > 1) {
+        tapCounter = 0; // Ignore multi-finger
+        return;
+    }
+
+    tapCounter++;
+    clearTimeout(tapTimeout);
+    tapTimeout = setTimeout(() => {
+        tapCounter = 0;
+    }, 500);
+
+    if (tapCounter >= 3) {
+        redirectNow();
+    }
+});
