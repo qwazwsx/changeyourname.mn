@@ -2,10 +2,13 @@ if (window.location.protocol != "file:") {
     alert("This is a work in progress. I am not a lawyer. This is not legal advice. -Emma")
 }
 
-
+// default to introduction being checked
 document.querySelector('input#introduction').checked = true;
 
-
+// unwrap assumption checkboxes when printing
+window.addEventListener("beforeprint", (event) => {
+    document.body.classList.add('print');
+});
 
 // Helper function to set a cookie
 function setCookie(name, value, days = 365) {
