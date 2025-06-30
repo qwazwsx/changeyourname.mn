@@ -1,23 +1,43 @@
+# Redirect www.changeyourname.mn → changeyourname.mn (HTTP)
 server {
-    server_name changeyourname.mn www.changeyourname.mn;
+    listen 80;
+    server_name www.changeyourname.mn;
+    return 301 https://changeyourname.mn$request_uri;
+}
+
+# Redirect www.changeyourname.mn → changeyourname.mn (HTTPS)
+server {
+    listen 443 ssl;
+    server_name www.changeyourname.mn;
+
+    ssl_certificate /etc/letsencrypt/live/changeyourname.mn/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/changeyourname.mn/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+    return 301 https://changeyourname.mn$request_uri;
+}
+
+# Actual site (only changeyourname.mn)
+server {
+    listen 80;
+    server_name changeyourname.mn;
+    return 301 https://changeyourname.mn$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name changeyourname.mn;
 
     root /var/www/changeyourname.mn;
     index index.html;
 
+    ssl_certificate /etc/letsencrypt/live/changeyourname.mn/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/changeyourname.mn/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
     location / {
         try_files $uri $uri/ =404;
     }
-
-    listen 443 ssl; # managed by Certbot
-    ssl_certificate /etc/letsencrypt/live/changeyourname.mn/fullchain.pem; # managed by Certbot
-    ssl_certificate_key /etc/letsencrypt/live/changeyourname.mn/privkey.pem; # managed by Certbot
-    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
-    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
-
-
-}
-server {
-    listen 80;
-    server_name changeyourname.mn www.changeyourname.mn;
-    return 301 https://$host$request_uri;
 }
