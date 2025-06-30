@@ -141,7 +141,7 @@ a {
     color: #3f3f3f;
     transition: color .3s ease, font-weight .3s ease;
     /* color: #333; */
-    font-size: 16px;
+    font-size: 1em;
 }
 
 a::after {
@@ -224,6 +224,7 @@ amp-img.img {
     border-radius: 15px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     margin-bottom: 40px;
+    /* width: 100%; */
 }
 
 img.emoji {
@@ -271,4 +272,14 @@ a.form-generator {
     background-color: #ffffff3b;
     padding: 5px;
     border-radius: 10px;
+}
+
+
+body.mobile {}
+
+body.mobile amp-img.img {
+    width: 100% !important;
+    /* height: fit-content !important; */
+    /* height: 100px; */
+    /* height: auto !important; */
 }
