@@ -1,5 +1,5 @@
 if (window.location.protocol != "file:") {
-    alert("This is a work in progress. I am not a lawyer. This is not legal advice. -Emma")
+    alert("You are viewing an outdated version. This simplified version will no longer be updated. See the main version at changeyourname.mn")
 }
 
 // default to introduction being checked
