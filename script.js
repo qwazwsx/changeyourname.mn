@@ -358,4 +358,6 @@ document.addEventListener('touchstart', function (e) {
 // ACCESSIBILITY WIDGET
 document.querySelector('#accessibility').addEventListener('click', () => {
     document.querySelector('.asw-widget a').click();
+    document.querySelector('button.asw-btn[data-key="monochrome"]').click();
+    document.querySelector('button.asw-btn[data-key="stop-animations"]').click();
 });

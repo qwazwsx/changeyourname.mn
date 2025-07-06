@@ -1306,4 +1306,6 @@ a#moreConfetti {
     display: none;
 }
 
-a[href^="#"] {color: black;}
+a[href^="#"] {
+    color: black;
+}
