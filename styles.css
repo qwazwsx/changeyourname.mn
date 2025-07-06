@@ -1279,6 +1279,28 @@ a#moreConfetti {
     }
 }
 
+/* Navigation Drawer Additional Styles */
+.nav-divider {
+    margin: 1rem 0;
+    border: none;
+    height: 1px;
+    background: var(--md-sys-color-outline-variant);
+}
+
+.nav-item--secondary {
+    opacity: 0.8;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+.nav-item--secondary:hover {
+    opacity: 1;
+    background: var(--md-sys-color-surface-container-high);
+}
+
+.nav-item--secondary .material-symbols-outlined {
+    font-size: 1.25rem;
+}
 
 .asw-widget {
     display: none;
