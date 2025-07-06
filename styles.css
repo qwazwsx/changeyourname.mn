@@ -1023,6 +1023,95 @@ a#moreConfetti {
     flex-wrap: wrap;
 }
 
+/* Funding Progress Styles */
+.funding-progress {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: var(--md-sys-color-surface-container-low);
+    border-radius: 12px;
+    border: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.funding-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.funding-current {
+    color: var(--md-sys-color-primary);
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.funding-separator {
+    color: var(--md-sys-color-on-surface-variant);
+    font-size: 0.875rem;
+}
+
+.funding-goal {
+    color: var(--md-sys-color-on-surface);
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.funding-percentage {
+    color: var(--md-sys-color-on-surface-variant);
+    font-size: 0.875rem;
+}
+
+.funding-description {
+    text-align: center;
+    margin: 0.5rem 0 0 0;
+    font-size: 0.875rem;
+    color: var(--md-sys-color-on-surface-variant);
+    font-style: italic;
+}
+
+/* Custom progress bar styling */
+md-linear-progress {
+    --md-linear-progress-track-color: var(--md-sys-color-surface-variant);
+    --md-linear-progress-active-indicator-color: var(--md-sys-color-primary);
+    --md-linear-progress-track-height: 8px;
+    border-radius: 4px;
+}
+
+/* Contribution ideas styling */
+.contribution-ideas {
+    margin: 1rem 0;
+    padding: 1rem;
+    background: var(--md-sys-color-surface-container-lowest);
+    border-radius: 8px;
+    border: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.contribution-ideas h4 {
+    margin: 0 0 0.75rem 0;
+    color: var(--md-sys-color-primary);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.contribution-ideas ul {
+    margin: 0;
+    padding-left: 1.25rem;
+}
+
+.contribution-ideas li {
+    margin: 0.5rem 0;
+    color: var(--md-sys-color-on-surface);
+    line-height: 1.4;
+    font-size: 0.9rem;
+}
+
+.contribution-ideas li strong {
+    color: var(--md-sys-color-primary);
+    font-weight: 500;
+}
+
 .support-message {
     margin-top: 2rem;
     padding: 1.5rem;
