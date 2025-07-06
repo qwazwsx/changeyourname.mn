@@ -1409,12 +1409,25 @@
                                 name in Minnesota</a> helpful, please consider:</p>
 
                         <div class="support-options">
-                            <div class="support-option">
+                            <div class="support-option fund">
                                 <span class="material-symbols-outlined support-icon">volunteer_activism</span>
                                 <div class="support-option-content">
                                     <h3>Help Fund This Site</h3>
                                     <p>Help offset the ~$200/year it takes to run this site. I am very broke idk why I
                                         committed to this. Anything helps.</p>
+
+                                    <!-- Funding Progress -->
+                                    <div class="funding-progress">
+                                        <div class="funding-info">
+                                            <span class="funding-current">$25</span>
+                                            <span class="funding-separator">of</span>
+                                            <span class="funding-goal">$200</span>
+                                            <span class="funding-percentage">(13%)</span>
+                                        </div>
+                                        <md-linear-progress value="0.23" style="margin: 8px 0;"></md-linear-progress>
+                                        <p class="funding-description">Annual hosting costs</p>
+                                    </div>
+
                                     <div class="support-buttons">
                                         <md-filled-button
                                             onclick="window.open('https://ko-fi.com/emmazimbinski', '_blank')"
@@ -1426,26 +1439,67 @@
                                 </div>
                             </div>
 
-                            <div class="support-option">
+                            <div class="support-option share">
                                 <span class="material-symbols-outlined support-icon">share</span>
                                 <div class="support-option-content">
                                     <h3>Spread the Word</h3>
                                     <p>Share this guide with someone you know who might find it helpful. Word of mouth
                                         helps more people find this resource.</p>
+                                    <div class="support-buttons">
+                                        <md-outlined-button
+                                            href="https://twitter.com/intent/tweet?text=Check%20out%20this%20comprehensive%20guide%20to%20changing%20your%20name%20in%20Minnesota!&url=https://changeyourname.mn"
+                                            target="_blank" rel="noopener">
+                                            <span class="material-symbols-outlined" slot="icon">share</span>
+                                            Share on Twitter
+                                        </md-outlined-button>
+                                        <md-outlined-button
+                                            href="https://www.facebook.com/sharer/sharer.php?u=https://changeyourname.mn"
+                                            target="_blank" rel="noopener">
+                                            <span class="material-symbols-outlined" slot="icon">share</span>
+                                            Share on Facebook
+                                        </md-outlined-button>
+                                        <md-outlined-button
+                                            href="https://www.reddit.com/submit?url=https://changeyourname.mn&title=Comprehensive%20Guide%20to%20Changing%20Your%20Name%20in%20Minnesota"
+                                            target="_blank" rel="noopener">
+                                            <span class="material-symbols-outlined" slot="icon">share</span>
+                                            Share on Reddit
+                                        </md-outlined-button>
+                                        <md-outlined-button
+                                            href="mailto:?subject=Name%20Change%20Guide%20for%20Minnesota&body=I%20found%20this%20helpful%20guide%20for%20changing%20your%20name%20in%20Minnesota:%20https://changeyourname.mn"
+                                            target="_blank" rel="noopener">
+                                            <span class="material-symbols-outlined" slot="icon">mail</span>
+                                            Share via Email
+                                        </md-outlined-button>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="support-option">
+                            <div class="support-option contribute">
                                 <span class="material-symbols-outlined support-icon">code</span>
                                 <div class="support-option-content">
                                     <h3>Contribute</h3>
                                     <p>Help improve this guide by contributing to the open source repository if you are
                                         able.</p>
+
+                                    <div class="contribution-ideas">
+                                        <ul>
+                                            <li><strong>Update outdated information</strong></li>
+                                            <li><strong>Add county-specific details</strong></li>
+                                            <li><strong>Improve accessibility</strong></li>
+                                            <li><strong>Translate content</strong></li>
+                                        </ul>
+                                    </div>
+
                                     <div class="support-buttons">
                                         <md-outlined-button href="https://github.com/qwazwsx/changeyourname.mn"
                                             target="_blank" rel="noopener">
                                             <span class="material-symbols-outlined" slot="icon">code</span>
                                             View on GitHub
+                                        </md-outlined-button>
+                                        <md-outlined-button href="https://github.com/qwazwsx/changeyourname.mn/issues"
+                                            target="_blank" rel="noopener">
+                                            <span class="material-symbols-outlined" slot="icon">bug_report</span>
+                                            Report Issues
                                         </md-outlined-button>
                                     </div>
                                 </div>
