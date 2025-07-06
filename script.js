@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
         element.checked = savedValue
 
         // update nav bar
-        document.querySelector('.nav-drawer nav-item')
+        updateNavCheckmark(element.id, savedValue);
 
 
         if (element.tagName === 'INPUT') {
@@ -123,13 +123,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Save the value when it changes
                 save(element);
                 playClick();
-
+                updateNavCheckmark(element.id, element.checked);
             })
         } else if (element.tagName === 'MD-CHECKBOX') {
             element.addEventListener('change', () => {
                 // Save the value when it changes
                 save(element.id, element.checked);
                 playClick();
+                updateNavCheckmark(element.id, element.checked);
             });
         }
     })
@@ -138,6 +139,34 @@ document.addEventListener('DOMContentLoaded', () => {
     function playClick() {
         const audio = new Audio('resources/click.mp3');
         audio.play();
+    }
+
+    // Update nav bar checkmarks based on checkbox state
+    function updateNavCheckmark(checkboxId, isChecked) {
+        // Convert checkbox ID to nav ID (e.g., "introduction-checkbox" -> "introduction-nav")
+        const navId = checkboxId.replace('-checkbox', '-nav');
+        const navItem = document.getElementById(navId);
+
+        if (navItem) {
+            // Find or create the checkmark icon
+            let checkmark = navItem.querySelector('.nav-checkmark');
+
+            if (isChecked) {
+                // Add checkmark if it doesn't exist
+                if (!checkmark) {
+                    checkmark = document.createElement('span');
+                    checkmark.className = 'material-symbols-outlined nav-checkmark';
+                    checkmark.textContent = 'check_circle';
+                    checkmark.setAttribute('aria-hidden', 'true');
+                    navItem.appendChild(checkmark);
+                }
+            } else {
+                // Remove checkmark if it exists
+                if (checkmark) {
+                    checkmark.remove();
+                }
+            }
+        }
     }
 
 

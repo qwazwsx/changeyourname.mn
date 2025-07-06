@@ -180,6 +180,32 @@ body {
     font-variation-settings: 'opsz' 32;
 }
 
+/* Nav item checkmark styling */
+.nav-checkmark {
+    margin-left: auto;
+    font-size: 24px !important;
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24 !important;
+    transition: color 0.2s ease;
+}
+
+/* Alternating checkmark colors to match nav item background colors exactly */
+.nav-item:nth-child(odd) .nav-checkmark {
+    color: var(--md-sys-color-secondary-container) !important;
+}
+
+.nav-item:nth-child(even) .nav-checkmark {
+    color: var(--md-sys-color-tertiary-container) !important;
+}
+
+/* Checkmark hover effects - turn black */
+.nav-item:nth-child(odd):hover .nav-checkmark {
+    color: var(--md-sys-color-on-surface) !important;
+}
+
+.nav-item:nth-child(even):hover .nav-checkmark {
+    color: var(--md-sys-color-on-surface) !important;
+}
+
 .nav-overlay {
     position: fixed;
     top: 0;
@@ -1397,4 +1423,9 @@ md-linear-progress {
 
 a[href^="#"] {
     color: black;
+}
+
+
+.material-symbols-outlined {
+    user-select: none;
 }
