@@ -1429,3 +1429,118 @@ a[href^="#"] {
 .material-symbols-outlined {
     user-select: none;
 }
+
+/* Quick Escape Popup Styles */
+.escape-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.escape-popup-content {
+    background: var(--md-sys-color-surface);
+    border-radius: 16px;
+    padding: 24px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.3s ease-out;
+}
+
+.escape-popup-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.escape-popup-header .material-symbols-outlined {
+    color: var(--md-sys-color-primary);
+    font-size: 24px;
+}
+
+.escape-popup-header h3 {
+    margin: 0;
+    color: var(--md-sys-color-on-surface);
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.escape-popup-body {
+    margin-bottom: 20px;
+}
+
+.escape-popup-body p {
+    margin: 0 0 12px 0;
+    color: var(--md-sys-color-on-surface);
+    line-height: 1.5;
+}
+
+.escape-popup-body ul {
+    margin: 12px 0;
+    padding-left: 20px;
+    color: var(--md-sys-color-on-surface);
+}
+
+.escape-popup-body li {
+    margin: 8px 0;
+    line-height: 1.4;
+}
+
+.escape-popup-note {
+    font-size: 0.9rem;
+    color: var(--md-sys-color-on-surface-variant);
+    font-style: italic;
+}
+
+.escape-popup-footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Mobile responsiveness for escape popup */
+@media (max-width: 768px) {
+    .escape-popup-content {
+        max-width: 90%;
+        margin: 20px;
+    }
+
+    .escape-popup-header h3 {
+        font-size: 1.1rem;
+    }
+
+    .escape-popup-body {
+        font-size: 0.9rem;
+    }
+}
