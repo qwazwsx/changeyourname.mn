@@ -345,20 +345,54 @@ let escCounter = 0;
 let tapCounter = 0;
 let escapeTimeout;
 let tapTimeout;
+let escapePopupShown = false;
 
 function redirectNow() {
     window.open(OPEN_URL, '_blank');
     location.replace(REDIRECT_URL);
 }
 
+function showEscapePopup() {
+    if (escapePopupShown) return;
+
+    const popup = document.getElementById('escapePopup');
+    if (popup) {
+        popup.style.display = 'flex';
+        escapePopupShown = true;
+
+        // // Auto-hide after 5 seconds
+        // setTimeout(() => {
+        //     hideEscapePopup();
+        // }, 5000);
+    }
+}
+
+function hideEscapePopup() {
+    const popup = document.getElementById('escapePopup');
+    if (popup) {
+        popup.style.display = 'none';
+    }
+}
+
 // ESCAPE HANDLER (Desktop)
 document.addEventListener('keyup', function (e) {
     if (e.key === 'Escape' || e.code === 'Escape') {
+        // Skip if nav drawer is open (existing functionality)
+        const navDrawer = document.getElementById('navDrawer');
+        if (navDrawer && navDrawer.classList.contains('open')) {
+            return;
+        }
+
         escCounter++;
         clearTimeout(escapeTimeout);
         escapeTimeout = setTimeout(() => {
             escCounter = 0;
         }, 1000);
+
+        // Show popup on first escape press
+        if (escCounter === 1) {
+            showEscapePopup();
+        }
 
         if (escCounter >= 3) {
             redirectNow();
@@ -379,8 +413,31 @@ document.addEventListener('touchstart', function (e) {
         tapCounter = 0;
     }, 500);
 
+    // Show popup on first double tap
+    if (tapCounter === 2) {
+        showEscapePopup();
+    }
+
     if (tapCounter >= 3) {
         redirectNow();
+    }
+});
+
+// ESCAPE POPUP EVENT HANDLERS
+document.addEventListener('DOMContentLoaded', () => {
+    const escapePopupClose = document.getElementById('escapePopupClose');
+    const escapePopup = document.getElementById('escapePopup');
+
+    if (escapePopupClose) {
+        escapePopupClose.addEventListener('click', hideEscapePopup);
+    }
+
+    if (escapePopup) {
+        escapePopup.addEventListener('click', (e) => {
+            if (e.target === escapePopup) {
+                hideEscapePopup();
+            }
+        });
     }
 });
 
