@@ -60,7 +60,7 @@
     <link rel="stylesheet" href="styles.css">
 
     <!-- AMP Script for amp-img -->
-    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <!-- <script async src="https://cdn.ampproject.org/v0.js"></script> -->
 
     <script type="importmap">
     {
@@ -195,7 +195,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Navigation Scrim -->
         <div class="nav-overlay" id="navOverlay"></div>
 
@@ -270,8 +269,8 @@
         <div class="container">
             <!-- Header Card -->
             <div class="card header-card">
-                <amp-img src="images/banner.webp" width="1200" height="200" layout="responsive"
-                    alt="Trans Name Change Guide Banner"></amp-img>
+                <img src="images/banner.webp" width="1200" height="200" loading="lazy"
+                    alt="Trans Name Change Guide Banner" style="width: 100%; height: auto; max-width: 1200px;">
                 <h1>Trans Person's Guide To Changing Your Legal Name in Minnesota</h1>
                 <div class="author-info">
                     <p class="author-name">by Emma Zimbinski</p>
@@ -291,9 +290,8 @@
                     <br>
                     <a href="#prepare-forms">Fill out some forms</a> • <a href="#file-forms">File them with the
                         court</a> • <a href="#background-check">Get a background check done</a> • <a href="#hearing">Go
-                        to a hearing</a> •
-                    Update your Birth Certificate • Update records with Social Security Administration • Update License
-                    with DMV • Tell employer, school, banks, insurance, etc.
+                        to a hearing</a> • Update records with Social Security Administration • Update License
+                    with DMV • Tell employer, school, banks, insurance, doctors, pharmacy etc.
                 </p>
                 <p class="subtitle">It's going to take some time, but you can do it little by little :-)</p>
 
@@ -324,6 +322,14 @@
                         <a href="#certified-copies" class="quick-nav-item">
                             <span class="material-symbols-outlined">receipt_long</span>
                             <span>Get Copies</span>
+                        </a>
+                        <a href="#ssa" class="quick-nav-item">
+                            <span class="material-symbols-outlined">security</span>
+                            <span>Social Security</span>
+                        </a>
+                        <a href="#dvs" class="quick-nav-item">
+                            <span class="material-symbols-outlined">id_card</span>
+                            <span>Driver's License</span>
                         </a>
                     </div>
                 </div>
@@ -834,8 +840,8 @@
                             <li>Click "Actions", then "Payment Account". Add a payment method.</li>
                         </ol>
                         <div class="image-container">
-                            <amp-img src="images/eFile_home.png" width="964" height="509" layout="responsive"
-                                alt="eFile system home page"></amp-img>
+                            <img src="images/eFile_home.png" width="964" height="509" loading="lazy"
+                                alt="eFile system home page" style="width: 100%; height: auto; max-width: 964px;">
                             <p class="image-caption">The eFile system home page where you'll register your account</p>
                         </div>
                     </div>
@@ -848,8 +854,9 @@
                             <li>Enter your current legal name and address as the Petitioner</li>
                         </ol>
                         <div class="image-container">
-                            <amp-img src="images/eFile_name.png" width="837" height="834" layout="responsive"
-                                alt="eFile case setup with name fields"></amp-img>
+                            <img src="images/eFile_name.png" width="837" height="834" loading="lazy"
+                                alt="eFile case setup with name fields"
+                                style="width: 100%; height: auto; max-width: 837px;">
                             <p class="image-caption">Enter your current legal name when creating the case</p>
                         </div>
                     </div>
@@ -871,8 +878,9 @@
                             <li>Save your changes</li>
                         </ol>
                         <div class="image-container">
-                            <amp-img src="images/eFile_docs.png" width="843" height="848" layout="responsive"
-                                alt="eFile document upload interface"></amp-img>
+                            <img src="images/eFile_docs.png" width="843" height="848" loading="lazy"
+                                alt="eFile document upload interface"
+                                style="width: 100%; height: auto; max-width: 843px;">
                             <p class="image-caption">The document upload interface in the eFile system</p>
                         </div>
                     </div>
@@ -924,8 +932,9 @@
                             and
                             another hold will be placed on your card. Holds are returned after about two weeks.</p>
                         <div class="image-container">
-                            <amp-img src="images/eFile_allDocuments.png" width="843" height="244" layout="responsive"
-                                alt="eFile showing all documents uploaded"></amp-img>
+                            <img src="images/eFile_allDocuments.png" width="843" height="244" loading="lazy"
+                                alt="eFile showing all documents uploaded"
+                                style="width: 100%; height: auto; max-width: 843px;">
                             <p class="image-caption">All three documents uploaded and ready for submission</p>
                         </div>
                     </div>
@@ -1355,8 +1364,9 @@
                             <li>Submit your filing</li>
                         </ol>
                         <div class="image-container">
-                            <amp-img src="images/eFile_certifiedCopy.png" width="837" height="856" layout="responsive"
-                                alt="eFile certified copy request form"></amp-img>
+                            <img src="images/eFile_certifiedCopy.png" width="837" height="856" loading="lazy"
+                                alt="eFile certified copy request form"
+                                style="width: 100%; height: auto; max-width: 837px;">
                             <p class="image-caption">Requesting certified copies through the eFile system</p>
                         </div>
                     </div>
@@ -1396,7 +1406,7 @@
                     </div>
                     <div class="section-header-buttons">
                         <md-checkbox touch-target="wrapper" class="saveable" value="false"
-                            id="file-forms-checkbox"></md-checkbox>
+                            id="ssa-checkbox"></md-checkbox>
                         <button class="collapse">
                             <span class="material-symbols-outlined">expand_more</span>
                         </button>
@@ -1449,6 +1459,10 @@
                             <li><a href="https://secure.ssa.gov/ICON/main.jsp" target="_blank" rel="noopener">Find your
                                     nearest SSA Card Center</a>
                             </li>
+                            <ul>
+                                <li>Most SSA offices are by appointment only now.</li>
+                                <li>Make sure you go to a <i>card center</i>.</li>
+                            </ul>
                             <li><a href="https://www.ssa.gov/number-card/replace-card/get-started/" target="_blank"
                                     rel="noopener">Make an appointment online</a></li>
                             <ul>
@@ -1534,7 +1548,7 @@
                     </div>
                     <div class="section-header-buttons">
                         <md-checkbox touch-target="wrapper" class="saveable" value="false"
-                            id="file-forms-checkbox"></md-checkbox>
+                            id="dvs-checkbox"></md-checkbox>
                         <button class="collapse">
                             <span class="material-symbols-outlined">expand_more</span>
                         </button>
@@ -1574,8 +1588,16 @@
                             <li>Confirmation of pre-application (if applicable)</li>
                             <li>Cash or a physical card (no NFC tap-to-pay)</li>
                         </ul>
-                        <p><strong>For gender marker changes:</strong> Minnesota allows self-designation, so no
-                            additional medical documentation is required.</p>
+                        <p><strong>For sex marker changes:</strong> Alongside your eye color, height, and weight-- sex
+                            is a self designated descriptor. This means you can simply provide your self-identified
+                            sex without needing additional documentation.</p>
+                        <div class="resources">
+                            <md-outlined-button
+                                onclick="window.open('https://dps.mn.gov/divisions/dvs/license-and-id/dl-and-id-card-information/dl-and-id-card-features-and-options', '_blank')">
+                                <span class="material-symbols-outlined" slot="icon">open_in_new</span>
+                                DVS: Self-designated Descriptors
+                            </md-outlined-button>
+                        </div>
                     </div>
 
                     <div class="sub-card sub-card--info">
@@ -1586,12 +1608,21 @@
                             </li>
                             <li>Present your documents to the DVS representative</li>
                             <li>Complete any additional paperwork as needed</li>
-                            <li>Pay the applicable fees</li>
+                            <li>Pay the <a href="https://dps.mn.gov/divisions/dvs/license-and-id/dl-and-id-card-fees"
+                                    target="_blank" rel="noopener">applicable fees</a>. ~$26 for a reissue, ~$46 for a
+                                renewal.</li>
                             <li>Take a new photo</li>
                         </ol>
                         <p><strong>Processing time:</strong> As of (7/18/25), the processing time for updated
                             licenses is approximately 3-4 months due to the new REALID requirements causing everybody to
                             get new ID's all at once.</p>
+                    </div>
+
+                    <div class="sub-card sub-card--warning">
+                        <h3>A word of warning</h3>
+                        <p>Despite being indicated on my application, the DVS representative chose NOT to change my sex
+                            marker until asked directly. They'll have you verify a printout of your information before
+                            they enter it into the system. Make sure this is accurate before signing.</p>
                     </div>
 
                     <div class="resources">

@@ -580,6 +580,7 @@ md-text-button {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
+    flex-direction: column;
 }
 
 /* Resources section */
@@ -602,6 +603,7 @@ md-filled-button,
 md-outlined-button,
 md-text-button {
     margin: 4px;
+    /* display: block; */
 }
 
 /* Celebration Button */
@@ -877,6 +879,7 @@ body {
 body {
     /* scroll-behavior: smooth; */
     transition: opacity .3s ease-in-out;
+    overflow-x: hidden;
 }
 
 body.loading .content {
@@ -1543,4 +1546,25 @@ a[href^="#"] {
     .escape-popup-body {
         font-size: 0.9rem;
     }
+}
+
+
+
+body.print a[href^=http]:after{
+    content: " (" attr(href) ")"
+}
+
+
+p.print-button-url {
+    display: block;
+    text-align: center;
+    display: none;
+}
+
+body.print p.print-button-url {
+    display: block;
+}
+
+body.print .app-bar {
+    display: none;
 }
