@@ -447,3 +447,70 @@ document.querySelector('#accessibility').addEventListener('click', () => {
     document.querySelector('button.asw-btn[data-key="monochrome"]').click();
     document.querySelector('button.asw-btn[data-key="stop-animations"]').click();
 });
+
+
+// SHOW URLS ON PRINT VIEW
+window.addEventListener("beforeprint", () => {
+    document.body.classList.add('print');
+
+    // Create hidden URL display elements for md-filled-button elements
+    createButtonUrlDisplays();
+
+    // Force load all lazy images for printing
+    forceLoadLazyImages();
+});
+
+window.addEventListener("afterprint", () => {
+    document.body.classList.remove('print');
+});
+
+// Function to force load all lazy images for printing
+function forceLoadLazyImages() {
+    document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+        // Change loading attribute to eager to force immediate loading
+        img.loading = 'eager';
+
+        // If the image hasn't loaded yet, force it by triggering load
+        if (!img.complete) {
+            // Create a new image to force loading
+            const newImg = new Image();
+            newImg.onload = () => {
+                // Image is now loaded and will appear in print
+            };
+            newImg.src = img.src;
+        }
+    });
+}
+
+// Function to create hidden URL displays for buttons
+function createButtonUrlDisplays() {
+    // Remove any existing print URL elements first
+    document.querySelectorAll('.print-button-url').forEach(el => el.remove());
+
+    // Find all md-filled-button elements with onclick attributes
+    document.querySelectorAll('md-filled-button[onclick], md-outlined-button[onclick], md-text-button[onclick]').forEach(button => {
+        const onclick = button.getAttribute('onclick');
+
+        // Extract URL from onclick attribute
+        // Look for patterns like window.open('url', '_blank') or similar
+        const urlMatch = onclick.match(/(?:window\.open|location\.href\s*=)\s*\(\s*['"`]([^'"`]+)['"`]/);
+
+        if (urlMatch && urlMatch[1]) {
+            let url = urlMatch[1];
+
+            if (!url.startsWith('http')) {
+                // Ensure URL is absolute
+                url = window.location.origin + '/' + url;
+            }
+
+            // Create hidden paragraph element
+            const urlDisplay = document.createElement('p');
+            urlDisplay.className = 'print-button-url';
+            urlDisplay.textContent = `(${url})`;
+            // urlDisplay.style.display = 'none'; // Hidden by default
+
+            // Insert the URL display after the button
+            button.parentNode.insertBefore(urlDisplay, button.nextSibling);
+        }
+    });
+}
