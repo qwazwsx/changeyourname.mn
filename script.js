@@ -1,5 +1,3 @@
-/* global confetti */
-
 // Main JavaScript functionality for changeyourname.mn
 document.addEventListener('DOMContentLoaded', () => {
     document.fonts.ready.then(() => {
@@ -247,7 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Celebration Button Functionality
     const celebrationButton = document.getElementById('celebrationButton');
     const moreConfetti = document.getElementById('moreConfetti');
-    const audio = new Audio('resources/celebrate.mp3');
+    let audio = undefined;
     navigator.mediaSession.setActionHandler('play', function () { /* Code excerpted. */ });
     navigator.mediaSession.setActionHandler('pause', function () { /* Code excerpted. */ });
     navigator.mediaSession.setActionHandler('seekbackward', function () { /* Code excerpted. */ });
@@ -256,7 +254,11 @@ document.addEventListener('DOMContentLoaded', () => {
     navigator.mediaSession.setActionHandler('nexttrack', function () { /* Code excerpted. */ });
 
     if (celebrationButton) {
-        celebrationButton.addEventListener('click', () => {
+        celebrationButton.addEventListener('click', async () => {
+            if (!audio) {
+                audio = new Audio('resources/celebrate.mp3');
+            }
+
             if (audio.paused) {
                 audio.currentTime = 0;
                 audio.play();
@@ -269,8 +271,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     celebrationButton.classList.remove('celebrating');
                 }, 600);
 
-                // Create confetti effect
-                fireConfetti();
+                // Load confetti library and create confetti effect
+                try {
+                    await loadConfettiLibrary();
+                    fireConfetti();
+                } catch (error) {
+                    console.warn('Failed to load confetti library:', error);
+                }
 
                 // Show the "more confetti?" link after first celebration
                 if (moreConfetti && moreConfetti.style.opacity === '0') {
@@ -284,14 +291,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // More Confetti Link Functionality
     if (moreConfetti) {
-        moreConfetti.addEventListener('click', (e) => {
+        moreConfetti.addEventListener('click', async (e) => {
             e.preventDefault();
-            fireConfetti();
+            try {
+                await loadConfettiLibrary();
+                fireConfetti();
+            } catch (error) {
+                console.warn('Failed to load confetti library:', error);
+            }
         });
     }
 
 
     function fireConfetti() {
+        // Only fire confetti if the library is loaded
+        if (!confettiLoaded || typeof window.confetti !== 'function') {
+            console.warn('Confetti library not loaded');
+            return;
+        }
+
         fire(0.25, {
             spread: 26,
             startVelocity: 55,
@@ -322,12 +340,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function fire(particleRatio, opts) {
+        // Only fire if confetti library is available
+        if (!confettiLoaded || typeof window.confetti !== 'function') {
+            return;
+        }
+
         // Reduce particle count on mobile for better performance
         // doing this based on window width is a hack, but it works for now
         const isMobile = window.innerWidth <= 768;
         const baseCount = isMobile ? 50 : 200; // Half particles on mobile
 
-        confetti(
+        window.confetti(
             Object.assign({}, {}, opts, {
                 particleCount: Math.floor(baseCount * particleRatio),
             })
@@ -336,6 +359,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 });
+
+
+
+// Global variable to track confetti library loading
+let confettiLoaded = false;
+let confettiLoadingPromise = null;
+
+// Function to dynamically load the confetti library
+function loadConfettiLibrary() {
+    if (confettiLoaded) {
+        return Promise.resolve();
+    }
+
+    if (confettiLoadingPromise) {
+        return confettiLoadingPromise;
+    }
+
+    confettiLoadingPromise = new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js';
+        script.onload = () => {
+            confettiLoaded = true;
+            resolve();
+        };
+        script.onerror = () => {
+            reject(new Error('Failed to load confetti library'));
+        };
+        document.head.appendChild(script);
+    });
+
+    return confettiLoadingPromise;
+}
+
+
+
 
 
 // REDIRECT FUNCTIONALITY
