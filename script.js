@@ -243,32 +243,41 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Celebration Button Functionality
-    const celebrationButton = document.getElementById('celebrationButton');
-    const moreConfetti = document.getElementById('moreConfetti');
+    const celebrationButton = document.querySelectorAll('.celebration-button');
+    // const moreConfetti = document.getElementById('moreConfetti');
+    navigator.mediaSession.setActionHandler('play', function () { });
+    navigator.mediaSession.setActionHandler('pause', function () { });
+    navigator.mediaSession.setActionHandler('seekbackward', function () { });
+    navigator.mediaSession.setActionHandler('seekforward', function () { });
+    navigator.mediaSession.setActionHandler('previoustrack', function () { });
+    navigator.mediaSession.setActionHandler('nexttrack', function () { });
+
     let audio = undefined;
-    navigator.mediaSession.setActionHandler('play', function () { /* Code excerpted. */ });
-    navigator.mediaSession.setActionHandler('pause', function () { /* Code excerpted. */ });
-    navigator.mediaSession.setActionHandler('seekbackward', function () { /* Code excerpted. */ });
-    navigator.mediaSession.setActionHandler('seekforward', function () { /* Code excerpted. */ });
-    navigator.mediaSession.setActionHandler('previoustrack', function () { /* Code excerpted. */ });
-    navigator.mediaSession.setActionHandler('nexttrack', function () { /* Code excerpted. */ });
+    let audioID = undefined;
 
     if (celebrationButton) {
-        celebrationButton.addEventListener('click', async () => {
-            if (!audio) {
-                audio = new Audio('resources/celebrate.mp3');
+        celebrationButton.forEach(button => button.addEventListener('click', async () => {
+
+            // if audio has been playing from another button, stop it
+            if (audioID !== button.getAttribute('audioID')) {
+                audio?.pause();
+                audio = undefined;
+
+                audioID = button.getAttribute('audioID')
+                audio = new Audio(`resources/celebrate-${audioID}.mp3`);
             }
 
+            // if audio is not playing, start
             if (audio.paused) {
                 audio.currentTime = 0;
                 audio.play();
 
                 // Add celebration animation
-                celebrationButton.classList.add('celebrating');
+                button.classList.add('celebrating');
 
                 // Remove animation class after animation completes
                 setTimeout(() => {
-                    celebrationButton.classList.remove('celebrating');
+                    button.classList.remove('celebrating');
                 }, 600);
 
                 // Load confetti library and create confetti effect
@@ -279,27 +288,28 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.warn('Failed to load confetti library:', error);
                 }
 
+                let moreConfetti = button.parentElement.querySelector('.more-confetti');
+                moreConfetti.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    try {
+                        await loadConfettiLibrary(); // wait for library to load, this won't actually load it again if already in progress
+                        fireConfetti();
+                    } catch (error) {
+                        console.warn('Failed to load confetti library:', error);
+                    }
+                });
+
+
                 // Show the "more confetti?" link after first celebration
                 if (moreConfetti && moreConfetti.style.opacity === '0') {
                     moreConfetti.style.opacity = '1';
+                    moreConfetti.style.display = 'block'
                 }
             } else {
+                // otherwise pause the music on second click
                 audio.pause();
             }
-        });
-    }
-
-    // More Confetti Link Functionality
-    if (moreConfetti) {
-        moreConfetti.addEventListener('click', async (e) => {
-            e.preventDefault();
-            try {
-                await loadConfettiLibrary();
-                fireConfetti();
-            } catch (error) {
-                console.warn('Failed to load confetti library:', error);
-            }
-        });
+        }));
     }
 
 
@@ -357,6 +367,13 @@ document.addEventListener('DOMContentLoaded', () => {
         );
     }
 
+
+    // Initial check
+    updateScrollScrim();
+
+    // Listen for scroll events
+    window.addEventListener('scroll', updateScrollScrim);
+    window.addEventListener('resize', updateScrollScrim);
 
 });
 
@@ -572,3 +589,23 @@ function createButtonUrlDisplays() {
         }
     });
 }
+
+// SCROLL INDICATOR SCRIM
+const scrollScrim = document.getElementById('scrollScrim');
+
+function updateScrollScrim() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+
+    // Hide scrim if user has scrolled down or if near bottom of page
+    const scrollThreshold = 100; // Hide after scrolling 100px
+    const nearBottom = (scrollTop + windowHeight) >= (documentHeight - 200);
+
+    if (scrollTop > scrollThreshold || nearBottom) {
+        scrollScrim.classList.add('hidden');
+    } else {
+        scrollScrim.classList.remove('hidden');
+    }
+}
+

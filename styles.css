@@ -580,7 +580,7 @@ md-text-button {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
-    flex-direction: column;
+    /* flex-direction: column; */
 }
 
 /* Resources section */
@@ -1551,7 +1551,7 @@ a[href^="#"] {
 
 
 
-body.print a[href^=http]:after{
+body.print a[href^=http]:after {
     content: " (" attr(href) ")"
 }
 
@@ -1573,4 +1573,26 @@ body.print .app-bar {
 .header-card img {
     width: 100%;
     border-radius: 20px;
+}
+
+/* Scroll Indicator Scrim */
+.scroll-indicator-scrim {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(to top, rgb(0 0 0 / 40%) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.scroll-indicator-scrim.hidden {
+    opacity: 0;
+}
+
+a.more-confetti {
+    transition: opacity 3s ease-in-out;
 }
