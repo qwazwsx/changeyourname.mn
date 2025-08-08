@@ -158,10 +158,10 @@
             'Trans Power',
             'Bark Bark Bark!',
             'Contribute to open source projects.',
-            'Please share this guide with others who need it.',
+            // 'Please share this guide with others who need it.',
             'Punch your local fascist.',
             'Throw a brick',
-            'TERF\'s don\'t go to heaven'
+            // 'TERF\'s don\'t go to heaven'
         ]
 
         // show random quip on page load
@@ -172,6 +172,9 @@
         }
     </script>
 
+
+    <!-- Scroll indicator scrim -->
+    <div class="scroll-indicator-scrim hidden" id="scrollScrim"></div>
 
     <div class="content">
 
@@ -250,6 +253,14 @@
                 <a href="#dvs" class="nav-item" id="dvs-nav">
                     <span class="material-symbols-outlined">id_card</span>
                     11.) Update the Department of Vehicle Services
+                </a>
+                <a href="#bank-employer" class="nav-item" id="bank-employer-nav">
+                    <span class="material-symbols-outlined">account_balance</span>
+                    12.) Update Banks and Employer
+                </a>
+                <a href="#medical-records" class="nav-item" id="medical-records-nav">
+                    <span class="material-symbols-outlined">local_hospital</span>
+                    13.) Update Medical Records
                 </a>
                 <a href="#support" class="nav-item" id="support-nav">
                     <span class="material-symbols-outlined">favorite</span>
@@ -672,7 +683,7 @@
                             </p>
 
                             <md-outlined-button
-                                onclick="window.open('https://www.mncourts.gov/GetForms.aspx?c=27', '_blank')">
+                                onclick="window.open('https://mncourts.gov/getforms/name-change', '_blank')">
                                 <span class="material-symbols-outlined" slot="icon">open_in_new</span>
                                 Download Original Forms
                             </md-outlined-button>
@@ -1135,7 +1146,7 @@
                         <div
                             style="background: var(--md-sys-color-surface-container-low); padding: 16px; border-radius: 8px; font-family: monospace; white-space: pre-line;">
                             <p>
-                                To the chambers of [District Court Judge Jane Doe],
+                                To the chambers of [District Court Judge Sarah Smith],
 
                                 Hello. I'm seeking to change my legal name and gender marker. I have filed the
                                 appropriate paperwork and have been assigned case number [#AB-123-456].
@@ -1152,6 +1163,17 @@
                     </div>
                 </div>
             </div>
+
+
+            <div class="sub-card">
+                <p><strong>Optional:</strong> If you want to speedrun the process, skip forward to <a
+                        href="#ssa">Section 10 - Social Security Administration</a> and follow the instructions for
+                    making an appointment, then come back here. The SSA has usually been scheduling appointments about a
+                    month out so plan accordingly if you want to move as fast as possible. You only need the certified
+                    copy in hand when you arrive at the appointment, so you can schedule the appointment before you have
+                    the necessary documents.</p>
+            </div>
+
 
             <!-- Section 8: Go to the hearing -->
             <div class="card guide-section" id="hearing">
@@ -1228,24 +1250,34 @@
                         <ul>
                             <li>If all goes well, the judge will grant your name change. Congratulations!</li>
                             <li>The judge will let you know what, if any, next steps there are.</li>
-                            <li>Take a beat to celebrate the fact that the state government now recognizes your
-                                identity! 🎉
-                            </li>
                             <li>Your next step will be to <a href="#certified-copies">get certified copies of the court
                                     order</a>.</li>
                         </ul>
-
-                        <!-- Celebration Button -->
-                        <div class="celebration-button-container">
-                            <md-filled-button id="celebrationButton" class="celebration-button">
-                                🎉 Celebrate! 🎉
-                            </md-filled-button>
-                            <br>
-                            <a href="#" id="moreConfetti" style="opacity: 0;">more confetti?</a>
-                        </div>
                     </div>
                 </div>
             </div>
+
+            <div class="card">
+                <div class="section-header">
+                    <div class="section-header-title">
+                        <span class="material-symbols-outlined section-icon" aria-hidden="true">celebration</span>
+                        <h2>Celebrate your Progress!</h2>
+                    </div>
+                </div>
+                <p style="text-align: center;">Congratulations! The state government now recognizes your identity. Take
+                    a beat to recognize your accomplishment. You've navigated a complex legal process and asserted your
+                    right to be seen as yourself. This is a huge step forward in your journey.
+                </p>
+                <div class="celebration-button-container">
+                    <md-filled-button audioID="1" class="celebration-button">
+                        🎉 Celebrate! 🎉
+                    </md-filled-button>
+                    <br>
+                    <a href="#" class="more-confetti" style="opacity: 0; display: none;">more confetti?</a>
+                </div>
+
+            </div>
+
 
             <!-- Section 9: Get certified copies of the order -->
             <div class="card guide-section" id="certified-copies">
@@ -1267,11 +1299,19 @@
                         copy
                         of this order from the
                         court for a small fee (~$14). This is a physical copy, stamped with an embossed seal, that can
-                        be
-                        used
-                        for official purposes. You will need this to change your name on your birth certificate, social
-                        security
-                        card, and driver's license.</p>
+                        be used for official purposes. You will need this to change your name on your birth certificate,
+                        social
+                        security card, and driver's license.</p>
+
+
+                    <div class="sub-card sub-card--warning">
+                        <p><strong>Important:</strong> Double check that all the information on the court order is
+                            correct <b>before</b> requesting certified copies. My copies required two rounds of
+                            revisions before it was correct. Thanks to Judge Lois Conroy's chambers for helping me fix
+                            the issues they caused. Unfortunately, mistakes do happen. It's better to catch them now
+                            than after you've paid for certified copies.</p>
+                    </div>
+
 
                     <p>You can request certified copies of the order by mail, in person, or online.</p>
 
@@ -1384,7 +1424,7 @@
                         <ul>
                             <li>Birth Certificate (Office of Vital Records)</li>
                             <li><a href="#ssa">Social Security Administration</a></li>
-                            <li><a href="#dvs">Department of Motor Vehicles (driver's license/ID)</a></li>
+                            <li><a href="#dvs">Department of Vehicle Services (driver's license/ID)</a></li>
                             <li>Banks, employers, schools, and other institutions (although a regular copy will suffice)
                             </li>
                         </ul>
@@ -1501,7 +1541,7 @@
                         <h3>Wait</h3>
                         <p> Your name change should be reflected in their system after about 24 hours while your new
                             card will arrive in the mail within 7-10 business days of them processing the request. If
-                            you really care, you can use the mySocialSecurity system to check when the system has been
+                            you really care, you can use mySocialSecurity to check when the system has been
                             updated, but it's really more trouble than it's worth.</p>
 
 
@@ -1570,8 +1610,8 @@
                     <div class="sub-card sub-card--info">
                         <h3>Pre-Apply Online (Optional)</h3>
                         <ol>
-                            <li><a href="https://onlineservices.dps.mn.gov/EServices/" target="_blank"
-                                    rel="noopener">Pre-apply online</a> to save time at the office</li>
+                            <li><a href="https://onlineservices.dps.mn.gov/EServices/?Link=PreApplication"
+                                    target="_blank" rel="noopener">Pre-apply online</a> to save time at the office</li>
                             <li>Print or save the confirmation page to bring with you</li>
                         </ol>
                         <p><strong>Note:</strong> If you do not pre-apply online, you will need to fill out a form at
@@ -1611,16 +1651,30 @@
                                 renewal.</li>
                             <li>Take a new photo</li>
                         </ol>
-                        <p><strong>Processing time:</strong> As of (7/18/25), the processing time for updated
-                            licenses is approximately 3-4 months due to the new REALID requirements causing everybody to
-                            get new ID's all at once.</p>
+                        <p><strong>Processing time:</strong> As of (7/18/25), I was told the processing time for updated
+                            licenses was approximately 3-4 months due to the REALID deadline, however, my new ID arrived
+                            in the mail after just a week.</p>
                     </div>
 
                     <div class="sub-card sub-card--warning">
                         <h3>A word of warning</h3>
                         <p>Despite being indicated on my application, the DVS representative chose NOT to change my sex
                             marker until asked directly. They'll have you verify a printout of your information before
-                            they enter it into the system. Make sure this is accurate before signing.</p>
+                            they enter it into the system. <b>Make sure this is accurate before signing</b>.</p>
+                        <p> A representative from the Driver and Vehicle Services had the following to say on the
+                            matter:
+                        <blockquote>
+                            <p>
+                                We sincerely and deeply apologize for the experience that you had. The information has
+                                been forwarded to his supervisor to be addressed, to ensure that you (and others) will
+                                not have that experience again.
+
+
+                                Again, we truly apologize for the bad experience you had--that is not the level of
+                                service we as an agency strive to provide.
+                            </p>
+                        </blockquote>
+                        </p>
                     </div>
 
                     <div class="resources">
@@ -1639,6 +1693,137 @@
                 </div>
             </div>
 
+            <div class="card">
+                <div class="section-header">
+                    <div class="section-header-title">
+                        <span class="material-symbols-outlined section-icon" aria-hidden="true">celebration</span>
+                        <h2>Celebrate your Progress!</h2>
+                    </div>
+                </div>
+                <p style="text-align: center;">Congratulations on making it this far! You've taken important steps
+                    towards your goal of changing
+                    your name and gender marker. Getting your ID is a significant achievement, and you should be proud
+                    of the progress you've made!</p>
+                <div class="celebration-button-container">
+                    <md-filled-button audioID="2" class="celebration-button">
+                        🎉 Celebrate! 🎉
+                    </md-filled-button>
+                    <br>
+                    <a href="#" class="more-confetti" style="opacity: 0; display: none;">more confetti?</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <p>At this point in the process, you should have received your new ID in the mail. This ID will have
+                    your updated name and gender marker, which you can use to update any non-government agencies or
+                    organizations (banks, employer, doctors). Make sure you update your bank first before your
+                    employer to avoid paycheck issues. Then for doctors, make sure to update your insurance first, then
+                    providers, then pharmacies to avoid gaps in care.</p>
+            </div>
+
+
+            <!-- Section 12: Update Banks and Employers -->
+            <div class="card guide-section" id="bank-employer">
+                <div class="section-header">
+                    <div class="section-header-title">
+                        <span class="material-symbols-outlined section-icon" aria-hidden="true">account_balance</span>
+                        <h2>12.) Update Banks and Employers</h2>
+                    </div>
+                    <div class="section-header-buttons">
+                        <md-checkbox touch-target="wrapper" class="saveable" value="false"
+                            id="bank-employer-checkbox"></md-checkbox>
+                        <button class="collapse">
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="section-content">
+                    <p>To ensure your paychecks arrive correctly, update your bank with your new name
+                        <b>before</b> your update your employer. You don't want a paycheck with a name the bank
+                        doesn't
+                        recognize to bounce.
+                    </p>
+
+                    <div class="sub-card sub-card--primary">
+                        <h3>1) Update Bank</h3>
+                        <p>Contact your bank to update your account information with your new name and gender
+                            marker.
+                            This may involve filling out a form or providing documentation of the name change. Your
+                            bank's customer service department will be able to assist you. For me (US Bank) it
+                            involved
+                            going in person to show my new ID and court order. The whole process took 15 minutes. I
+                            would recommend going in person over filling out the forms yourself and mailing them.
+                        </p>
+                    </div>
+
+                    <div class="sub-card sub-card--primary">
+                        <h3>2) Update Employer</h3>
+                        <p>Once your bank has been updated, contact your employer's HR department to update your
+                            employee records and paycheck. You may want to ask them to change your records with your
+                            insurance company at this time as well.</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Section 13: Update Medical Records -->
+            <div class="card guide-section" id="medical-records">
+                <div class="section-header">
+                    <div class="section-header-title">
+                        <span class="material-symbols-outlined section-icon" aria-hidden="true">local_hospital</span>
+                        <h2>13.) Update Medical Records</h2>
+                    </div>
+                    <div class="section-header-buttons">
+                        <md-checkbox touch-target="wrapper" class="saveable" value="false"
+                            id="medical-records-checkbox"></md-checkbox>
+                        <button class="collapse">
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="section-content">
+                    <p>You'll want to update your insurance company (or public assistance program) first, then any
+                        healthcare providers, and finally any pharmacies. If you update these out of order, you risk
+                        not
+                        having access to healthcare or medication. If it's safe, you may consider getting a larger
+                        prescription supply before updating to avoid any gaps in care should there be any issues.
+                    </p>
+
+                    <div class="sub-card sub-card--info">
+                        <h3>1) Update Insurance</h3>
+                        <p>You or your insurance guarantor/policy holder (if under another's insurance) will have to
+                            update your insurance company with your new name and gender marker. This may involve
+                            filling
+                            out a form or providing documentation of the name change. Your human resources
+                            department or
+                            benefit administrator will be able to assist you.</p>
+                    </div>
+
+                    <div class="sub-card sub-card--info">
+                        <h3>2) Update Providers</h3>
+                        <p>After your insurance company has been updated (and the change has processed), you'll need
+                            to
+                            update your healthcare providers with your new name and gender marker. This includes
+                            your
+                            primary care physician, specialists, and any other medical providers you see. Check to
+                            see
+                            who is responsible for prescribing each medication you take and update them
+                            individually.
+                        </p>
+                    </div>
+
+                    <div class="sub-card sub-card--info">
+                        <h3>3) Update Pharmacy</h3>
+                        <p>After your providers and medication prescriptions have been updated, you'll need to
+                            update
+                            your pharmacy with your new name and gender marker. Be sure to have photo ID.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+
 
             <!-- Work in Progress Section -->
             <div class="card wip-section">
@@ -1649,8 +1834,7 @@
                             <h3>What's Next for This Guide</h3>
                         </div>
                         <p>This guide currently covers the core name change process, but there's more to come!
-                            Future
-                            updates will include:</p>
+                            Future updates will include:</p>
 
                         <div class="wip-items">
                             <div class="wip-item">
@@ -1667,12 +1851,12 @@
                             </div>
                             <div class="wip-item">
                                 <span class="material-symbols-outlined">account_balance</span>
-                                <span>Updating records with banks, employers, schools, and other
-                                    institutions</span>
+                                <span><s>Updating records with banks, employers, schools, and other
+                                        institutions</s></span>
                             </div>
                             <div class="wip-item">
                                 <span class="material-symbols-outlined">local_hospital</span>
-                                <span>Updating insurance, doctors/clinics, and pharmacies.</span>
+                                <span><s>Updating insurance, doctors/clinics, and pharmacies</s></span>
                             </div>
                             <div class="wip-item">
                                 <span class="material-symbols-outlined">flight</span>
@@ -1704,19 +1888,25 @@
                                     <h3>Help Fund This Site</h3>
                                     <p>Help offset the ~$200/year it takes to run this site. I am very broke idk
                                         why I
-                                        committed to this. Anything helps.</p>
+                                        committed to this. Anything helps, even $1</p>
 
                                     <!-- Funding Progress -->
                                     <div class="funding-progress">
                                         <div class="funding-info">
-                                            <span class="funding-current">$25</span>
+                                            <span class="funding-current">$35</span>
                                             <span class="funding-separator">of</span>
                                             <span class="funding-goal">$200</span>
-                                            <span class="funding-percentage">(13%)</span>
+                                            <span class="funding-percentage">(18%)</span>
                                         </div>
-                                        <md-linear-progress value="0.13" style="margin: 8px 0;"></md-linear-progress>
+                                        <md-linear-progress value="0.18" style="margin: 8px 0;"></md-linear-progress>
                                         <p class="funding-description">Annual hosting costs</p>
+
                                     </div>
+
+                                    <p>Thanks to <i>suorinnn</i> and <i>Lars</i> for their generous support in
+                                        keeping
+                                        the lights on!</p>
+
 
                                     <div class="support-buttons">
                                         <md-filled-button
