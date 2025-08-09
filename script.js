@@ -481,6 +481,9 @@ document.addEventListener('touchstart', function (e) {
         tapCounter = 0; // Ignore multi-finger
         return;
     }
+    if (e.target.tagName === 'A') {
+        return; // Ignore taps on links
+    }
 
     tapCounter++;
     clearTimeout(tapTimeout);
