@@ -488,12 +488,12 @@ document.addEventListener('touchstart', function (e) {
         tapCounter = 0;
     }, 500);
 
-    // Show popup on first double tap
-    if (tapCounter === 2) {
+    // Show popup on first triple tap
+    if (tapCounter === 3) {
         showEscapePopup();
     }
 
-    if (tapCounter >= 3) {
+    if (tapCounter >= 5) {
         redirectNow();
     }
 });
