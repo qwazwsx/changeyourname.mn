@@ -882,6 +882,10 @@ body {
     overflow-x: hidden;
 }
 
+html {
+    overflow-x: hidden;
+}
+
 body.loading .content {
     opacity: 0 !important;
 }
