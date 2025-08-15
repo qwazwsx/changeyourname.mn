@@ -82,6 +82,12 @@ a {
     font-display: swap;
 }
 
+
+html.asw-stop-animations * {
+    animation: none !important;
+    transition: none !important;
+}
+
 /* Layout containers */
 .container {
     max-width: 1200px;
