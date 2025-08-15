@@ -1,0 +1,25 @@
+{
+  "name": "changeyourname.mn",
+  "version": "2.0.0",
+  "description": "**A clear, step-by-step guide to legally changing your name in Minnesota - made by and for trans people.**",
+  "homepage": "https://github.com/qwazwsx/changeyourname.mn#readme",
+  "bugs": {
+    "url": "https://github.com/qwazwsx/changeyourname.mn/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qwazwsx/changeyourname.mn.git"
+  },
+  "license": "CC-BY-NC-SA-4.0",
+  "author": "",
+  "type": "module",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@material/web": "^2.3.0",
+    "sienna-accessibility": "^1.0.0",
+    "vite": "^7.1.2"
+  }
+}

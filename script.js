@@ -476,7 +476,8 @@ document.addEventListener('keyup', function (e) {
 });
 
 // TOUCH HANDLER (Mobile)
-document.addEventListener('touchstart', function (e) {
+document.addEventListener('touchend', function (e) {
+    console.log(e)
     if (e.touches.length > 1) {
         tapCounter = 0; // Ignore multi-finger
         return;
