@@ -1188,7 +1188,7 @@ md-linear-progress {
 .support-message p:last-child {
     font-style: italic;
     font-size: 1rem;
-    opacity: 0.8;
+    /* opacity: 0.8; */
 }
 
 /* Make support section responsive */
