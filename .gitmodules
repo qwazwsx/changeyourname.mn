@@ -1,4 +1,4 @@
-[submodule "v1"]
-	path = v1
+[submodule "public/v1"]
+	path = public/v1
 	url = https://github.com/qwazwsx/changeyourname.mn.git
 	branch = v1

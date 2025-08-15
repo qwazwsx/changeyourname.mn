@@ -46,32 +46,47 @@
 
     <!-- Material Design 3 CSS -->
     <link rel="preload"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block&icon_names=accessibility,account_balance,attach_money,badge,bug_report,celebration,check_circle,code,coffee,construction,contract_edit,credit_card,download,drive_file_rename_outline,edit_document,email,expand_less,expand_more,favorite,flight,gavel,hourglass_top,id_card,info,language,local_hospital,local_police,mail,menu,open_in_new,picture_as_pdf,receipt_long,rocket_launch,search,security,share,shield,upload_file,visibility,volunteer_activism,warning"
         as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=block"
         rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
 
 
 
-    <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script>
+    <!-- <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script> -->
 
     <!-- External CSS -->
     <link rel="stylesheet" href="styles.css">
 
     <!-- AMP Script for amp-img -->
     <!-- <script async src="https://cdn.ampproject.org/v0.js"></script> -->
-
+    <!-- 
     <script type="importmap">
     {
       "imports": {
         "@material/web/": "https://esm.run/@material/web/"
       }
     }
-    </script>
+    </script> -->
 
     <script type="module">
-        import '@material/web/all.js';
+        // import '@material/web/all.js';
+        import '@material/web/checkbox/checkbox.js';
+        import '@material/web/iconbutton/icon-button.js';
+        import '@material/web/button/filled-button.js';
+        import '@material/web/button/outlined-button.js';
+        import '@material/web/button/text-button.js';
+        import '@material/web/progress/linear-progress.js';
+
+        // async function loadAccessibility() {
+        //     await import('./sienna-min.js');
+        //     console.log('Accessibility menu loaded');
+        // }
+
+        // loadAccessibility()
     </script>
+
+    <script src="sienna.min.js" defer></script>
 
     <script type="application/ld+json">
 {
@@ -192,13 +207,17 @@
                         <span class="material-symbols-outlined">search</span>
                     </md-icon-button> -->
                     <md-icon-button aria-label="Accessibility Menu" id="accessibility">
-                        <span class="material-symbols-outlined">accessibility</span>
+                        <span class="material-symbols-outlined" style="font-size: 24px;">accessibility</span>
                     </md-icon-button>
                 </div>
             </div>
         </div>
         <!-- Navigation Scrim -->
         <div class="nav-overlay" id="navOverlay"></div>
+
+
+        <div class="bg"></div>
+        <div class="bg-img"></div>
 
         <!-- Navigation Drawer -->
         <nav class="nav-drawer" id="navDrawer">
@@ -283,8 +302,8 @@
         <div class="container">
             <!-- Header Card -->
             <div class="card header-card">
-                <img src="images/banner.webp" height="200" alt="Trans Name Change Guide Banner">
-                <h1>Trans Person's Guide To Changing Your Legal Name in Minnesota</h1>
+                <img src="images/logo.webp" alt="Trans Name Change Guide Logo">
+                <!-- <h1>Trans Person's Guide To Changing Your Legal Name in Minnesota</h1> -->
                 <div class="author-info">
                     <p class="author-name">by Emma Zimbinski</p>
                     <div class="contact-links">
@@ -303,8 +322,9 @@
                     <br>
                     <a href="#prepare-forms">Fill out some forms</a> • <a href="#file-forms">File them with the
                         court</a> • <a href="#background-check">Get a background check done</a> • <a href="#hearing">Go
-                        to a hearing</a> • Update records with Social Security Administration • Update License
-                    with DMV • Tell employer, school, banks, insurance, doctors, pharmacy etc.
+                        to a hearing</a> • <a href="#ssa">Update records with Social Security Administration</a> • <a
+                        href="#dvs">Update License with DMV</a> • Tell employer, school, banks, insurance, doctors,
+                    pharmacy etc.
                 </p>
                 <p class="subtitle">It's going to take some time, but you can do it little by little :-)</p>
 
@@ -359,7 +379,7 @@
                         <md-checkbox touch-target="wrapper" class="saveable" value="false"
                             id="introduction-checkbox"></md-checkbox>
                         <button class="collapse">
-                            <span class="material-symbols-outlined">expand_more</span>
+                            <span class="material-symbols-outlined">expand_less</span>
                         </button>
                     </div>
                 </div>
@@ -604,7 +624,7 @@
                         <md-checkbox touch-target="wrapper" class="saveable" value="false"
                             id="prepare-forms-checkbox"></md-checkbox>
                         <button class="collapse">
-                            <span class="material-symbols-outlined">expand_more</span>
+                            <span class="material-symbols-outlined">expand_less</span>
                         </button>
                     </div>
                 </div>
@@ -771,7 +791,7 @@
                         <md-checkbox touch-target="wrapper" class="saveable" value="false"
                             id="financial-assistance-checkbox"></md-checkbox>
                         <button class="collapse">
-                            <span class="material-symbols-outlined">expand_more</span>
+                            <span class="material-symbols-outlined">expand_less</span>
                         </button>
                     </div>
                 </div>
@@ -826,7 +846,7 @@
                         <md-checkbox touch-target="wrapper" class="saveable" value="false"
                             id="file-forms-checkbox"></md-checkbox>
                         <button class="collapse">
-                            <span class="material-symbols-outlined">expand_more</span>
+                            <span class="material-symbols-outlined">expand_less</span>
                         </button>
                     </div>
                 </div>
@@ -973,7 +993,7 @@
                         <md-checkbox touch-target="wrapper" class="saveable" value="false"
                             id="wait-filing-checkbox"></md-checkbox>
                         <button class="collapse">
-                            <span class="material-symbols-outlined">expand_more</span>
+                            <span class="material-symbols-outlined">expand_less</span>
                         </button>
                     </div>
                 </div>
@@ -1016,7 +1036,7 @@
                         <md-checkbox touch-target="wrapper" class="saveable" value="false"
                             id="lookup-case-checkbox"></md-checkbox>
                         <button class="collapse">
-                            <span class="material-symbols-outlined">expand_more</span>
+                            <span class="material-symbols-outlined">expand_less</span>
                         </button>
                     </div>
                 </div>
@@ -1053,7 +1073,7 @@
                         <md-checkbox touch-target="wrapper" class="saveable" value="false"
                             id="background-check-checkbox"></md-checkbox>
                         <button class="collapse">
-                            <span class="material-symbols-outlined">expand_more</span>
+                            <span class="material-symbols-outlined">expand_less</span>
                         </button>
                     </div>
                 </div>
@@ -1135,7 +1155,7 @@
                         <md-checkbox touch-target="wrapper" class="saveable" value="false"
                             id="email-judge-checkbox"></md-checkbox>
                         <button class="collapse">
-                            <span class="material-symbols-outlined">expand_more</span>
+                            <span class="material-symbols-outlined">expand_less</span>
                         </button>
                     </div>
                 </div>
@@ -1190,7 +1210,7 @@
                         <md-checkbox touch-target="wrapper" class="saveable" value="false"
                             id="hearing-checkbox"></md-checkbox>
                         <button class="collapse">
-                            <span class="material-symbols-outlined">expand_more</span>
+                            <span class="material-symbols-outlined">expand_less</span>
                         </button>
                     </div>
                 </div>
@@ -1294,7 +1314,7 @@
                         <md-checkbox touch-target="wrapper" class="saveable" value="false"
                             id="certified-copies-checkbox"></md-checkbox>
                         <button class="collapse">
-                            <span class="material-symbols-outlined">expand_more</span>
+                            <span class="material-symbols-outlined">expand_less</span>
                         </button>
                     </div>
                 </div>
@@ -1450,7 +1470,7 @@
                         <md-checkbox touch-target="wrapper" class="saveable" value="false"
                             id="ssa-checkbox"></md-checkbox>
                         <button class="collapse">
-                            <span class="material-symbols-outlined">expand_more</span>
+                            <span class="material-symbols-outlined">expand_less</span>
                         </button>
                     </div>
                 </div>
@@ -1592,7 +1612,7 @@
                         <md-checkbox touch-target="wrapper" class="saveable" value="false"
                             id="dvs-checkbox"></md-checkbox>
                         <button class="collapse">
-                            <span class="material-symbols-outlined">expand_more</span>
+                            <span class="material-symbols-outlined">expand_less</span>
                         </button>
                     </div>
                 </div>
@@ -1738,7 +1758,7 @@
                         <md-checkbox touch-target="wrapper" class="saveable" value="false"
                             id="bank-employer-checkbox"></md-checkbox>
                         <button class="collapse">
-                            <span class="material-symbols-outlined">expand_more</span>
+                            <span class="material-symbols-outlined">expand_less</span>
                         </button>
                     </div>
                 </div>
@@ -1782,7 +1802,7 @@
                         <md-checkbox touch-target="wrapper" class="saveable" value="false"
                             id="medical-records-checkbox"></md-checkbox>
                         <button class="collapse">
-                            <span class="material-symbols-outlined">expand_more</span>
+                            <span class="material-symbols-outlined">expand_less</span>
                         </button>
                     </div>
                 </div>
@@ -2112,8 +2132,8 @@
     </div>
 
 
-    <div class="footer">
-        <hr>
+    <div class="footer card">
+        <!-- <hr> -->
         <p>
             <i><u>Dedicated to <b>Sara Millerey González</b>, whose life and death calls us to justice. </u></i>
             🧱
@@ -2134,16 +2154,10 @@
             <a href="https://zimbin.ski" target="_blank" rel="noopener">Emma Zimbinski</a>
             is licensed under
             <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
-            <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg"
-                style="max-width: 1em;max-height:1em;margin-left: .2em;" alt="Creative Commons">
-            <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg"
-                style="max-width: 1em;max-height:1em;margin-left: .2em;" alt="Attribution">
-            <img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg"
-                style="max-width: 1em;max-height:1em;margin-left: .2em;" alt="NonCommercial">
-            <img src="https://mirrors.creativecommons.org/presskit/icons/sa.svg"
-                style="max-width: 1em;max-height:1em;margin-left: .2em;" alt="ShareAlike">
-
-
+            <img src="images/cc.svg" style="max-width: 1em;max-height:1em;margin-left: .2em;" alt="Creative Commons">
+            <img src="images/by.svg" style="max-width: 1em;max-height:1em;margin-left: .2em;" alt="Attribution">
+            <img src="images/nc.svg" style="max-width: 1em;max-height:1em;margin-left: .2em;" alt="NonCommercial">
+            <img src="images/sa.svg" style="max-width: 1em;max-height:1em;margin-left: .2em;" alt="ShareAlike">
         </p>
 
     </div>
@@ -2172,7 +2186,7 @@
     </div>
 
     <!-- External JavaScript -->
-    <script src="script.js"></script>
+    <script src="script.js" type="module"></script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZQTGQ207FY" defer></script>
     <script>
