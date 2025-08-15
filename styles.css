@@ -908,6 +908,10 @@ body.loading .content {
     opacity: 0 !important;
 }
 
+.content .container {
+    overflow-x: hidden;
+}
+
 /* Loading animation styles */
 .loader-container {
     position: fixed;
