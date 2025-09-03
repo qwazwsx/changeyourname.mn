@@ -58,7 +58,7 @@ body {
     padding: 0;
     /* background: linear-gradient(270deg, #ff8fa3, #f582e5, #c084fc, #5eead4, #86efac, #fef08a); */
     /* background-size: 600% 600%; */
-    /* animation: rainbowFlow 15s ease infinite !important; */
+    /* animation: rainbowFlow 30s ease infinite !important; */
     color: var(--md-sys-color-on-background);
 }
 
