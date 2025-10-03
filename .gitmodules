@@ -1,8 +1,0 @@
-[submodule "public/v1"]
-	path = public/v1
-	url = https://github.com/qwazwsx/changeyourname.mn.git
-	branch = v1
-[submodule "dist/v1"]
-	path = dist/v1
-	url = https://github.com/qwazwsx/changeyourname.mn.git
-	branch = v1
