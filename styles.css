@@ -51,6 +51,10 @@
     --md-sys-color-surface-container-highest: rgb(230 226 223);
 }
 
+body {
+    touch-action: pan-x pan-y;
+}
+
 /* Base styles */
 body {
     font-family: 'Roboto', sans-serif;
