@@ -1663,4 +1663,5 @@ a.more-confetti {
     background: linear-gradient(90deg, #ff8fa3, #f582e5, #c084fc, #5eead4, #86efac, #fef08a);
     background-size: 600% 600%;
     /* filter: brightness(1.2); */
+    opacity: 0.5;
 }
