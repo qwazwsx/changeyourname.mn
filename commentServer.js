@@ -14,13 +14,12 @@ const server = http.createServer(async (req, res) => {
     req.on("data", chunk => body += chunk);
     req.on("end", () => {
         try {
-            const { text, page } = JSON.parse(body);
+            const { text } = JSON.parse(body);
 
             if (
                 typeof text !== "string" ||
                 text.length < 3 ||
-                text.length > 2000 ||
-                typeof page !== "string"
+                text.length > 2000
             ) {
                 res.writeHead(400);
                 return res.end();
@@ -28,7 +27,6 @@ const server = http.createServer(async (req, res) => {
 
             const entry = {
                 id: crypto.randomUUID(),
-                page,
                 body: text,
                 ts: Math.floor(Date.now() / 1000)
             };

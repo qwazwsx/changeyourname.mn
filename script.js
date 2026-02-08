@@ -618,12 +618,12 @@ window['submitComment'] = submitComment;
 function submitComment() {
     let input = document.querySelector('#comment-input');
 
-    fetch('/submit-comment', {
+    fetch('/comments', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ comment: input.value })
+        body: JSON.stringify({ text: input.value })
     })
         .then(response => {
             if (response.ok) {
