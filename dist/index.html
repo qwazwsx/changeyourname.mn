@@ -47,7 +47,7 @@
 
     <!-- Material Design 3 CSS -->
     <link rel="preload"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block&icon_names=accessibility,account_balance,attach_money,badge,bug_report,celebration,check_circle,code,coffee,construction,contract_edit,credit_card,download,drive_file_rename_outline,edit_document,email,expand_less,expand_more,favorite,flight,gavel,hourglass_top,id_card,info,language,local_hospital,local_police,mail,menu,open_in_new,picture_as_pdf,receipt_long,rocket_launch,search,security,share,shield,upload_file,visibility,volunteer_activism,warning"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block&icon_names=accessibility,account_balance,attach_money,badge,bug_report,celebration,check_circle,code,coffee,comment,construction,contract_edit,credit_card,download,drive_file_rename_outline,edit_document,email,expand_less,expand_more,favorite,flight,gavel,hourglass_top,id_card,info,language,local_hospital,local_police,mail,menu,open_in_new,picture_as_pdf,receipt_long,rocket_launch,search,security,send,share,shield,upload_file,visibility,volunteer_activism,warning"
         as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=block"
         rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -140,8 +140,8 @@
       }
     }
     </script>
-  <script type="module" crossorigin src="/assets/index-ac9KkLZj.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-Boi4nIhN.css">
+  <script type="module" crossorigin src="/assets/index-botSanck.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-Bp5Cd7N-.css">
 </head>
 
 <body class="loading">
@@ -1857,6 +1857,35 @@
             </div>
 
 
+            <div class="card comments">
+
+                <div class="comments-header">
+                    <span class="material-symbols-outlined wip-icon">comment</span>
+                    <h3>Leave a comment. How did the process go for you?</h3>
+                </div>
+
+                <div class="comments-content">
+                    <p>I would love to hear about your experience with the name change process. Please share your
+                        thoughts with others going through the same journey. Did the guide miss
+                        anything? Has the process changed? How long did it take you?</p>
+
+                    <textarea id="comment-input" placeholder="Leave your comments here..."></textarea>
+
+                    <p><i>Feel free to leave your email in the comment card if you'd like a response. Otherwise, your
+                            comments are fully <u><b>anonymous</b></u> and are <u><b>not linked to your
+                                    identity</b></u>. If you are expecting a response, know that I am not a lawyer and
+                            cannot provide legal advice.</i>
+                    </p>
+                </div>
+
+                <div class="comments-footer">
+                    <md-filled-button onclick="submitComment()">
+                        <span class="material-symbols-outlined" slot="icon">send</span>
+                        Send Comment
+                    </md-filled-button>
+                </div>
+            </div>
+
 
 
             <!-- Work in Progress Section -->
@@ -2036,17 +2065,18 @@
                                     <!-- Funding Progress -->
                                     <div class="funding-progress">
                                         <div class="funding-info">
-                                            <span class="funding-current">$65</span>
+                                            <span class="funding-current">$265</span>
                                             <span class="funding-separator">of</span>
                                             <span class="funding-goal">$200</span>
-                                            <span class="funding-percentage">(33%)</span>
+                                            <span class="funding-percentage">(133%)</span>
                                         </div>
-                                        <md-linear-progress value="0.33" style="margin: 8px 0;"></md-linear-progress>
+                                        <md-linear-progress value="1.33" style="margin: 8px 0;"></md-linear-progress>
                                         <p class="funding-description">Annual hosting costs</p>
 
                                     </div>
 
-                                    <p>Thanks to <i>suorinnn</i>, <i>Lars</i>, <i>Rowan</i>, and <i>Milo</i> for their
+                                    <p>Thanks to <i>suorinnn</i>, <i>Lars</i>, <i>Rowan</i>, <i>Milo</i>, and <i
+                                            class="special">Jhana</i> for their
                                         generous support in keeping the lights on!</p>
 
 
@@ -2069,9 +2099,7 @@
                                         mouth
                                         helps more people find this resource.</p>
                                     <div class="support-buttons">
-                                        <md-outlined-button
-                                            href="https://twitter.com/intent/tweet?text=Check%20out%20this%20comprehensive%20guide%20to%20changing%20your%20name%20in%20Minnesota!&url=https://changeyourname.mn"
-                                            target="_blank" rel="noopener">
+                                        <md-outlined-button href="javascript:alert('really?')">
                                             <span class="material-symbols-outlined" slot="icon">share</span>
                                             Share on Twitter
                                         </md-outlined-button>

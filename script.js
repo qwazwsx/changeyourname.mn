@@ -613,3 +613,36 @@ function updateScrollScrim() {
     }
 }
 
+
+window['submitComment'] = submitComment;
+function submitComment() {
+    let input = document.querySelector('#comment-input');
+
+    fetch('/submit-comment', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ comment: input.value })
+    })
+        .then(response => {
+            if (response.ok) {
+                alert('Comment submitted successfully!');
+            } else {
+                failSubmitComment(input.value)
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            failSubmitComment(input.value)
+        });
+}
+
+function failSubmitComment(comment) {
+    alert('Error submitting comment. Sorry. Email me at emma@zimbin.ski');
+
+    const mailto = 'mailto:emma@zimbin.ski?subject=' + encodeURIComponent('ChangeYourName.MN') + '&body=' + encodeURIComponent(comment);
+    window.open(mailto, '_blank');
+}
+
+
