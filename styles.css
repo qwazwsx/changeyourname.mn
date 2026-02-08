@@ -106,8 +106,8 @@ html.asw-stop-animations * {
     margin: 16px 0;
     padding: 24px;
     /* max-height: 10000000px; */
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
 }
 
 /* App bar styles */
@@ -416,13 +416,13 @@ md-text-button {
 
 /* Sub-card component - reusable card inside main cards */
 .sub-card {
-    background-color: rgb(247 243 240 / 32%);
+    background-color: rgb(247 243 240 / 50%);
     border-radius: 12px;
     padding: 20px;
     margin: 16px 0;
     border-left: 4px solid #555555;
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
+    /* backdrop-filter: blur(3px); */
+    /* -webkit-backdrop-filter: blur(3px); */
 }
 
 /* Border accent variants */
