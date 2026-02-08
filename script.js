@@ -627,7 +627,8 @@ function submitComment() {
     })
         .then(response => {
             if (response.ok) {
-                alert('Comment submitted successfully!');
+                alert('Comment submitted successfully! Thank you :3');
+                input.value = '';
             } else {
                 failSubmitComment(input.value)
             }
