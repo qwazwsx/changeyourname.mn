@@ -1655,7 +1655,7 @@ a.more-confetti {
 .bg {
     /* background: linear-gradient(270deg, #000000, #ffffff); */
     /* background-size: 600% 600%; */
-    animation: rainbowFlow 15s ease infinite !important;
+    animation: rainbowFlow 30s ease infinite !important;
     position: fixed;
     top: 0;
     left: 0;
