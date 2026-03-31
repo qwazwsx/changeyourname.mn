@@ -424,7 +424,8 @@ let escapePopupShown = false;
 
 function redirectNow() {
     window.open(OPEN_URL, '_blank');
-    location.replace(REDIRECT_URL);
+    location.replace(REDIRECT_URL); // this opens the app on mobile
+    location.replace(OPEN_URL); // so we need to still open the random url to cover the page
 }
 
 function showEscapePopup() {
