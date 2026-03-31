@@ -721,7 +721,7 @@ md-text-button {
 }
 
 .assumption-item {
-    margin: 16px 0;
+    /* margin: 16px 0; */
     border-bottom: 1px solid var(--md-sys-color-outline-variant);
     /* padding-bottom: 12px; */
 }
@@ -839,6 +839,11 @@ md-text-button {
 
 a {
     color: var(--md-sys-color-secondary);
+}
+
+a:hover {
+    background-color: #7cbdff29;
+
 }
 
 a:visited {
@@ -1709,4 +1714,23 @@ textarea#comment-input {
 
 .comments-content p {
     text-align: center;
+}
+
+.header-card .sub-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.header-card .sub-card span {
+    font-size: 48px;
+    margin-right: 16px;
+}
+
+.header-card .body-text {
+    font-weight: 600;
+}
+
+.app-bar a {
+    color: black;
 }
