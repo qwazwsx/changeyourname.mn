@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@material/web": "^2.3.0",
+    "@recogito/text-annotator": "^3.4.9",
     "sienna-accessibility": "^1.0.0",
     "vite": "^7.1.7"
   }
