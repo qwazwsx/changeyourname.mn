@@ -1,7 +1,143 @@
+import { createTextAnnotator } from '@recogito/text-annotator';
+
+import '@recogito/text-annotator/text-annotator.css';
+
+
+
 // Main JavaScript functionality for changeyourname.mn
 document.addEventListener('DOMContentLoaded', () => {
     document.fonts.ready.then(() => {
         document.body.classList.remove('loading');
+    });
+
+    const anno = createTextAnnotator(document.querySelector('.content'), {
+        allowModifierSelect: true,
+        // mergeHighlights: {
+        //     horizontalTolerance: 50,
+        //     verticalTolerance: 50
+        // },
+        dismissOnNotAnnotatable: true,
+        selectionMode: 'shortest',
+
+    });
+    anno.setStyle({
+        fill: '#a6ff00',
+        fillOpacity: .25,
+        underlineStyle: 'dashed',
+        underlineColor: '#7d7208ff',
+        underlineOffset: 0,
+        underlineThickness: 2
+    });
+
+    let isNewAnnotationPending = false;
+
+    anno.on('selectionChanged', annotations => {
+        // // deselect browser range
+        // if (window.getSelection) { window.getSelection().removeAllRanges(); }
+        // else if (document.selection) { document.selection.empty(); }
+
+        setTimeout(() => { // lib calls selectionChanged before the DOM updates, so we need to wait a tick to get the new elements in the DOM. this is a hack
+            console.log('Selected:', annotations);
+            if (annotations.length === 0) {
+                if (!isNewAnnotationPending) {
+                    console.log('No annotations, closing popover');
+                    document.querySelector('.annotate-popover').style.display = 'none';
+                    return;
+                }
+            } else {
+                isNewAnnotationPending = true;
+            }
+
+            if (annotations[0].bodies[0] !== undefined) {
+                document.querySelector('.annotate-popover md-filled-text-field').value = annotations[0].bodies[0].text;
+            }
+
+            document.querySelectorAll('.r6o-annotation.selected').forEach(el => el.classList.remove('selected'));
+            let els = document.querySelectorAll(`[data-annotation="${annotations[0].id}"]`);
+            // calculate bounding box for all els with this annotation ID
+            let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+            els.forEach(el => {
+                el.classList.add('selected');
+                let bb = el.getBoundingClientRect();
+                minX = Math.min(minX, bb.left);
+                minY = Math.min(minY, bb.top);
+                maxX = Math.max(maxX, bb.right);
+                maxY = Math.max(maxY, bb.bottom);
+            });
+
+            let popover = document.querySelector('.annotate-popover');
+            popover.style.display = 'flex';
+
+            // center bb
+            popover.style.left = `${(minX + maxX) / 2 + window.pageXOffset - (popover.offsetWidth / 2)}px`;
+            popover.style.top = `${minY + window.pageYOffset - (popover.offsetHeight)}px`;
+
+            // if popover goes off screen, move it back on
+            if (
+                window.innerWidth < 700 ||
+                parseInt(popover.style.left.split('px')[0]) < window.pageXOffset ||
+                parseInt(popover.style.top.split('px')[0]) < window.pageYOffset ||
+                parseInt(popover.style.top.split('px')[0]) + popover.offsetHeight > window.pageYOffset + window.innerHeight ||
+                parseInt(popover.style.left.split('px')[0]) + popover.offsetWidth > window.pageXOffset + window.innerWidth
+            ) {
+                // position in center
+                popover.style.left = `${(window.innerWidth / 2) - (popover.offsetWidth / 2)}px`;
+                popover.style.top = `${(window.innerHeight / 2) - (popover.offsetHeight)}px`;
+                popover.style.position = 'fixed'
+                // ensure annotation is in view (not blocked by centered popover)
+                let annotationTarget = annotations[0].target.selector[0].range.startContainer.parentElement
+                annotationTarget.style.scrollMarginTop = '-750px';
+                annotationTarget.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                console.log(annotations)
+            }
+
+            // setTimeout(() => {
+            //     document.addEventListener('click', (event) => {
+            //     if (!document.querySelector('.annotate-popover').contains(event.target)) {
+            //         closePopover();
+            //     }
+            // })
+
+
+            document.addEventListener('click', (event) => {
+                if (!document.querySelector('.annotate-popover').contains(event.target)) {
+                    closePopover();
+                }
+            }, { once: true }) // only listen for the first click, then remove listener to prevent multiple triggers;
+
+            function closePopover() {
+                document.getSelection().removeAllRanges()
+                isNewAnnotationPending = false;
+                annotations[0].bodies[0] = { text: document.querySelector('.annotate-popover md-filled-text-field').value }
+
+                anno.updateAnnotation(annotations[0]);
+
+
+                popover.style.display = 'none';
+                document.querySelector('.annotate-popover md-filled-text-field').value = ''
+                anno.cancelSelected()
+            }
+
+            // listen for x click
+            document.querySelector('.annotate-popover .close-popover').onclick = () => {
+                anno.removeAnnotation(annotations[0].id);
+                popover.style.display = 'none';
+                document.getSelection().removeAllRanges()
+                isNewAnnotationPending = false;
+            }
+
+            // listen for post note click
+            document.querySelector('.annotate-popover .post-note').onclick = () => {
+                closePopover()
+
+                // send
+
+            }
+
+
+
+
+        }, 150);
     });
 
     // NAVIGATION BAR FUNCTIONALITY
@@ -49,6 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // show details when unchecked
         checkbox.addEventListener('change', (e) => {
+            console.log(5555555555)
             if (detailsElement) {
                 if (e.target.checked) {
                     // Hide details when checked
@@ -532,6 +669,7 @@ document.querySelector('#accessibility').addEventListener('click', () => {
 // SHOW URLS ON PRINT VIEW
 window.addEventListener("beforeprint", () => {
     document.body.classList.add('print');
+    alert('For some reason printing is broken. Unfortunately this is a low priority issue for me. Feel free to PR a fix.');
 
     // Create hidden URL display elements for md-filled-button elements
     createButtonUrlDisplays();
