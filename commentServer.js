@@ -3,7 +3,7 @@ import fs from "node:fs";
 import crypto from "node:crypto";
 
 const COMMENTS_FILE = "/var/lib/comments/comments.ndjson";
-
+console.log(5555555555)
 const server = http.createServer(async (req, res) => {
     if (req.method !== "POST" || req.url !== "/comments") {
         res.writeHead(404);
@@ -13,6 +13,7 @@ const server = http.createServer(async (req, res) => {
     let body = "";
     req.on("data", chunk => body += chunk);
     req.on("end", () => {
+        console.log(4444, body)
         try {
             let { text, object } = JSON.parse(body);
 
