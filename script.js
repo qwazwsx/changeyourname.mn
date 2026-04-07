@@ -23,6 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
         selectionMode: 'shortest',
 
     });
+
+
     anno.setStyle((annotation, state) => ({
         fill: '#a6ff00',
         fillOpacity: .25,
