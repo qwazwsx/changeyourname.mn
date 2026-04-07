@@ -14,10 +14,10 @@ const server = http.createServer(async (req, res) => {
     req.on("data", chunk => body += chunk);
     req.on("end", () => {
         try {
-            const { text } = JSON.parse(body);
+            const { text, object } = JSON.parse(body);
 
             if (
-                typeof text !== "string" ||
+                (typeof text !== "string" && !object) ||
                 text.length < 3 ||
                 text.length > 2000
             ) {
@@ -25,9 +25,19 @@ const server = http.createServer(async (req, res) => {
                 return res.end();
             }
 
+            if (
+                (typeof object !== "object" && !text) ||
+                object === null ||
+                Array.isArray(object)
+            ) {
+                res.writeHead(400);
+                return res.end();
+            }
+
             const entry = {
                 id: crypto.randomUUID(),
-                body: text,
+                text,
+                object,
                 ts: Math.floor(Date.now() / 1000)
             };
 
