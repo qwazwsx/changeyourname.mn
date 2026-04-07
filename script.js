@@ -139,9 +139,10 @@ document.addEventListener('DOMContentLoaded', () => {
             // listen for x click
             document.querySelector('.annotate-popover .close-popover').onclick = () => {
                 anno.removeAnnotation(annotations[0].id);
-                popover.style.display = 'none';
-                document.getSelection().removeAllRanges()
-                isNewAnnotationPending = false;
+                // popover.style.display = 'none';
+                // document.getSelection().removeAllRanges()
+                // isNewAnnotationPending = false;
+                closePopover();
             }
 
             // listen for post note click
