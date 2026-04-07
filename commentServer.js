@@ -65,7 +65,7 @@ const server = http.createServer(async (req, res) => {
             res.end("ok");
         } catch (err) {
             console.log(err)
-            res.writeHead(400);
+            res.writeHead(500);
             res.end();
         }
     });
