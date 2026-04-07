@@ -158,7 +158,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     .then(response => {
                         if (response.ok) {
                             alert('Suggestion submitted successfully! Thank you :3');
-                            input.value = '';
                         } else {
                             failSubmitComment(JSON.stringify(annotations[0]))
                         }
