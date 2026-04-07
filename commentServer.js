@@ -15,17 +15,17 @@ const server = http.createServer(async (req, res) => {
     req.on("end", () => {
         try {
             let { text, object } = JSON.parse(body);
-
-            if (!text) text = ""
-            if (!object) object = null
-
             if (text === undefined && object === undefined) {
                 res.writeHead(400);
                 return res.end();
             }
 
+            if (!text) text = ""
+            if (!object) object = null
+
+
             if (
-                (typeof text !== "string" && !object) ||
+                (typeof text !== "string" && !object) &&
                 text.length < 3 ||
                 text.length > 2000
             ) {
@@ -34,7 +34,7 @@ const server = http.createServer(async (req, res) => {
             }
 
             if (
-                (typeof object !== "object" && !text) ||
+                (typeof object !== "object" && !text) &&
                 object === null ||
                 Array.isArray(object)
             ) {
@@ -48,6 +48,8 @@ const server = http.createServer(async (req, res) => {
                 object,
                 ts: Math.floor(Date.now() / 1000)
             };
+
+            console.log(entry)
 
             fs.appendFile(
                 COMMENTS_FILE,
