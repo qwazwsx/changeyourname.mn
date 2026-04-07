@@ -15,6 +15,9 @@ const server = http.createServer(async (req, res) => {
     req.on("end", () => {
         try {
             let { text, object } = JSON.parse(body);
+
+            console.log(5555, text, object)
+
             if (text === undefined && object === undefined) {
                 res.writeHead(400);
                 return res.end();
