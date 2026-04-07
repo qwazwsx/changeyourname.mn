@@ -14,7 +14,7 @@ const server = http.createServer(async (req, res) => {
     req.on("data", chunk => body += chunk);
     req.on("end", () => {
         try {
-            const { text, object } = JSON.parse(body);
+            let { text, object } = JSON.parse(body);
 
             if (!text) text = ""
             if (!object) object = null
