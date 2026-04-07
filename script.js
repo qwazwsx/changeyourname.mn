@@ -3,7 +3,6 @@ import { createTextAnnotator } from '@recogito/text-annotator';
 import '@recogito/text-annotator/text-annotator.css';
 
 
-
 // Main JavaScript functionality for changeyourname.mn
 document.addEventListener('DOMContentLoaded', () => {
     document.fonts.ready.then(() => {
@@ -26,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     anno.setStyle((annotation, state) => ({
-        fill: '#a6ff00',
+        fill: annotation.bodies?.[0]?.sent ? 'red' : '#a6ff00',
         fillOpacity: .25,
         underlineStyle: 'dashed',
         underlineColor: '#7d7208ff',
@@ -38,138 +37,188 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let isNewAnnotationPending = false;
 
-    anno.on('selectionChanged', annotations => {
+    anno.on('selectionChanged', async annotations => {
+        // let a = Math.random()
+        // console.log('Selection changed:', annotations, a);
         // // deselect browser range
         // if (window.getSelection) { window.getSelection().removeAllRanges(); }
         // else if (document.selection) { document.selection.empty(); }
 
-        setTimeout(() => { // lib calls selectionChanged before the DOM updates, so we need to wait a tick to get the new elements in the DOM. this is a hack
-            console.log('Selected:', annotations);
-            if (annotations.length === 0) {
-                if (!isNewAnnotationPending) {
-                    console.log('No annotations, closing popover');
-                    document.querySelector('.annotate-popover').style.display = 'none';
-                    return;
-                } else {
-                    console.log('No annotations, but new annotation is pending, keeping popover open');
-                }
+        console.log('Selected:', annotations);
+        if (annotations.length === 0) {
+            if (!isNewAnnotationPending) {
+                console.log('No annotations, closing popover');
+                document.querySelector('.annotate-popover').style.display = 'none';
+                return;
             } else {
-                isNewAnnotationPending = true;
+                console.log('No annotations, but new annotation is pending, keeping popover open');
+                return
             }
-
-            if (annotations[0].bodies[0] !== undefined) {
-                document.querySelector('.annotate-popover md-filled-text-field').value = annotations[0].bodies[0].text;
-            }
-
-            document.querySelectorAll('.r6o-annotation.selected').forEach(el => el.classList.remove('selected'));
-            let els = document.querySelectorAll(`[data-annotation="${annotations[0].id}"]`);
-            // calculate bounding box for all els with this annotation ID
-            let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
-            els.forEach(el => {
-                el.classList.add('selected');
-                let bb = el.getBoundingClientRect();
-                minX = Math.min(minX, bb.left);
-                minY = Math.min(minY, bb.top);
-                maxX = Math.max(maxX, bb.right);
-                maxY = Math.max(maxY, bb.bottom);
-            });
-
-            let popover = document.querySelector('.annotate-popover');
-            popover.style.display = 'flex';
-
-            // center bb
-            popover.style.left = `${(minX + maxX) / 2 + window.pageXOffset - (popover.offsetWidth / 2)}px`;
-            popover.style.top = `${minY + window.pageYOffset - (popover.offsetHeight)}px`;
+        } else {
+            isNewAnnotationPending = true;
+        }
 
 
-            // if popover goes off screen, move it back on
-            if (
-                window.innerWidth < 700 ||
-                parseInt(popover.style.left.split('px')[0]) < window.pageXOffset ||
-                parseInt(popover.style.top.split('px')[0]) < window.pageYOffset ||
-                parseInt(popover.style.top.split('px')[0]) + popover.offsetHeight > window.pageYOffset + window.innerHeight ||
-                parseInt(popover.style.left.split('px')[0]) + popover.offsetWidth > window.pageXOffset + window.innerWidth
-            ) {
-                // position in center
-                popover.style.left = `${(window.innerWidth / 2) - (popover.offsetWidth / 2)}px`;
-                popover.style.top = `${(window.innerHeight / 2) - (popover.offsetHeight)}px`;
-                popover.style.position = 'fixed'
-                // ensure annotation is in view (not blocked by centered popover)
-                let annotationTarget = annotations[0].target.selector[0].range.startContainer.parentElement
-                annotationTarget.style.scrollMarginTop = '-750px';
-                annotationTarget.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                console.log(annotations)
-            }
+        if (annotations?.[0]?.bodies?.[0]?.sent) {
+            document.querySelector('.annotate-popover md-filled-text-field').setAttribute('disabled', 'disabled')
+            document.querySelector('.annotate-popover .post-note').setAttribute('disabled', 'disabled')
+        } else {
+            document.querySelector('.annotate-popover md-filled-text-field').removeAttribute('disabled')
+            document.querySelector('.annotate-popover .post-note').removeAttribute('disabled')
+        }
 
-            // setTimeout(() => {
-            //     document.addEventListener('click', (event) => {
-            //     if (!document.querySelector('.annotate-popover').contains(event.target)) {
-            //         closePopover();
-            //     }
-            // })
-
-            let closeIfClickedOutside = (event) => {
-                console.log('Document click:', event.target);
-                if (!document.querySelector('.annotate-popover').contains(event.target)) {
-                    closePopover();
+        // we get this event prior to the annotation actually being rendered in the DOM, so we have to wait a tick and check for the element to exist before proceeding
+        await new Promise(resolve => {
+            let interval = setInterval(() => {
+                if (!!document.querySelector(`[data-annotation="${annotations[0].id}"]`)) {
+                    clearTimeout(timeout);
+                    clearInterval(interval);
+                    resolve();
                 }
-            }
-            document.addEventListener('click', closeIfClickedOutside);
+            }, 10)
+
+            let timeout = setTimeout(() => {
+                console.warn('timeout waiting for annotation dom')
+                clearInterval(interval);
+                resolve()
+            }, 500);
+        });
+
+        if (annotations?.[0]?.bodies?.[0] !== undefined) {
+            document.querySelector('.annotate-popover md-filled-text-field').value = annotations[0].bodies[0].text;
+        }
+
+        document.querySelectorAll('.r6o-annotation.selected').forEach(el => el.classList.remove('selected'));
+        let els = document.querySelectorAll(`[data-annotation="${annotations[0].id}"]`);
+        // calculate bounding box for all els with this annotation ID
+        let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+        els.forEach(el => {
+            el.classList.add('selected');
+            let bb = el.getBoundingClientRect();
+            minX = Math.min(minX, bb.left);
+            minY = Math.min(minY, bb.top);
+            maxX = Math.max(maxX, bb.right);
+            maxY = Math.max(maxY, bb.bottom);
+        });
+
+        let popover = document.querySelector('.annotate-popover');
+        popover.style.display = 'flex';
+
+        // hack
+        let offsetWidth = 532
+        let offsetHeight = 271
+
+        // setTimeout(() => {
+        // center bb
+        console.log(popover.offsetWidth, minX, maxX, window.pageXOffset, offsetWidth)
+        popover.style.left = `${(minX + maxX) / 2 + window.pageXOffset - (offsetWidth / 2)}px`;
+        popover.style.top = `${minY + window.pageYOffset - (offsetHeight)}px`;
 
 
-            function closePopover() {
-                console.log('Closing popover');
-                document.removeEventListener('click', closeIfClickedOutside);
+        // if popover goes off screen, move it back on
+        if (
+            window.innerWidth < 700 ||
+            parseInt(popover.style.left.split('px')[0]) < window.pageXOffset ||
+            parseInt(popover.style.top.split('px')[0]) < window.pageYOffset ||
+            parseInt(popover.style.top.split('px')[0]) + offsetHeight > window.pageYOffset + window.innerHeight ||
+            parseInt(popover.style.left.split('px')[0]) + offsetWidth > window.pageXOffset + window.innerWidth
+        ) {
+            // position in center
+            popover.style.position = 'fixed'
+            popover.style.left = `${(window.innerWidth / 2) - (offsetWidth / 2)}px`;
+            popover.style.top = `${(window.innerHeight / 2) - (offsetHeight)}px`;
+            // ensure annotation is in view (not blocked by centered popover)
+            let annotationTarget = annotations[0].target.selector[0].range.startContainer.parentElement
+            annotationTarget.style.scrollMarginTop = '-750px';
+            annotationTarget.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            console.log(annotations)
+        }
+        // })
 
-                annotations[0].bodies[0] = { text: document.querySelector('.annotate-popover md-filled-text-field').value }
-                anno.updateAnnotation(annotations[0]);
-                isNewAnnotationPending = false;
+        // setTimeout(() => {
+        //     document.addEventListener('click', (event) => {
+        //     if (!document.querySelector('.annotate-popover').contains(event.target)) {
+        //         closePopover();
+        //     }
+        // })
 
-
-                // document.getSelection().removeAllRanges()
-                popover.style.display = 'none';
-                document.querySelector('.annotate-popover md-filled-text-field').value = ''
-                anno.cancelSelected()
-
-                // save to localstorage
-                let allAnnotations = anno.getAnnotations();
-                localStorage.setItem('annotations', JSON.stringify(allAnnotations));
-            }
-
-            // listen for x click
-            document.querySelector('.annotate-popover .close-popover').onclick = () => {
-                anno.removeAnnotation(annotations[0].id);
-                // popover.style.display = 'none';
-                // document.getSelection().removeAllRanges()
-                // isNewAnnotationPending = false;
+        let closeIfClickedOutside = (event) => {
+            console.log('Document click:', event.target);
+            if (!document.querySelector('.annotate-popover').contains(event.target)) {
                 closePopover();
             }
+        }
+        document.addEventListener('click', closeIfClickedOutside);
 
-            // listen for post note click
-            document.querySelector('.annotate-popover .post-note').onclick = () => {
-                closePopover()
 
-                fetch('/comments', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ object: annotations[0] })
-                })
-                    .then(response => {
-                        if (response.ok) {
-                            alert('Suggestion submitted successfully! Thank you :3');
-                        } else {
-                            failSubmitComment(JSON.stringify(annotations[0]))
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        failSubmitComment(JSON.stringify(annotations[0]))
-                    });
-                // send
+        function closePopover() {
+            console.log('Closing popover');
+            document.removeEventListener('click', closeIfClickedOutside);
+
+            if (!annotations[0].bodies[0]) {
+                annotations[0].bodies[0] = {}
             }
-        }, 150);
+            annotations[0].bodies[0].text = document.querySelector('.annotate-popover md-filled-text-field').value
+
+            anno.updateAnnotation(annotations[0]);
+            isNewAnnotationPending = false;
+
+
+            // document.getSelection().removeAllRanges()
+            popover.style.display = 'none';
+            document.querySelector('.annotate-popover md-filled-text-field').value = ''
+            anno.cancelSelected()
+
+            // save to localstorage
+            let allAnnotations = anno.getAnnotations();
+            localStorage.setItem('annotations', JSON.stringify(allAnnotations));
+        }
+
+        // listen for x click
+        document.querySelector('.annotate-popover .close-popover').onclick = () => {
+            anno.removeAnnotation(annotations[0].id);
+            // popover.style.display = 'none';
+            // document.getSelection().removeAllRanges()
+            // isNewAnnotationPending = false;
+            closePopover();
+        }
+
+        // listen for post note click
+        document.querySelector('.annotate-popover .post-note').onclick = () => {
+            if (annotations[0].bodies?.[0]?.sent) return
+
+            fetch('/comments', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ object: annotations[0] })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        if (!annotations[0].bodies?.[0]) {
+                            annotations[0].bodies[0] = {}
+                        }
+                        annotations[0].bodies[0].sent = true;
+                        anno.updateAnnotation(annotations[0]);
+
+                        // save to localstorage
+                        let allAnnotations = anno.getAnnotations();
+                        localStorage.setItem('annotations', JSON.stringify(allAnnotations));
+
+
+                        alert('Suggestion submitted successfully! Thank you :3');
+                    } else {
+                        failSubmitComment(JSON.stringify(annotations[0]))
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    failSubmitComment(JSON.stringify(annotations[0]))
+                });
+            // send
+        }
+        // }, 200);
     });
 
     // NAVIGATION BAR FUNCTIONALITY
