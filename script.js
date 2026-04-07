@@ -8,6 +8,9 @@ import '@recogito/text-annotator/text-annotator.css';
 document.addEventListener('DOMContentLoaded', () => {
     document.fonts.ready.then(() => {
         document.body.classList.remove('loading');
+        // load from local storage
+        const savedAnnotations = JSON.parse(localStorage.getItem('annotations')) || [];
+        savedAnnotations.forEach(annotation => anno.addAnnotation(annotation));
     });
 
     const anno = createTextAnnotator(document.querySelector('.content'), {
@@ -29,11 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
         underlineThickness: 2,
         fillOpacity: state.hovered ? 0.5 : 0.25,
     }));
-
-
-    // load from local storage
-    const savedAnnotations = JSON.parse(localStorage.getItem('annotations')) || [];
-    savedAnnotations.forEach(annotation => anno.addAnnotation(annotation));
 
 
     let isNewAnnotationPending = false;
