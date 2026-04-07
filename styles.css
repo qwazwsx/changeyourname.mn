@@ -115,7 +115,7 @@ html.asw-stop-animations * {
     background-color: var(--md-sys-color-surface);
     padding: 16px 0px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: sticky;
+    position: fixed;
     top: 0;
     width: 100%;
     z-index: 100;
@@ -132,7 +132,21 @@ html.asw-stop-animations * {
 .app-bar-section {
     display: flex;
     align-items: center;
-    gap: 16px;
+    justify-content: start;
+    width: 100%;
+    user-select: none;
+}
+
+.app-bar-section .headline-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.app-bar-section .headline-container p {
+    margin: 0px;
 }
 
 .headline {
@@ -311,6 +325,8 @@ md-text-button {
 .header-card {
     text-align: center;
     margin-bottom: 32px;
+    margin-top: 75px;
+
 }
 
 .header-card h1 {
@@ -1848,4 +1864,31 @@ img.comic {
 
 .annotate-popover .post-note {
     margin-top: 15px;
+}
+
+.centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.card.annotate-guide h1,
+.card.annotate-guide h2,
+.card.annotate-guide h3 {
+    margin: 0px;
+}
+
+.card.annotate-guide .sub {
+    font-weight: 300;
+}
+
+.card.annotate-guide img {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    margin-top: 25px;
+    border-radius: 10px;
+}
+
+.hovered .r6o-span-highlight-layer .r6o-annotation:hover {
+    background: #555;
 }

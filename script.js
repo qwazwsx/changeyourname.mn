@@ -20,14 +20,21 @@ document.addEventListener('DOMContentLoaded', () => {
         selectionMode: 'shortest',
 
     });
-    anno.setStyle({
+    anno.setStyle((annotation, state) => ({
         fill: '#a6ff00',
         fillOpacity: .25,
         underlineStyle: 'dashed',
         underlineColor: '#7d7208ff',
         underlineOffset: 0,
-        underlineThickness: 2
-    });
+        underlineThickness: 2,
+        fillOpacity: state.hovered ? 0.5 : 0.25,
+    }));
+
+
+    // load from local storage
+    const savedAnnotations = JSON.parse(localStorage.getItem('annotations')) || [];
+    savedAnnotations.forEach(annotation => anno.addAnnotation(annotation));
+
 
     let isNewAnnotationPending = false;
 
@@ -43,6 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.log('No annotations, closing popover');
                     document.querySelector('.annotate-popover').style.display = 'none';
                     return;
+                } else {
+                    console.log('No annotations, but new annotation is pending, keeping popover open');
                 }
             } else {
                 isNewAnnotationPending = true;
@@ -72,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
             popover.style.left = `${(minX + maxX) / 2 + window.pageXOffset - (popover.offsetWidth / 2)}px`;
             popover.style.top = `${minY + window.pageYOffset - (popover.offsetHeight)}px`;
 
+
             // if popover goes off screen, move it back on
             if (
                 window.innerWidth < 700 ||
@@ -98,24 +108,32 @@ document.addEventListener('DOMContentLoaded', () => {
             //     }
             // })
 
-
-            document.addEventListener('click', (event) => {
+            let closeIfClickedOutside = (event) => {
+                console.log('Document click:', event.target);
                 if (!document.querySelector('.annotate-popover').contains(event.target)) {
                     closePopover();
                 }
-            }, { once: true }) // only listen for the first click, then remove listener to prevent multiple triggers;
+            }
+            document.addEventListener('click', closeIfClickedOutside);
+
 
             function closePopover() {
-                document.getSelection().removeAllRanges()
-                isNewAnnotationPending = false;
+                console.log('Closing popover');
+                document.removeEventListener('click', closeIfClickedOutside);
+
                 annotations[0].bodies[0] = { text: document.querySelector('.annotate-popover md-filled-text-field').value }
-
                 anno.updateAnnotation(annotations[0]);
+                isNewAnnotationPending = false;
 
 
+                // document.getSelection().removeAllRanges()
                 popover.style.display = 'none';
                 document.querySelector('.annotate-popover md-filled-text-field').value = ''
                 anno.cancelSelected()
+
+                // save to localstorage
+                let allAnnotations = anno.getAnnotations();
+                localStorage.setItem('annotations', JSON.stringify(allAnnotations));
             }
 
             // listen for x click
@@ -130,13 +148,27 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('.annotate-popover .post-note').onclick = () => {
                 closePopover()
 
+                fetch('/comments', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ text: JSON.stringify(annotations[0]) })
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            alert('Suggestion submitted successfully! Thank you :3');
+                            input.value = '';
+                        } else {
+                            failSubmitComment(JSON.stringify(annotations[0]))
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        failSubmitComment(JSON.stringify(annotations[0]))
+                    });
                 // send
-
             }
-
-
-
-
         }, 150);
     });
 
@@ -495,7 +527,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Reduce particle count on mobile for better performance
         // doing this based on window width is a hack, but it works for now
         const isMobile = window.innerWidth <= 768;
-        const baseCount = isMobile ? 50 : 200; // Half particles on mobile
+        const baseCount = isMobile ? 50 : 100; // Half particles on mobile
 
         window.confetti(
             Object.assign({}, {}, opts, {
