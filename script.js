@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ text: JSON.stringify(annotations[0]) })
+                    body: JSON.stringify({ object: JSON.stringify(annotations[0]) })
                 })
                     .then(response => {
                         if (response.ok) {
