@@ -19,7 +19,7 @@ const server = http.createServer(async (req, res) => {
             console.log(5555, text, object)
 
             if (text === undefined && object === undefined) {
-                res.writeHead(400);
+                res.writeHead(401);
                 return res.end();
             }
 
@@ -32,7 +32,7 @@ const server = http.createServer(async (req, res) => {
                 text.length < 3 ||
                 text.length > 2000
             ) {
-                res.writeHead(400);
+                res.writeHead(402);
                 return res.end();
             }
 
@@ -41,7 +41,7 @@ const server = http.createServer(async (req, res) => {
                 object === null ||
                 Array.isArray(object)
             ) {
-                res.writeHead(400);
+                res.writeHead(403);
                 return res.end();
             }
 
