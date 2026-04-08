@@ -84,6 +84,8 @@ document.addEventListener('DOMContentLoaded', (): void => {
     let isNewAnnotationPending: boolean = false;
 
     anno.on('selectionChanged', async (annotations: Annotation[]): Promise<void> => {
+        console.log('Selection changed:', annotations);
+
         const customBody = annotations?.[0]?.bodies?.[0] as { text?: string; sent?: boolean };
 
         if (customBody?.sent) {
