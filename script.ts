@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', (): void => {
     });
 
     anno.setStyle((annotation: Annotation, state: AnnotationState): HighlightStyle => ({
-        fill: (annotation.bodies?.[0] as CustomBody)?.sent ? '#ff0000' : '#a6ff00',
+        fill: (annotation.bodies?.[0] as CustomBody)?.sent ? '#d3d3d3' : '#a6ff00',
         fillOpacity: state.hovered ? 0.5 : 0.25,
         underlineStyle: 'dashed',
         underlineColor: '#7d7208ff',
