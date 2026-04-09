@@ -11,6 +11,7 @@ import '@material/web/button/text-button.js';
 import '@material/web/icon/icon.js';
 import '@material/web/progress/linear-progress.js';
 import '@material/web/textfield/filled-text-field.js';
+import { createHash } from 'crypto';
 
 // Type definitions
 // interface Annotation {
@@ -56,10 +57,26 @@ interface AnnotationState {
     hovered?: boolean;
 }
 
+function fnv1a(str) {
+    let hash = 0x811c9dc5; // offset basis
+
+    for (let i = 0; i < str.length; i++) {
+        hash ^= str.charCodeAt(i);
+        hash = Math.imul(hash, 0x01000193); // prime
+    }
+
+    return hash >>> 0; // unsigned 32-bit
+}
+
 // Main JavaScript functionality for changeyourname.mn
 document.addEventListener('DOMContentLoaded', (): void => {
     document.fonts.ready.then((): void => {
         document.body.classList.remove('loading');
+
+        const hash = fnv1a(document.body.innerText);
+        console.log(document.body.innerText, hash);
+
+
         // load from local storage
         const savedAnnotations: Annotation[] = JSON.parse(localStorage.getItem('annotations') || '[]');
         savedAnnotations.forEach((annotation: Annotation) => anno.addAnnotation(annotation as any));
@@ -213,6 +230,10 @@ document.addEventListener('DOMContentLoaded', (): void => {
         if (postNoteButton) {
             postNoteButton.onclick = (): void => {
                 if ((annotations[0].bodies?.[0] as CustomBody)?.sent) return;
+                const textFieldInput = document.querySelector('.annotate-popover md-filled-text-field') as any;
+                if (textFieldInput) {
+                    (annotations[0].bodies[0] as CustomBody).text = textFieldInput.value;
+                }
 
                 fetch('/comments', {
                     method: 'POST',
@@ -223,11 +244,11 @@ document.addEventListener('DOMContentLoaded', (): void => {
                 })
                     .then((response: Response) => {
                         if (response.ok) {
-                            // if (!annotations[0].bodies?.[0]) {
-                            //     annotations[0].bodies = [{} as AnnotationBody];
-                            // }
-                            // (annotations[0].bodies[0] as CustomBody).sent = true;
-                            // anno.updateAnnotation(annotations[0] as TextAnnotation);
+                            if (!annotations[0].bodies?.[0]) {
+                                annotations[0].bodies = [{} as AnnotationBody];
+                            }
+                            (annotations[0].bodies[0] as CustomBody).sent = true;
+                            anno.updateAnnotation(annotations[0] as TextAnnotation);
 
                             // save to localstorage
                             // const allAnnotations = anno.getAnnotations();
