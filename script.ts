@@ -230,6 +230,10 @@ document.addEventListener('DOMContentLoaded', (): void => {
         if (postNoteButton) {
             postNoteButton.onclick = (): void => {
                 if ((annotations[0].bodies?.[0] as CustomBody)?.sent) return;
+
+                if (!annotations[0].bodies?.[0]) {
+                    annotations[0].bodies = [{} as AnnotationBody];
+                }
                 const textFieldInput = document.querySelector('.annotate-popover md-filled-text-field') as any;
                 if (textFieldInput) {
                     (annotations[0].bodies[0] as CustomBody).text = textFieldInput.value;
