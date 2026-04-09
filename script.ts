@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded', (): void => {
                             // const allAnnotations = anno.getAnnotations();
                             anno.removeAnnotation(annotations[0].id);
                             localStorage.setItem('annotations', JSON.stringify(anno.getAnnotations()));
-
+                            closePopover();
                             alert('Suggestion submitted successfully! Thank you :3');
                         } else {
                             failSubmitComment(JSON.stringify(annotations[0]));
