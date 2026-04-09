@@ -19,8 +19,8 @@ const server = http.createServer(async (req, res) => {
                 return res.end();
             }
 
-            if (!text) text = ""
-            if (!object) object = null
+            if (text === undefined) text = "";
+            if (!object) object = null;
 
 
             if (
