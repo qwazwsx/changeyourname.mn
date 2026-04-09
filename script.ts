@@ -223,15 +223,16 @@ document.addEventListener('DOMContentLoaded', (): void => {
                 })
                     .then((response: Response) => {
                         if (response.ok) {
-                            if (!annotations[0].bodies?.[0]) {
-                                annotations[0].bodies = [{} as AnnotationBody];
-                            }
-                            (annotations[0].bodies[0] as CustomBody).sent = true;
-                            anno.updateAnnotation(annotations[0] as TextAnnotation);
+                            // if (!annotations[0].bodies?.[0]) {
+                            //     annotations[0].bodies = [{} as AnnotationBody];
+                            // }
+                            // (annotations[0].bodies[0] as CustomBody).sent = true;
+                            // anno.updateAnnotation(annotations[0] as TextAnnotation);
 
                             // save to localstorage
-                            const allAnnotations = anno.getAnnotations();
-                            localStorage.setItem('annotations', JSON.stringify(allAnnotations));
+                            // const allAnnotations = anno.getAnnotations();
+                            anno.removeAnnotation(annotations[0].id);
+                            localStorage.setItem('annotations', JSON.stringify(anno.getAnnotations()));
 
                             alert('Suggestion submitted successfully! Thank you :3');
                         } else {
@@ -369,11 +370,21 @@ document.addEventListener('DOMContentLoaded', (): void => {
                 updateNavCheckmark(element.id, (element as HTMLInputElement).checked);
             });
         } else if (element.tagName === 'MD-CHECKBOX') {
+            function hideSection(element: Element) {
+                let btn = (document.querySelector(`#${element.id}`)?.closest('.section-header-buttons')?.querySelector('button.collapse') as HTMLButtonElement)
+                if (btn.getAttribute('aria-expanded') === 'false') btn.click();
+                console.log(btn.getAttribute('aria-expanded'));
+            }
+
+            if ((element as any).checked) hideSection(element);
+
+
             element.addEventListener('change', (): void => {
                 // Save the value when it changes
                 save(element.id, (element as any).checked);
                 playClick();
                 updateNavCheckmark(element.id, (element as any).checked);
+                if ((element as any).checked) hideSection(element);
             });
         }
     });
