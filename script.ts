@@ -168,11 +168,11 @@ document.addEventListener('DOMContentLoaded', (): void => {
                 // position in center
                 popover.style.position = 'fixed';
                 popover.style.left = `${(window.innerWidth / 2) - (offsetWidth / 2)}px`;
-                popover.style.top = `${(window.innerHeight / 2) - offsetHeight}px`;
+                popover.style.top = `${(window.innerHeight / 2)}px`;
 
                 // ensure annotation is in view (not blocked by centered popover)
                 const annotationTarget = annotations[0].target.selector[0].range.startContainer.parentElement;
-                annotationTarget.style.scrollMarginTop = '-750px';
+                annotationTarget.style.scrollMarginTop = '-500px';
                 annotationTarget.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 console.log(annotations);
             }

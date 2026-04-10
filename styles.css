@@ -1899,3 +1899,7 @@ img.comic {
 .hovered .r6o-span-highlight-layer .r6o-annotation:hover {
     background: #555;
 }
+
+.header-card .sub-card {
+    padding: 5px;
+}
