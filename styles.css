@@ -56,7 +56,7 @@
     font-family: 'Atkinson Hyperlegible Soft';
     src: url('public/AtkinsonHyperlegibleSoft-Regular.ttf');
 }
-dxcjkl
+
 :root, body{
     --mdc-typography-font-family: 'Atkinson Hyperlegible Soft', 'Roboto', sans-serif;
 }
