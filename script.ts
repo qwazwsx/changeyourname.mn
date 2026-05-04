@@ -57,29 +57,32 @@ interface AnnotationState {
     hovered?: boolean;
 }
 
-function fnv1a(str) {
-    let hash = 0x811c9dc5; // offset basis
+// // non cryptographic hash func I stole from stackoverflow
+// function fnv1a(str) {
+//     let hash = 0x811c9dc5; // offset basis
 
-    for (let i = 0; i < str.length; i++) {
-        hash ^= str.charCodeAt(i);
-        hash = Math.imul(hash, 0x01000193); // prime
-    }
+//     for (let i = 0; i < str.length; i++) {
+//         hash ^= str.charCodeAt(i);
+//         hash = Math.imul(hash, 0x01000193); // prime
+//     }
 
-    return hash >>> 0; // unsigned 32-bit
-}
+//     return hash >>> 0; // unsigned 32-bit
+// }
 
 // Main JavaScript functionality for changeyourname.mn
 document.addEventListener('DOMContentLoaded', (): void => {
     document.fonts.ready.then((): void => {
         document.body.classList.remove('loading');
 
-        const hash = fnv1a(document.body.innerText);
-        console.log(document.body.innerText, hash);
-
+        // const hash = fnv1a(document.body.innerText);
+        // console.log(document.body.innerText, hash);
+        // TODO: verify hash of page contents to ensure integrity of annotations, and to prevent loading annotations on an outdated version
+        // of the page that may have different content and thus different annotation offsets. This is a naiive approach I think
 
         // load from local storage
-        const savedAnnotations: Annotation[] = JSON.parse(localStorage.getItem('annotations') || '[]');
-        savedAnnotations.forEach((annotation: Annotation) => anno.addAnnotation(annotation as any));
+        // const savedAnnotations: Annotation[] = JSON.parse(localStorage.getItem('annotations') || '[]');
+        // savedAnnotations.forEach((annotation: Annotation) => anno.addAnnotation(annotation as any));
+
     });
 
     const anno = createTextAnnotator(document.querySelector('.content')!, {
@@ -102,6 +105,9 @@ document.addEventListener('DOMContentLoaded', (): void => {
 
     anno.on('selectionChanged', async (annotations: Annotation[]): Promise<void> => {
         console.log('Selection changed:', annotations);
+        if (annotations.length === 0) {
+            return
+        }
 
         const customBody = annotations?.[0]?.bodies?.[0] as { text?: string; sent?: boolean };
 
@@ -112,7 +118,7 @@ document.addEventListener('DOMContentLoaded', (): void => {
         // we get this event prior to the annotation actually being rendered in the DOM, so we have to wait a tick and check for the element to exist before proceeding
         await new Promise<void>((resolve): void => {
             const interval = setInterval((): void => {
-                if (!!document.querySelector(`[data-annotation="${annotations[0].id}"]`)) {
+                if (!!document.querySelector(`[data-annotation="${annotations[0]?.id}"]`)) {
                     clearTimeout(timeout);
                     clearInterval(interval);
                     resolve();
@@ -156,6 +162,7 @@ document.addEventListener('DOMContentLoaded', (): void => {
             console.log(popover.offsetWidth, minX, maxX, window.pageXOffset, offsetWidth);
             popover.style.left = `${(minX + maxX) / 2 + window.pageXOffset - (offsetWidth / 2)}px`;
             popover.style.top = `${minY + window.pageYOffset - offsetHeight}px`;
+            popover.style.position = 'absolute';
 
             // if popover goes off screen, move it back on
             if (
@@ -316,7 +323,6 @@ document.addEventListener('DOMContentLoaded', (): void => {
 
         // show details when unchecked
         checkbox.addEventListener('change', (e: Event): void => {
-            console.log(5555555555);
             if (detailsElement) {
                 if ((e.target as any).checked) {
                     // Hide details when checked
@@ -334,7 +340,8 @@ document.addEventListener('DOMContentLoaded', (): void => {
         // Initialize the DOM state, just in case the section is not collapsed
         button.setAttribute('aria-expanded', 'false');
         const icon = button.querySelector('.material-symbols-outlined') as HTMLElement;
-        if (icon) icon.textContent = 'expand_more';
+        if (icon) icon.textContent = 'expand_less';
+        button.setAttribute('aria-expanded', 'true');
 
         button.closest('.guide-section')?.classList.remove('collapsed');
         const content = button.closest('.guide-section')?.querySelector('.section-content') as HTMLElement;
@@ -397,7 +404,8 @@ document.addEventListener('DOMContentLoaded', (): void => {
         } else if (element.tagName === 'MD-CHECKBOX') {
             function hideSection(element: Element) {
                 let btn = (document.querySelector(`#${element.id}`)?.closest('.section-header-buttons')?.querySelector('button.collapse') as HTMLButtonElement)
-                if (btn.getAttribute('aria-expanded') === 'false') btn.click();
+                console.log(btn, btn.getAttribute('aria-expanded'));
+                if (btn.getAttribute('aria-expanded') === 'true' || btn.getAttribute('aria-expanded') === null) btn.click()
                 console.log(btn.getAttribute('aria-expanded'));
             }
 

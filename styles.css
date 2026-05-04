@@ -51,13 +51,25 @@
     --md-sys-color-surface-container-highest: rgb(230 226 223);
 }
 
+
+@font-face {
+    font-family: 'Atkinson Hyperlegible Soft';
+    src: url('public/AtkinsonHyperlegibleSoft-Regular.ttf');
+}
+dxcjkl
+:root, body{
+    --mdc-typography-font-family: 'Atkinson Hyperlegible Soft', 'Roboto', sans-serif;
+}
+
 body {
     touch-action: pan-x pan-y;
 }
 
+
+
 /* Base styles */
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Atkinson Hyperlegible Soft', 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
     /* background: linear-gradient(270deg, #ff8fa3, #f582e5, #c084fc, #5eead4, #86efac, #fef08a); */
@@ -326,8 +338,15 @@ md-text-button {
     text-align: center;
     margin-bottom: 32px;
     margin-top: 75px;
+}
+
+@media screen and (max-width: 775px) {
+    .header-card {
+        margin-top: 90px;
+    }
 
 }
+
 
 .header-card h1 {
     font-size: 2rem;
@@ -977,7 +996,7 @@ body:not(.loading) .loader-container {
 }
 
 .loader-text {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Atkinson Hyperlegible Soft', 'Roboto', sans-serif;
     font-size: 16px;
     font-weight: 400;
     color: var(--md-sys-color-on-surface, #1d1b20);
@@ -1756,7 +1775,7 @@ textarea#comment-input {
 }
 
 .header-card .body-text {
-    font-weight: 600;
+    /* font-weight: 600; */
 }
 
 .app-bar a {
@@ -1902,4 +1921,9 @@ img.comic {
 
 .header-card .sub-card {
     padding: 5px;
+}
+
+#prepare-forms .option-card md-filled-button {
+    animation: celebration-pulse 2s ease-in-out infinite;
+
 }
