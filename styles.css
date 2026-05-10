@@ -1694,7 +1694,7 @@ a.more-confetti {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-image: url(images/bg.webp);
+    background-image: url(/images/bg.webp);
     z-index: -999999;
     /* opacity: .05; */
     /* background-size: contain; */
