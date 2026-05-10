@@ -54,7 +54,7 @@
 
 @font-face {
     font-family: 'Atkinson Hyperlegible Soft';
-    src: url('public/AtkinsonHyperlegibleSoft-Regular.ttf');
+    src: url('/AtkinsonHyperlegibleSoft-Regular.ttf');
 }
 
 :root, body{
@@ -106,7 +106,7 @@ html.asw-stop-animations * {
 
 /* Layout containers */
 .container {
-    max-width: 1200px;
+    max-width: 1300px;
     margin: 0 auto;
     padding: 16px;
 }
@@ -124,13 +124,14 @@ html.asw-stop-animations * {
 
 /* App bar styles */
 .app-bar {
-    background-color: var(--md-sys-color-surface);
+    background-color:  rgb(255 255 255 / 70%);
     padding: 16px 0px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 100;
+        backdrop-filter: blur(5px);
 }
 
 .app-bar-content {
@@ -342,7 +343,7 @@ md-text-button {
 
 @media screen and (max-width: 775px) {
     .header-card {
-        margin-top: 90px;
+        margin-top: 125px;
     }
 
 }
@@ -363,7 +364,7 @@ md-text-button {
 
 .author-name {
     font-size: 1.1rem;
-    font-weight: 500;
+    font-weight: 900;
     color: var(--md-sys-color-on-surface-variant);
     margin-bottom: 12px;
     font-style: italic;
@@ -1701,7 +1702,7 @@ a.more-confetti {
     /* background: linear-gradient(90deg, #ff8fa3, #f582e5, #c084fc, #5eead4, #86efac, #fef08a); */
     /* background-size: 600% 600%; */
     /* animation: rainbowFlow 15s ease infinite !important; */
-    opacity: 0.05;
+    opacity: 0.1;
 }
 
 .bg {
@@ -1723,7 +1724,7 @@ a.more-confetti {
     opacity: 0.5;
 }
 
-i.special {
+.special {
     background: linear-gradient(to right, #ef5350, #f48fb1, #7e57c2, #2196f3, #26c6da, #43a047, #b49a3f, #f9a825, #ff5722);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -1926,4 +1927,43 @@ img.comic {
 #prepare-forms .option-card md-filled-button {
     animation: celebration-pulse 2s ease-in-out infinite;
 
+}
+
+
+div.options {
+    display: flex;
+    gap: 25px;
+}
+
+@media screen and (max-width: 1000px) {
+    div.options {
+        flex-direction: column;
+        gap: 0px;
+    }
+    div.options .option{
+        transition: none !important
+    }
+    div.options .option:hover {
+        transform: none !important;
+    }
+}
+
+div.options .material-symbols-outlined {
+    font-size: 48px;
+    color: var(--md-sys-color-primary);
+}
+
+div.options h2 {
+    margin-top: 0px;
+}
+
+div.options .option {
+    transition: transform 0.3s ease-in-out;
+      flex: 1;
+
+}
+
+div.options .option:hover {
+    transform: translateY(-5px);
+    /* background-color: rgb(228, 228, 228); */
 }
