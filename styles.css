@@ -358,9 +358,15 @@ md-text-button {
     margin-left: auto;
     margin-right: auto;
     display: block;
+
+
+
+    width: 100%;
+    height: auto;
+    margin-top:21vw;
 }
 
-@media screen and (max-width: 1350px) {
+/* @media screen and (max-width: 1350px) {
     .header-card {
         margin-top: 0px;
     }
@@ -378,7 +384,7 @@ md-text-button {
     }
     
 
-}
+} */
 
 .header-card h1 {
     font-size: 2rem;
