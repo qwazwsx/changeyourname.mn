@@ -169,6 +169,11 @@ html.asw-stop-animations * {
     color: var(--md-sys-color-on-surface);
 }
 
+
+.headline-container img {
+    height: 50px;
+}
+
 /* Navigation drawer styles */
 .nav-drawer {
     position: fixed;
@@ -338,7 +343,21 @@ md-text-button {
 .header-card {
     text-align: center;
     margin-bottom: 32px;
-    margin-top: 75px;
+    /* margin-top: 200px; */
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+.skyline {
+      margin-bottom: 0px;
+    margin-top: 80px;
+    /* position: relative; */
+    /* top: 5px; */
+    z-index: -99;
+    height: 308px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 
 @media screen and (max-width: 775px) {
@@ -360,6 +379,12 @@ md-text-button {
 .author-info {
     margin: 16px 0 24px 0;
     margin-top: 0px;
+        margin-bottom: 0px;
+
+}
+
+.header-card h2 {
+    margin-bottom: 0px;
 }
 
 .author-name {
@@ -376,6 +401,11 @@ md-text-button {
     justify-content: center;
     gap: 24px;
     flex-wrap: wrap;
+
+    position: relative;
+    top: -15px;
+
+    
 }
 
 .contact-item {
@@ -390,6 +420,8 @@ md-text-button {
     transition: all 0.2s ease;
     font-size: 0.9rem;
     border: 1px solid var(--md-sys-color-outline-variant);
+
+    
 }
 
 .contact-item:hover {
