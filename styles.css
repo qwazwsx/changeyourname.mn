@@ -363,7 +363,7 @@ md-text-button {
 
     width: 100%;
     height: auto;
-    margin-top:21vw;
+    /* margin-top:21vw; */
 }
 
 /* @media screen and (max-width: 1350px) {
@@ -376,15 +376,14 @@ md-text-button {
     }
     
 
-}
-@media screen and (max-width: 500px) {
+}*/
+@media screen and (max-width: 800px) {
     .skyline {
-        width: 100%;
-            height: 160px;
+        margin-top:100px;
     }
     
 
-} */
+} 
 
 .header-card h1 {
     font-size: 2rem;
