@@ -888,8 +888,10 @@ function updateScrollScrim(): void {
 
     if (scrollTop > scrollThreshold || nearBottom) {
         scrollScrim.classList.add('hidden');
+        document.querySelector('.headline-container p')?.classList.add('hidden');
     } else {
         scrollScrim.classList.remove('hidden');
+        document.querySelector('.headline-container p')?.classList.remove('hidden');
     }
 }
 

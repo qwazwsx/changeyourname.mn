@@ -402,6 +402,7 @@ md-text-button {
 
 .header-card h2 {
     margin-bottom: 0px;
+    margin-top: 0px;
 }
 
 .author-name {
@@ -1716,6 +1717,15 @@ body.print .app-bar {
     /* height: 131px; */
 }
 
+.headline-container p {
+        transition: opacity 0.3s ease-in-out, height 0.3s ease-in-out;
+}
+
+.headline-container p.hidden {
+    opacity: 0;
+    height: 0px;
+}
+
 /* Scroll Indicator Scrim */
 .scroll-indicator-scrim {
     position: fixed;
@@ -1771,6 +1781,13 @@ a.more-confetti {
     background-size: 600% 600%;
     /* filter: brightness(1.2); */
     opacity: 0.5;
+}
+
+@media screen and (max-width: 767px) {
+    .bg {
+        animation: rainbowFlow 45s ease infinite !important;
+    }
+    
 }
 
 .special {
@@ -1942,11 +1959,23 @@ img.comic {
     margin-top: 15px;
 }
 
-.centered {
-    display: flex;
-    flex-direction: column;
+.centered,
+.centered h1 {
+    display: inline-block;
+    /* flex-direction: column; */
     align-items: center;
     justify-content: center;
+    margin-left:auto;
+    margin-right:auto;
+    text-align: center;
+}
+
+.centered h1 u {
+    display: inline-block;
+}
+
+.annotate-guide {
+    width:100%;
 }
 
 .card.annotate-guide h1,
