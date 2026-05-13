@@ -362,7 +362,7 @@ md-text-button {
 
 
     width: 100%;
-    height: auto;
+    height: 200px;
     /* margin-top:21vw; */
 }
 
@@ -380,6 +380,8 @@ md-text-button {
 @media screen and (max-width: 800px) {
     .skyline {
         margin-top:110px;
+            height: auto;
+
     }
     
 
