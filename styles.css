@@ -1734,8 +1734,8 @@ body.print .app-bar {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 80px;
-    background: linear-gradient(to top, rgb(0 0 0 / 40%) 0%, transparent 100%);
+    height: 100px;
+    background: linear-gradient(to top, rgb(0 0 0 / 75%) 0%, transparent 100%);
     pointer-events: none;
     z-index: 1000;
     opacity: 1;
@@ -2046,4 +2046,9 @@ div.options .option {
 div.options .option:hover {
     transform: translateY(-5px);
     /* background-color: rgb(228, 228, 228); */
+}
+
+.header-card p {
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
