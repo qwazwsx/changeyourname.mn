@@ -13,6 +13,8 @@ import '@material/web/progress/linear-progress.js';
 import '@material/web/textfield/filled-text-field.js';
 import { createHash } from 'crypto';
 
+new Image().src = 'images/bg.webp'; // preload background image
+
 // Type definitions
 // interface Annotation {
 //     id: string;
