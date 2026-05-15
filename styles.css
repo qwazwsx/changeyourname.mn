@@ -1849,6 +1849,11 @@ textarea#comment-input {
 
 .header-card h2 {
         font-weight: 400;
+
+}
+
+.header-card h1 {
+         margin-top: 0px;
 }
 
 .app-bar a {
