@@ -1847,6 +1847,10 @@ textarea#comment-input {
     /* font-weight: 600; */
 }
 
+.header-card h2 {
+        font-weight: 400;
+}
+
 .app-bar a {
     color: black;
 }
