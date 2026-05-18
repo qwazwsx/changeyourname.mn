@@ -1084,7 +1084,7 @@ body:not(.loading) .loader-container {
 .footer {
     text-align: center;
     position: absolute;
-    width: 100%;
+    /* width: 100%; */
 
 }
 
@@ -1972,7 +1972,7 @@ img.comic {
 
 .centered,
 .centered h1 {
-    display: inline-block;
+    display: block;
     /* flex-direction: column; */
     align-items: center;
     justify-content: center;
@@ -1985,9 +1985,9 @@ img.comic {
     display: inline-block;
 }
 
-.annotate-guide {
+/* .annotate-guide {
     width:100%;
-}
+} */
 
 .card.annotate-guide h1,
 .card.annotate-guide h2,
