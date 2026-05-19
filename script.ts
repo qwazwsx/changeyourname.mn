@@ -716,9 +716,18 @@ function showEscapePopup(): void {
         popup.style.display = 'flex';
         // escapePopupShown = true;
     }
+
+    isHideEscapePopupOnTimeout = true;
+    setTimeout(() => {
+        isHideEscapePopupOnTimeout = false;
+    }, 500)
+
 }
 
+let isHideEscapePopupOnTimeout = false;
 function hideEscapePopup(): void {
+    if (isHideEscapePopupOnTimeout) return;
+
     const popup = document.getElementById('escapePopup') as HTMLElement;
     if (popup) {
         popup.style.display = 'none';
