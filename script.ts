@@ -11,7 +11,7 @@ import '@material/web/button/text-button.js';
 import '@material/web/icon/icon.js';
 import '@material/web/progress/linear-progress.js';
 import '@material/web/textfield/filled-text-field.js';
-import { createHash } from 'crypto';
+// import { createHash } from 'crypto';
 
 new Image().src = 'images/bg.webp'; // preload background image
 
@@ -714,7 +714,7 @@ function showEscapePopup(): void {
     const popup = document.getElementById('escapePopup') as HTMLElement;
     if (popup) {
         popup.style.display = 'flex';
-        escapePopupShown = true;
+        // escapePopupShown = true;
     }
 }
 
@@ -752,8 +752,32 @@ document.addEventListener('keyup', (e: KeyboardEvent): void => {
 });
 
 // TOUCH HANDLER (Mobile)
+// basically we want to ignore scrolls
+let startX = 0;
+let startY = 0;
+let moved = false;
+document.addEventListener("touchstart", (e) => {
+    const touch = e.touches[0];
+    startX = touch.clientX;
+    startY = touch.clientY;
+    moved = false;
+})
+
+document.addEventListener("touchmove", (e) => {
+    const touch = e.touches[0];
+
+    const dx = touch.clientX - startX;
+    const dy = touch.clientY - startY;
+
+    let THRESH = 100;
+    if (Math.abs(dx) > THRESH || Math.abs(dy) > THRESH) {
+        moved = true;
+    }
+});
+
+
 document.addEventListener('touchend', (e: TouchEvent): void => {
-    console.log(e);
+    if (moved) return;
     if (e.touches.length > 1) {
         tapCounter = 0; // Ignore multi-finger
         return;
@@ -771,6 +795,7 @@ document.addEventListener('touchend', (e: TouchEvent): void => {
     // Show popup on first triple tap
     if (tapCounter === 3) {
         showEscapePopup();
+        e.preventDefault();
     }
 
     if (tapCounter >= 5) {
