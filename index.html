@@ -188,7 +188,7 @@
         <div class="nav-drawer-content">
           <a href="#introduction" class="nav-item" id="introduction-nav">
             <span class="material-symbols-outlined">warning</span>
-            0.) Goals, Requirements, and Assumptions
+            0.) Requirements and Assumptions
           </a>
           <a href="#prepare-forms" class="nav-item" id="prepare-forms-nav">
             <span class="material-symbols-outlined">contract_edit</span>
@@ -446,7 +446,7 @@
           <div class="section-header">
             <div class="section-header-title">
               <span class="material-symbols-outlined section-icon" aria-hidden="true">warning</span>
-              <h2>0.) Goals, Requirements, and Assumptions</h2>
+              <h2>0.) Requirements and Assumptions</h2>
             </div>
             <div class="section-header-buttons">
               <md-checkbox touch-target="wrapper" class="saveable" value="false" id="introduction-checkbox"></md-checkbox>
@@ -497,208 +497,215 @@
                 these assumptions.
               </p>
               <p>This guide will assume that you...</p>
-              <div class="assumptions-checklist">
-                <div class="assumption-item">
-                  <div class="checkbox-container not-annotatable not-annotatable">
-                    <md-checkbox id="assumption-mn-born" checked touch-target="wrapper"></md-checkbox>
-                    <label for="assumption-mn-born" class="assumption-label"> Were born in Minnesota </label>
+              <div class="checklist-container">
+                <div class="assumptions-checklist">
+                  <div class="assumption-item">
+                    <div class="checkbox-container not-annotatable not-annotatable">
+                      <md-checkbox id="assumption-mn-born" checked touch-target="wrapper"></md-checkbox>
+                      <label for="assumption-mn-born" class="assumption-label"> Were born in Minnesota </label>
+                    </div>
+                    <div class="assumption-details" id="details-mn-born">
+                      <p>
+                        If you were born outside of Minnesota, you can still change your name (and self selected gender marker on your ID), but you
+                        will need your state's cooperation to change birth records. Seek out the council of the
+                        <a
+                          href="https://docs.google.com/forms/d/e/1FAIpQLSe63PCfgMQcY5ZdZBdS4jjJTWzXlIk_dw0N2Dd7N4X0RXFpEA/viewform"
+                          target="_blank"
+                          rel="noopener"
+                          >MN Volunteer Lawyer's Network</a
+                        >
+                        for more guidance. Unfortunately, some states do not allow you to change your gender marker on your birth certificate at all.
+                        Others have requirements to prove you've had "appropriate treatment" or surgery prior to amending birth certificates. Maybe
+                        one day this will change.
+                        <a href="https://mapresearch.org/equality-map/identity-document-laws-and-policies/" target="_blank">
+                          Movement Advancement Project has a great map that you can use as a starting point for understanding your birth state's laws.
+                        </a>
+                      </p>
+                    </div>
                   </div>
-                  <div class="assumption-details" id="details-mn-born">
-                    <p>
-                      If you were born outside of Minnesota, you can still change your name (and self selected gender marker on your ID), but you will
-                      need your state's cooperation to change birth records. Seek out the council of the
-                      <a
-                        href="https://docs.google.com/forms/d/e/1FAIpQLSe63PCfgMQcY5ZdZBdS4jjJTWzXlIk_dw0N2Dd7N4X0RXFpEA/viewform"
-                        target="_blank"
-                        rel="noopener"
-                        >MN Volunteer Lawyer's Network</a
-                      >
-                      for more guidance. Unfortunately, some states do not allow you to change your gender marker on your birth certificate at all.
-                      Others have requirements to prove you've had "appropriate treatment" or surgery prior to amending birth certificates. Maybe one
-                      day this will change.
-                      <a href="https://mapresearch.org/equality-map/identity-document-laws-and-policies/" target="_blank">
-                        Movement Advancement Project has a great map that you can use as a starting point for understanding your birth state's laws.
-                      </a>
-                    </p>
+                  <div class="assumption-item">
+                    <div class="checkbox-container not-annotatable">
+                      <md-checkbox id="assumption-adult" checked touch-target="wrapper"></md-checkbox>
+                      <label for="assumption-adult" class="assumption-label"> Are 18 years or older and are filing for yourself </label>
+                    </div>
+                    <div class="assumption-details" id="details-adult">
+                      <p>
+                        The automated form generator and interactive form set skip over the minor section. Go back and fill this section out.
+                        Furthermore, there is a separate set of forms for minors. Both parents must be notified.
+                        <b> Important: Click ESC 5 times quickly (or tap 5 times quickly) to exit the page and clear history. </b>
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div class="assumption-item">
-                  <div class="checkbox-container not-annotatable">
-                    <md-checkbox id="assumption-adult" checked touch-target="wrapper"></md-checkbox>
-                    <label for="assumption-adult" class="assumption-label"> Are 18 years or older and are filing for yourself </label>
+                  <div class="assumption-item">
+                    <div class="checkbox-container not-annotatable">
+                      <md-checkbox id="assumption-mn-raised" checked touch-target="wrapper"></md-checkbox>
+                      <label for="assumption-mn-raised" class="assumption-label"> Have lived in no other states as an adult </label>
+                    </div>
+                    <div class="assumption-details" id="details-mn-raised">
+                      <p>
+                        If you have lived in other states as an adult, the background check step may require more information. Seek out the council of
+                        the
+                        <a
+                          href="https://docs.google.com/forms/d/e/1FAIpQLSe63PCfgMQcY5ZdZBdS4jjJTWzXlIk_dw0N2Dd7N4X0RXFpEA/viewform"
+                          target="_blank"
+                          rel="noopener"
+                          >MN Volunteer Lawyer's Network</a
+                        >
+                        .
+                      </p>
+                    </div>
                   </div>
-                  <div class="assumption-details" id="details-adult">
-                    <p>
-                      The automated form generator and interactive form set skip over the minor section. Go back and fill this section out.
-                      Furthermore, there is a separate set of forms for minors. Both parents must be notified.
-                      <b> Important: Click ESC 5 times quickly (or tap 5 times quickly) to exit the page and clear history. </b>
-                    </p>
+                  <div class="assumption-item">
+                    <div class="checkbox-container not-annotatable">
+                      <md-checkbox id="assumption-trans" checked touch-target="wrapper"></md-checkbox>
+                      <label for="assumption-trans" class="assumption-label">
+                        Are transgender and looking to change your name and gender marker
+                      </label>
+                    </div>
+                    <div class="assumption-details" id="details-trans">
+                      <p>
+                        If you just want to change your name and not your gender marker, or just your gender marker and not your name, you can do that
+                        too. Just make sure to fill out the correct parts of the forms and leave the parts you don't want blank. The automatic form
+                        generator will assume you want to change your gender, so make sure to go back and correct the forms if you are using it. If
+                        you aren't transgender, you can still use this process to change your name, just make sure not to accidentally change your
+                        legal gender by filling out the wrong parts of the forms.
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div class="assumption-item">
-                  <div class="checkbox-container not-annotatable">
-                    <md-checkbox id="assumption-mn-raised" checked touch-target="wrapper"></md-checkbox>
-                    <label for="assumption-mn-raised" class="assumption-label"> Have lived in no other states as an adult </label>
-                  </div>
-                  <div class="assumption-details" id="details-mn-raised">
-                    <p>
-                      If you have lived in other states as an adult, the background check step may require more information. Seek out the council of
-                      the
-                      <a
-                        href="https://docs.google.com/forms/d/e/1FAIpQLSe63PCfgMQcY5ZdZBdS4jjJTWzXlIk_dw0N2Dd7N4X0RXFpEA/viewform"
-                        target="_blank"
-                        rel="noopener"
-                        >MN Volunteer Lawyer's Network</a
-                      >
-                      .
-                    </p>
-                  </div>
-                </div>
-                <div class="assumption-item">
-                  <div class="checkbox-container not-annotatable">
-                    <md-checkbox id="assumption-trans" checked touch-target="wrapper"></md-checkbox>
-                    <label for="assumption-trans" class="assumption-label">
-                      Are transgender and seek to change your legal gender marker along with your name
-                    </label>
-                  </div>
-                  <div class="assumption-details" id="details-trans">
-                    <p>
-                      If you just want to change your name and not your gender marker, or just your gender marker and not your name, you can do that
-                      too. Just make sure to fill out the correct parts of the forms and leave the parts you don't want blank. The automatic form
-                      generator will assume you want to change your gender, so make sure to go back and correct the forms if you are using it. If you
-                      aren't transgender, you can still use this process to change your name, just make sure not to accidentally change your legal
-                      gender by filling out the wrong parts of the forms.
-                    </p>
-                  </div>
-                </div>
-                <div class="assumption-item">
-                  <div class="checkbox-container not-annotatable">
-                    <md-checkbox id="assumption-citizen" checked touch-target="wrapper"></md-checkbox>
-                    <label for="assumption-citizen" class="assumption-label">Are a citizen</label>
-                  </div>
-                  <div class="assumption-details" id="details-citizen">
-                    <p>
-                      If you are not a citizen, reach out to the
-                      <a
-                        href="https://docs.google.com/forms/d/e/1FAIpQLSe63PCfgMQcY5ZdZBdS4jjJTWzXlIk_dw0N2Dd7N4X0RXFpEA/viewform"
-                        target="_blank"
-                        rel="noopener"
-                        >MN Volunteer Lawyer's Network</a
-                      >
-                      for legal assistance.
-                    </p>
-                  </div>
-                </div>
-                <div class="assumption-item">
-                  <div class="checkbox-container not-annotatable">
-                    <md-checkbox id="assumption-english" checked touch-target="wrapper"></md-checkbox>
-                    <label for="assumption-english" class="assumption-label"> Speak and understand English </label>
-                  </div>
-                  <div class="assumption-details" id="details-english">
-                    <p>
-                      You can request an interpreter using the top of form NAM102. You can also get an interpreter for your two required witnesses.
-                      Arrange this with the judge's chambers. The automated form generator and interactive form set skip over the interpreter section,
-                      make sure to go back and add this section. You may wish to reach out to the
-                      <a
-                        href="https://docs.google.com/forms/d/e/1FAIpQLSe63PCfgMQcY5ZdZBdS4jjJTWzXlIk_dw0N2Dd7N4X0RXFpEA/viewform"
-                        target="_blank"
-                        rel="noopener"
-                        >MN Volunteer Lawyer's Network</a
-                      >
-                      for assistance.
-                    </p>
+                  <div class="assumption-item">
+                    <div class="checkbox-container not-annotatable">
+                      <md-checkbox id="assumption-criminal" checked touch-target="wrapper"></md-checkbox>
+                      <label for="assumption-criminal" class="assumption-label"> Have no criminal history </label>
+                    </div>
+                    <div class="assumption-details" id="details-criminal">
+                      <p>
+                        The automated form generator and interactive form set skip over the criminal history section. Go back and fill this section
+                        out. Seek out the council of the
+                        <a
+                          href="https://docs.google.com/forms/d/e/1FAIpQLSe63PCfgMQcY5ZdZBdS4jjJTWzXlIk_dw0N2Dd7N4X0RXFpEA/viewform"
+                          target="_blank"
+                          rel="noopener"
+                          >MN Volunteer Lawyer's Network</a
+                        >
+                        .
+                      </p>
+                    </div>
+                    <div class="assumption-item">
+                      <div class="checkbox-container not-annotatable">
+                        <md-checkbox id="assumption-children" checked touch-target="wrapper"></md-checkbox>
+                        <label for="assumption-children" class="assumption-label">Have no children</label>
+                      </div>
+                      <div class="assumption-details" id="details-children">
+                        <p>
+                          The automated form generator and interactive form set skip over the children section. Go back and fill this section out.
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div class="assumption-item">
-                  <div class="checkbox-container not-annotatable">
-                    <md-checkbox id="assumption-address" checked touch-target="wrapper"></md-checkbox>
-                    <label for="assumption-address" class="assumption-label"> Have a legal address </label>
+                <div class="assumptions-checklist">
+                  <div class="assumption-item">
+                    <div class="checkbox-container not-annotatable">
+                      <md-checkbox id="assumption-citizen" checked touch-target="wrapper"></md-checkbox>
+                      <label for="assumption-citizen" class="assumption-label">Are a citizen</label>
+                    </div>
+                    <div class="assumption-details" id="details-citizen">
+                      <p>
+                        If you are not a citizen, reach out to the
+                        <a
+                          href="https://docs.google.com/forms/d/e/1FAIpQLSe63PCfgMQcY5ZdZBdS4jjJTWzXlIk_dw0N2Dd7N4X0RXFpEA/viewform"
+                          target="_blank"
+                          rel="noopener"
+                          >MN Volunteer Lawyer's Network</a
+                        >
+                        for legal assistance.
+                      </p>
+                    </div>
                   </div>
-                  <div class="assumption-details" id="details-address">
-                    <p>
-                      If you don't have a legal address, contact the
-                      <a
-                        href="https://docs.google.com/forms/d/e/1FAIpQLSe63PCfgMQcY5ZdZBdS4jjJTWzXlIk_dw0N2Dd7N4X0RXFpEA/viewform"
-                        target="_blank"
-                        rel="noopener"
-                        >MN Volunteer Lawyer's Network</a
-                      >
-                      for guidance on alternative options.
-                    </p>
+                  <div class="assumption-item">
+                    <div class="checkbox-container not-annotatable">
+                      <md-checkbox id="assumption-english" checked touch-target="wrapper"></md-checkbox>
+                      <label for="assumption-english" class="assumption-label"> Speak and understand English </label>
+                    </div>
+                    <div class="assumption-details" id="details-english">
+                      <p>
+                        You can request an interpreter using the top of form NAM102. You can also get an interpreter for your two required witnesses.
+                        Arrange this with the judge's chambers. The automated form generator and interactive form set skip over the interpreter
+                        section, make sure to go back and add this section. You may wish to reach out to the
+                        <a
+                          href="https://docs.google.com/forms/d/e/1FAIpQLSe63PCfgMQcY5ZdZBdS4jjJTWzXlIk_dw0N2Dd7N4X0RXFpEA/viewform"
+                          target="_blank"
+                          rel="noopener"
+                          >MN Volunteer Lawyer's Network</a
+                        >
+                        for assistance.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="assumption-item">
+                    <div class="checkbox-container not-annotatable">
+                      <md-checkbox id="assumption-address" checked touch-target="wrapper"></md-checkbox>
+                      <label for="assumption-address" class="assumption-label"> Have a legal address </label>
+                    </div>
+                    <div class="assumption-details" id="details-address">
+                      <p>
+                        If you don't have a legal address, contact the
+                        <a
+                          href="https://docs.google.com/forms/d/e/1FAIpQLSe63PCfgMQcY5ZdZBdS4jjJTWzXlIk_dw0N2Dd7N4X0RXFpEA/viewform"
+                          target="_blank"
+                          rel="noopener"
+                          >MN Volunteer Lawyer's Network</a
+                        >
+                        for guidance on alternative options.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="assumption-item">
+                    <div class="checkbox-container not-annotatable">
+                      <md-checkbox id="assumption-internet" checked touch-target="wrapper"></md-checkbox>
+                      <label for="assumption-internet" class="assumption-label"> Have regular access to the internet (phone OR computer) </label>
+                    </div>
+                    <div class="assumption-details" id="details-internet">
+                      <p>You should be able to do most of this via mail, however this guide follows the online process.</p>
+                    </div>
+                  </div>
+
+                  <div class="assumption-item">
+                    <div class="checkbox-container not-annotatable">
+                      <md-checkbox id="assumption-property" checked touch-target="wrapper"></md-checkbox>
+                      <label for="assumption-property" class="assumption-label">Own no land</label>
+                    </div>
+                    <div class="assumption-details" id="details-property">
+                      <p>
+                        Form NAM102 requires a description of any property you own or have an interest in. The automated form generator and
+                        interactive form set skip this. Go back and fill this section out. You may want to seek out the council of the
+                        <a
+                          href="https://docs.google.com/forms/d/e/1FAIpQLSe63PCfgMQcY5ZdZBdS4jjJTWzXlIk_dw0N2Dd7N4X0RXFpEA/viewform"
+                          target="_blank"
+                          rel="noopener"
+                          >MN Volunteer Lawyer's Network</a
+                        >
+                        .
+                      </p>
+                    </div>
+                  </div>
+                  <div class="assumption-item">
+                    <div class="checkbox-container not-annotatable">
+                      <md-checkbox id="assumption-marriage" checked touch-target="wrapper"></md-checkbox>
+                      <label for="assumption-marriage" class="assumption-label"> Are not and have never been married </label>
+                    </div>
+                    <div class="assumption-details" id="details-marriage">
+                      <p>
+                        The automated form generator and interactive form set skip over the marriage and/or divorce section. Go back and fill this
+                        section out. Furthermore, you may need to bring the court proof of marriage and/or divorce if your name has changed before.
+                        One of your witnesses for your hearing should be your spouse.
+                      </p>
+                    </div>
                   </div>
                 </div>
-                <div class="assumption-item">
-                  <div class="checkbox-container not-annotatable">
-                    <md-checkbox id="assumption-internet" checked touch-target="wrapper"></md-checkbox>
-                    <label for="assumption-internet" class="assumption-label"> Have regular access to the internet (phone OR computer) </label>
-                  </div>
-                  <div class="assumption-details" id="details-internet">
-                    <p>You should be able to do most of this via mail, however this guide follows the online process.</p>
-                  </div>
-                </div>
-                <div class="assumption-item">
-                  <div class="checkbox-container not-annotatable">
-                    <md-checkbox id="assumption-children" checked touch-target="wrapper"></md-checkbox>
-                    <label for="assumption-children" class="assumption-label">Have no children</label>
-                  </div>
-                  <div class="assumption-details" id="details-children">
-                    <p>The automated form generator and interactive form set skip over the children section. Go back and fill this section out.</p>
-                  </div>
-                </div>
-                <div class="assumption-item">
-                  <div class="checkbox-container not-annotatable">
-                    <md-checkbox id="assumption-marriage" checked touch-target="wrapper"></md-checkbox>
-                    <label for="assumption-marriage" class="assumption-label"> Are not and have never been married </label>
-                  </div>
-                  <div class="assumption-details" id="details-marriage">
-                    <p>
-                      The automated form generator and interactive form set skip over the marriage and/or divorce section. Go back and fill this
-                      section out. Furthermore, you may need to bring the court proof of marriage and/or divorce if your name has changed before. One
-                      of your witnesses for your hearing should be your spouse.
-                    </p>
-                  </div>
-                </div>
-                <div class="assumption-item">
-                  <div class="checkbox-container not-annotatable">
-                    <md-checkbox id="assumption-criminal" checked touch-target="wrapper"></md-checkbox>
-                    <label for="assumption-criminal" class="assumption-label"> Have no criminal history </label>
-                  </div>
-                  <div class="assumption-details" id="details-criminal">
-                    <p>
-                      The automated form generator and interactive form set skip over the criminal history section. Go back and fill this section out.
-                      Seek out the council of the
-                      <a
-                        href="https://docs.google.com/forms/d/e/1FAIpQLSe63PCfgMQcY5ZdZBdS4jjJTWzXlIk_dw0N2Dd7N4X0RXFpEA/viewform"
-                        target="_blank"
-                        rel="noopener"
-                        >MN Volunteer Lawyer's Network</a
-                      >
-                      .
-                    </p>
-                  </div>
-                </div>
-                <div class="assumption-item">
-                  <div class="checkbox-container not-annotatable">
-                    <md-checkbox id="assumption-property" checked touch-target="wrapper"></md-checkbox>
-                    <label for="assumption-property" class="assumption-label">Own no land</label>
-                  </div>
-                  <div class="assumption-details" id="details-property">
-                    <p>
-                      Form NAM102 requires a description of any property you own or have an interest in. The automated form generator and interactive
-                      form set skip this. Go back and fill this section out. You may want to seek out the council of the
-                      <a
-                        href="https://docs.google.com/forms/d/e/1FAIpQLSe63PCfgMQcY5ZdZBdS4jjJTWzXlIk_dw0N2Dd7N4X0RXFpEA/viewform"
-                        target="_blank"
-                        rel="noopener"
-                        >MN Volunteer Lawyer's Network</a
-                      >
-                      .
-                    </p>
-                  </div>
-                </div>
-                <div class="sub-card sub-card--info">
-                  <p>Uncheck a checkbox above to reveal additional information.</p>
-                </div>
+              </div>
+              <div class="sub-card sub-card--info">
+                <p>Uncheck a checkbox above to reveal additional information.</p>
               </div>
             </div>
           </div>
@@ -901,6 +908,14 @@
               <a target="_blank" href="https://minnesota.tylertech.cloud/SRL/SRL"> fee waiver form generator </a>
               that can help you create the necessary documents.
             </p>
+
+            <div class="centered">
+              <md-filled-button onclick="window.open('https://minnesota.tylertech.cloud/SRL/SRL', '_blank')">
+                <span class="material-symbols-outlined" slot="icon">open_in_new</span>
+                Open EFS (E-File) Website
+              </md-filled-button>
+            </div>
+
             <!-- </div> -->
             <!-- <h2>Non-Profit Funding Eligibility</h2>
                 <div class="sub-card sub-card--highlight">
@@ -986,9 +1001,15 @@
               <h3>Setup Your Account</h3>
               <ol>
                 <li>
-                  <a href="https://minnesota.tylertech.cloud/ofsweb" target="_blank"> Register for an account here. </a>
+                  <a href="https://efilemn.tylertech.cloud/OfsEfsp/ui/register/user-information" target="_blank"> Register for an account here. </a>
                   You can use your new name here as long as you use your legal name when filing below.
                 </li>
+                <div class="centered">
+                  <md-filled-button onclick="window.open('https://efilemn.tylertech.cloud/OfsEfsp/ui/register/user-information', '_blank')">
+                    <span class="material-symbols-outlined" slot="icon">open_in_new</span>
+                    Open Fee Waiver Form Generator
+                  </md-filled-button>
+                </div>
                 <li>Click "Actions", then "Payment Account". Add a payment method.</li>
               </ol>
               <div class="image-container">
@@ -1134,11 +1155,14 @@
               <h3>If Your Filing is Accepted</h3>
               <p>
                 If all went well, you should receive an email in a few days titled
-                <i> "EFILING ACCEPTED Case [00-AB-00-00000] , In the Matter of the Application of [Deadname] for a Change of Name" </i>
-                or
-                <i>
-                  "COURTESY NOTIFICATION OF FILING FOR Case [00-AB-00-00000], In the Matter of the Application of [Deadname] for a Change of Name"
+                <i> "EFILING ACCEPTED" </i> or
+                <i
+                  >"COURTESY NOTIFICATION OF FILING FOR Case [00-AB-00-00000] , In the Matter of the Application of [Deadname] for a Change of Name"
                 </i>
+                <!-- or -->
+                <!-- <i> -->
+                <!-- "COURTESY NOTIFICATION OF FILING FOR Case [00-AB-00-00000], In the Matter of the Application of [Deadname] for a Change of Name" -->
+                <!-- </i> -->
                 .
               </p>
               <p>
@@ -1330,9 +1354,14 @@
                 "
               >
                 <p>
-                  To the chambers of [District Court Judge Sarah Smith], Hello. I'm seeking to change my legal name and gender marker. I have filed
-                  the appropriate paperwork and have been assigned case number [#AB-123-456]. I'd like to schedule a hearing as soon as possible.
-                  What, if any, upcoming dates do you have available? I appreciate your time, Jane Doe youremail@example.com 123.456.7890
+                  To the chambers of [District Court Judge Sarah Smith],
+                  <br />
+                  Hello. I'm seeking to change my legal name and gender marker. I have filed the appropriate paperwork and have been assigned case
+                  number [#AB-123-456]. I'd like to schedule a hearing as soon as possible.
+                  <br />
+                  What, if any, upcoming dates do you have available? <br />
+                  I appreciate your time, <br />
+                  Jane Doe youremail@example.com 123.456.7890
                 </p>
               </div>
             </div>
@@ -2008,16 +2037,19 @@
                 . If you are expecting a response, know that I am not a lawyer and cannot provide legal advice.
               </i>
             </p>
-            <p>Recent updates related to comments given:</p>
+            <div class="comments-footer">
+              <md-filled-button onclick="submitComment()">
+                <span class="material-symbols-outlined" slot="icon">send</span>
+                Send Comment
+              </md-filled-button>
+            </div>
+            <br />
+            <b>Recent updates related to comments given:</b>
             <ul>
-              <li>Toned down the sensitivity of the "quick escape" feature on mobile, ignoring scroll events</li>
+              <li>Toned down the sensitivity of the "quick escape" feature on mobile. Scroll events are now ignored.</li>
+              <li>Various small fixes to content and clarity.</li>
+              <li>Added Voter Registration to scope.</li>
             </ul>
-          </div>
-          <div class="comments-footer">
-            <md-filled-button onclick="submitComment()">
-              <span class="material-symbols-outlined" slot="icon">send</span>
-              Send Comment
-            </md-filled-button>
           </div>
         </div>
         <!-- Work in Progress Section -->
@@ -2061,6 +2093,18 @@
                 <div class="wip-item">
                   <span class="material-symbols-outlined">flight</span>
                   <span>Updating passport</span>
+                </div>
+                <div class="wip-item">
+                  <span class="material-symbols-outlined">drive_file_rename_outline</span>
+                  <span>
+                    <span>Voter Registration</span>
+                  </span>
+                </div>
+                <div class="wip-item">
+                  <span class="material-symbols-outlined">drive_file_rename_outline</span>
+                  <span>
+                    <span>Credit Reporting Bureaus</span>
+                  </span>
                 </div>
               </div>
             </div>

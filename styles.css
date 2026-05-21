@@ -477,7 +477,7 @@ md-text-button {
     margin-bottom: 32px;
     /* overflow: hidden; */
     transition: height .3s ease-in-out;
-    scroll-margin-top: 500px;
+    scroll-margin-top: 100px;
     /* display: block; */
 }
 
@@ -804,9 +804,14 @@ md-text-button {
     }
 }
 
+.checklist-container{
+    display: flex;
+}
+
 /* Assumptions checklist styles */
 .assumptions-checklist {
-    margin-top: 20px;
+    /* margin-top: 20px; */
+        flex: 1;
 }
 
 .assumption-item {
