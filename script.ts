@@ -100,7 +100,6 @@ document.addEventListener('DOMContentLoaded', (): void => {
             el.style.opacity = 0;
         });
 
-        document.body.classList.remove('loading');
 
 
         let wiggleStrength = document.body.clientWidth < 768 ? 3 : 5
@@ -175,6 +174,7 @@ document.addEventListener('DOMContentLoaded', (): void => {
                     blurEl1.setAttribute('stdDeviation', currentBlur1.toString());
                     thresholdEl2.setAttribute('slope', currentSlope2.toString());
                     blurEl2.setAttribute('stdDeviation', currentBlur2.toString());
+                    document.body.classList.remove('loading');
 
 
 
