@@ -85,6 +85,96 @@ document.addEventListener('DOMContentLoaded', (): void => {
         // const savedAnnotations: Annotation[] = JSON.parse(localStorage.getItem('annotations') || '[]');
         // savedAnnotations.forEach((annotation: Annotation) => anno.addAnnotation(annotation as any));
 
+
+        (document.querySelector('.header-card h2') as HTMLElement).style.opacity = "0";
+        fadeIn(document.querySelector('.header-card h2'), { duration: 3000, fps: 5 });
+
+        let wiggleStrength = document.body.clientWidth < 768 ? 5 : 2
+
+        wiggle(document.querySelector('svg .one'), 1, wiggleStrength, 5)
+        wiggle(document.querySelector('svg .two'), 1, wiggleStrength, 5)
+        // wiggle(document.querySelector('.header-card h2'), 1, 2, 5)
+
+        // document.querySelectorAll('.options .option').forEach((el: any) => {
+        //     wiggle(el, 1, 5, 5)
+        // });
+
+
+        document.querySelectorAll('.options .option').forEach((el: any) => {
+            console.log(el)
+            el = el as HTMLElement;
+            el.style.opacity = 0;
+        });
+
+
+        document.querySelectorAll('.options .option').forEach((el: any) => {
+            fadeIn(el, { duration: 3000, fps: 5 })
+        });
+
+
+
+
+
+        // animate document.querySelector('#headerThreshold').setAttribute('slope', 0) to document.querySelector('#headerThreshold').setAttribute('slope', 100) ease in out. simultaneously document.querySelector('#headerBlur').setAttribute('stdDeviation', 2) to document.querySelector('#headerBlur').setAttribute('stdDeviation', 1)
+        (() => {
+            const thresholdEl1 = document.querySelector('#headerThreshold1');
+            const blurEl1 = document.querySelector('#headerBlur1');
+            const thresholdEl2 = document.querySelector('#headerThreshold2');
+            const blurEl2 = document.querySelector('#headerBlur2');
+
+
+            if (!thresholdEl1 || !blurEl1 || !thresholdEl2 || !blurEl2) {
+                console.error('Target elements not found.');
+                return;
+            }
+
+            const duration = 3000; // Duration in milliseconds
+            const startTime = performance.now();
+
+            // Ease-in-out quadratic function
+            const easeInOut = (t) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+
+            const animate = (currentTime) => {
+                let elapsed = currentTime - startTime;
+                // console.log(elapsed)
+                if (Math.floor(elapsed) % 4 == 0 || elapsed < .5) {
+                    let progress1 = Math.min(elapsed / duration, 1);
+                    let progress2 = Math.min((Math.max(0, elapsed - 1000)) / duration, 1);
+
+                    // Apply easing
+                    // const easedProgress = easeInOut(progress);
+
+                    // Calculate interpolated values
+                    const currentSlope1 = 30 + (100 - 0) * easeInOut(progress1);
+                    const currentBlur1 = 2 + (0 - 2) * easeInOut(progress1);
+
+                    const currentSlope2 = 25 + (100 - 0) * easeInOut(progress2);
+                    const currentBlur2 = 2 + (0 - 2) * easeInOut(progress2);
+
+                    // Update attributes
+                    thresholdEl1.setAttribute('slope', currentSlope1.toString());
+                    blurEl1.setAttribute('stdDeviation', currentBlur1.toString());
+                    thresholdEl2.setAttribute('slope', currentSlope2.toString());
+                    blurEl2.setAttribute('stdDeviation', currentBlur2.toString());
+
+
+
+                    if (progress1 < 1) {
+                        requestAnimationFrame(animate);
+                    }
+                } else {
+                    requestAnimationFrame(animate);
+                }
+
+
+            };
+
+            requestAnimationFrame(animate);
+        })();
+
+
+
+
     });
 
     const anno = createTextAnnotator(document.querySelector('.content')!, {
@@ -961,4 +1051,79 @@ function failSubmitComment(comment: string): void {
 
     const mailto = 'mailto:emma@zimbin.ski?subject=' + encodeURIComponent('ChangeYourName.MN') + '&body=' + encodeURIComponent(comment);
     window.open(mailto, '_blank');
+}
+
+// shameless LLM usage below
+function wiggle(element, freq = 2, amp = 20, fps = 60) {
+    const start = performance.now();
+    let lastFrame = -1;
+    let rand = Math.random();
+
+    function noise(t, seed) {
+        return (
+            Math.sin(t * 1.7 + seed) +
+            Math.sin(t * 3.3 + seed * 2) * 0.5 +
+            Math.sin(t * 7.1 + seed * 3) * 0.25
+        ) / 1.75;
+    }
+
+    function ease(t, a, b, c, d) {
+        const x = Math.min(Math.max((t - a) / (b - a), 0), 1);
+        return c + (d - c) * (x * x * (3 - 2 * x));
+    }
+
+    function animate(now) {
+        const t = (now - start) / 1000;
+
+        const frame = Math.floor(t * fps);
+
+        //  skip rendering if same frame
+        if (frame === lastFrame) {
+            requestAnimationFrame(animate);
+            return;
+        }
+        lastFrame = frame;
+
+        const st = frame / fps;
+
+        const strength = ease(t, 0, 5, 1, 0);
+        const a = amp * strength;
+
+        const x = noise(st * freq, 1 + rand) * a;
+        const y = noise(st * freq, 2 + rand) * a;
+        const r = noise(st * freq, 3 + rand) * (a / 100);
+
+        element.style.transform =
+            `translate(${x}px, ${y}px) rotate(${r}deg)`;
+
+        requestAnimationFrame(animate);
+    }
+
+    requestAnimationFrame(animate);
+}
+function easeInOut(t) {
+    return (1 - Math.cos(Math.PI * t)) / 2;
+}
+
+function fadeIn(el, { duration = 3000, fps = 5 } = {}) {
+    const step = 1000 / fps;
+    const frames = Math.floor(duration / step);
+
+    let start = performance.now();
+
+    el.style.opacity = 0;
+
+    function tick(now) {
+        const f = Math.min(Math.floor((now - start) / step), frames);
+        let t = f / frames;
+
+        t = easeInOut(t);
+
+        el.style.opacity = t;
+
+        if (f < frames) requestAnimationFrame(tick);
+        else el.style.opacity = 1;
+    }
+
+    requestAnimationFrame(tick);
 }

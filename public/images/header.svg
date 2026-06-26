@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200">
+    <defs>
+        <filter id="gaussianThenThreshold">
+
+            <!-- Extract alpha -->
+            <feGaussianBlur id="headerBlur" in="SourceAlpha" stdDeviation="1" result="blur" />
+
+            <!-- Threshold the blurred alpha -->
+            <feComponentTransfer in="blur" result="threshold">
+                <feFuncA type="linear" slope="75" intercept="-25" />
+            </feComponentTransfer>
+
+            <!-- Put it back as black text -->
+            <feFlood flood-color="black" result="color" />
+            <feComposite in="color" in2="threshold" operator="in" result="shape" />
+
+            <feComposite in="shape" operator="over" />
+        </filter>
+    </defs>
+
+    <!-- <rect width="100%" height="100%" fill="black" /> -->
+
+    <text
+        x="50%"
+        y="50%"
+        text-anchor="middle"
+        dominant-baseline="middle"
+        font-family="Arial"
+        font-size="20"
+        font-weight="bold"
+        fill="white"
+        filter="url(#gaussianThenThreshold)">
+        Changing your name can feel intimidating and out of reach,
+    </text>
+    <text
+        x="50%"
+        y="75%"
+        text-anchor="middle"
+        dominant-baseline="middle"
+        font-family="Arial"
+        font-size="20"
+        font-weight="bold"
+        fill="white"
+        filter="url(#gaussianThenThreshold)">
+        but it doesn't have to be,
+    </text>
+</svg>

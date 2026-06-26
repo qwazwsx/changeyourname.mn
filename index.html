@@ -271,8 +271,76 @@
               </a>
             </div>
           </div>
+
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 100">
+            <defs>
+              <filter id="gaussianThenThreshold1">
+                <!-- Extract alpha -->
+                <feGaussianBlur id="headerBlur1" in="SourceAlpha" stdDeviation="0" result="blur" />
+
+                <!-- Threshold the blurred alpha -->
+                <feComponentTransfer in="blur" result="threshold">
+                  <feFuncA id="headerThreshold1" type="linear" slope="30" intercept="-25" />
+                </feComponentTransfer>
+
+                <!-- Put it back as black text -->
+                <!-- <feFlood flood-color="rgb(28, 27, 26)" result="color" /> -->
+                <feComposite in="color" in2="threshold" operator="in" result="shape" />
+                <!-- <feGaussianBlur in="threshold" stdDeviation="0.25" result="softEdge" /> -->
+                <feComposite in="shape" operator="over" />
+              </filter>
+              <filter id="gaussianThenThreshold2">
+                <!-- Extract alpha -->
+                <feGaussianBlur id="headerBlur2" in="SourceAlpha" stdDeviation="0" result="blur" />
+
+                <!-- Threshold the blurred alpha -->
+                <feComponentTransfer in="blur" result="threshold">
+                  <feFuncA id="headerThreshold2" type="linear" slope="30" intercept="-25" />
+                </feComponentTransfer>
+
+                <!-- Put it back as black text -->
+                <!-- <feFlood flood-color="rgb(28, 27, 26)" result="color" /> -->
+                <feComposite in="color" in2="threshold" operator="in" result="shape" />
+                <!-- <feGaussianBlur in="threshold" stdDeviation="0.25" result="softEdge" /> -->
+                <feComposite in="shape" operator="over" />
+              </filter>
+            </defs>
+
+            <!-- <rect width="100%" height="100%" fill="black" /> -->
+
+            <text
+              class="one"
+              x="50%"
+              y="25%"
+              text-anchor="middle"
+              dominant-baseline="middle"
+              font-family="Atkinson Hyperlegible Soft"
+              font-size="32"
+              font-weight="200"
+              fill="rgb(28, 27, 26)"
+              filter="url(#gaussianThenThreshold1)"
+            >
+              Changing your name can feel intimidating and out of reach,
+            </text>
+            <text
+              class="two"
+              x="50%"
+              y="65%"
+              text-anchor="middle"
+              dominant-baseline="middle"
+              font-family="Atkinson Hyperlegible Soft"
+              font-size="40"
+              text-decoration="underline"
+              font-weight="900"
+              fill="rgb(28, 27, 26)"
+              filter="url(#gaussianThenThreshold2)"
+            >
+              but it doesn't have to be,
+            </text>
+          </svg>
+
           <!-- <p class="body-text"> -->
-          <h1>Changing your name can feel intimidating and out of reach, <br /><u>but it doesn't have to be</u>.</h1>
+          <!-- <h1>Changing your name can feel intimidating and out of reach, <br /><u>but it doesn't have to be</u>.</h1> -->
           <!-- <br /> -->
           <h2>
             This step-by-step primer was written by Trans people, for Trans people with the intention of helping orient you to the name change process
@@ -2273,8 +2341,7 @@
                     </div>
                     <p>
                       Thanks to
-                      <i>suorinnn</i>, <i>Lars</i>, <i>Rowan</i>, <i>Milo</i>, and
-                      <i class="special">Jhana</i>
+                      <i>suorinnn</i>, <i>Lars</i>, <i>Rowan</i>, <i>Milo</i>, <i class="special">Jhana</i>, <i>Yasmin</i>
                       for their generous support in keeping the lights on!
                     </p>
                     <p>
