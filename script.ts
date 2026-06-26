@@ -91,12 +91,13 @@ document.addEventListener('DOMContentLoaded', (): void => {
         // }
 
         (document.querySelector('.header-card h2') as HTMLElement).style.opacity = "0";
-        fadeIn(document.querySelector('.header-card h2'), { duration: 3000, fps: 5 });
 
-        let wiggleStrength = document.body.clientWidth < 768 ? 5 : 2
+        let wiggleStrength = document.body.clientWidth < 768 ? 3 : 5
 
         wiggle(document.querySelector('svg .one'), 1, wiggleStrength, 5)
         wiggle(document.querySelector('svg .two'), 1, wiggleStrength, 5)
+        wiggle(document.querySelector('svg .three'), 1, wiggleStrength, 5)
+
         // wiggle(document.querySelector('.header-card h2'), 1, 2, 5)
 
         // document.querySelectorAll('.options .option').forEach((el: any) => {
@@ -111,9 +112,13 @@ document.addEventListener('DOMContentLoaded', (): void => {
         });
 
 
-        document.querySelectorAll('.options .option').forEach((el: any) => {
-            fadeIn(el, { duration: 3000, fps: 5 })
-        });
+        setTimeout(() => {
+            document.querySelectorAll('.options .option').forEach((el: any) => {
+                fadeIn(el, { duration: 3000, fps: 5 })
+            });
+            fadeIn(document.querySelector('.header-card h2'), { duration: 3000, fps: 5 });
+
+        }, 1500);
 
 
 
@@ -1061,7 +1066,7 @@ function failSubmitComment(comment: string): void {
 function wiggle(element, freq = 2, amp = 20, fps = 60) {
     const start = performance.now();
     let lastFrame = -1;
-    let rand = Math.random();
+    let seedRand = Math.random() * Math.random() * 100
 
     function noise(t, seed) {
         return (
@@ -1093,9 +1098,9 @@ function wiggle(element, freq = 2, amp = 20, fps = 60) {
         const strength = ease(t, 0, 5, 1, 0);
         const a = amp * strength;
 
-        const x = noise(st * freq, 1 + rand) * a;
-        const y = noise(st * freq, 2 + rand) * a;
-        const r = noise(st * freq, 3 + rand) * (a / 100);
+        const x = noise(st * freq, seedRand) * a;
+        const y = noise(st * freq, seedRand) * a;
+        const r = noise(st * freq, seedRand) * (a / 100);
 
         element.style.transform =
             `translate(${x}px, ${y}px) rotate(${r}deg)`;
