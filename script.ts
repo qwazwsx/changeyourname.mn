@@ -86,9 +86,9 @@ document.addEventListener('DOMContentLoaded', (): void => {
         // savedAnnotations.forEach((annotation: Annotation) => anno.addAnnotation(annotation as any));
 
 
-        if (document.body.clientWidth < 768) {
-            document.querySelector('.header-card svg')?.setAttribute('viewBox', "0,0,1000,200")
-        }
+        // if (document.body.clientWidth < 768) {
+        //     document.querySelector('.header-card svg')?.setAttribute('viewBox', "0,0,1000,200")
+        // }
 
         (document.querySelector('.header-card h2') as HTMLElement).style.opacity = "0";
         fadeIn(document.querySelector('.header-card h2'), { duration: 3000, fps: 5 });
