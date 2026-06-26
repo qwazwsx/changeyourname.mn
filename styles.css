@@ -1032,14 +1032,14 @@ body.loading .content {
     justify-content: center;
     z-index: 9999;
     opacity: 1;
-    transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
+    transition: opacity .3s ease-out;
     background: linear-gradient(90deg, #ff8fa3, #f582e5, #c084fc, #5eead4, #86efac, #fef08a);
     background-size: 600% 600%;
 }
 
 body:not(.loading) .loader-container {
     opacity: 0;
-    visibility: hidden;
+    /* visibility: hidden; */
     pointer-events: none;
 }
 

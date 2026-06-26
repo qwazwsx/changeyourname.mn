@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', (): void => {
             const blurEl1 = document.querySelector('#headerBlur1');
             const thresholdEl2 = document.querySelector('#headerThreshold2');
             const blurEl2 = document.querySelector('#headerBlur2');
-
+            let firstTime = true;
 
             if (!thresholdEl1 || !blurEl1 || !thresholdEl2 || !blurEl2) {
                 console.error('Target elements not found.');
@@ -174,7 +174,11 @@ document.addEventListener('DOMContentLoaded', (): void => {
                     blurEl1.setAttribute('stdDeviation', currentBlur1.toString());
                     thresholdEl2.setAttribute('slope', currentSlope2.toString());
                     blurEl2.setAttribute('stdDeviation', currentBlur2.toString());
-                    document.body.classList.remove('loading');
+
+                    if (firstTime) {
+                        firstTime = false;
+                        document.body.classList.remove('loading');
+                    }
 
 
 
