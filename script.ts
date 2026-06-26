@@ -74,7 +74,6 @@ interface AnnotationState {
 // Main JavaScript functionality for changeyourname.mn
 document.addEventListener('DOMContentLoaded', (): void => {
     document.fonts.ready.then((): void => {
-        document.body.classList.remove('loading');
 
         // const hash = fnv1a(document.body.innerText);
         // console.log(document.body.innerText, hash);
@@ -91,6 +90,18 @@ document.addEventListener('DOMContentLoaded', (): void => {
         // }
 
         (document.querySelector('.header-card h2') as HTMLElement).style.opacity = "0";
+        document.querySelectorAll('.header-card .sub-card').forEach((el => {
+            (el as HTMLElement).style.opacity = "0";
+        }))
+
+        document.querySelectorAll('.options .option').forEach((el: any) => {
+            console.log(el)
+            el = el as HTMLElement;
+            el.style.opacity = 0;
+        });
+
+        document.body.classList.remove('loading');
+
 
         let wiggleStrength = document.body.clientWidth < 768 ? 3 : 5
 
@@ -105,11 +116,7 @@ document.addEventListener('DOMContentLoaded', (): void => {
         // });
 
 
-        document.querySelectorAll('.options .option').forEach((el: any) => {
-            console.log(el)
-            el = el as HTMLElement;
-            el.style.opacity = 0;
-        });
+
 
 
         setTimeout(() => {
@@ -117,7 +124,10 @@ document.addEventListener('DOMContentLoaded', (): void => {
                 fadeIn(el, { duration: 3000, fps: 5 })
             });
             fadeIn(document.querySelector('.header-card h2'), { duration: 3000, fps: 5 });
+            document.querySelectorAll('.header-card .sub-card').forEach((el: any) => {
 
+                fadeIn(el, { duration: 3000, fps: 5 });
+            });
         }, 1500);
 
 
