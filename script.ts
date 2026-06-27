@@ -91,9 +91,12 @@ document.addEventListener('DOMContentLoaded', (): void => {
         // }
 
         let FPS = 7;
+        let timeScalar = 1;
 
         if (document.body.clientWidth < 768) {
             document.querySelector('#speckleNoise')?.setAttribute('baseFrequency', ".08");
+            FPS = 60
+            timeScalar = .75
         }
 
         // start with content hidden
@@ -170,7 +173,6 @@ document.addEventListener('DOMContentLoaded', (): void => {
 
         animateNoise();
 
-
         // animate print effect 
         const thresholdEl1 = document.querySelector('#headerThreshold1');
         const blurEl1 = document.querySelector('#headerBlur1');
@@ -190,40 +192,40 @@ document.addEventListener('DOMContentLoaded', (): void => {
         const easeInOut = (t) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
 
         const animate = (currentTime) => {
-            let elapsed = currentTime - startTime;
+            let elapsed = (currentTime * timeScalar) - startTime;
             // console.log(elapsed)
-            if (Math.floor(elapsed) % 4 == 0 || elapsed < .5) {
-                let progress1 = Math.min((Math.max(0, elapsed + 1500)) / duration, 1);
-                let progress2 = Math.min((Math.max(0, (elapsed * .75) + 250)) / duration, 1);
-                // Apply easing
-                // const easedProgress = easeInOut(progress);
+            // if (elapsed < .5) {
+            let progress1 = Math.min((Math.max(0, elapsed + 1500)) / duration, 1);
+            let progress2 = Math.min((Math.max(0, (elapsed * .75) + 250)) / duration, 1);
+            // Apply easing
+            // const easedProgress = easeInOut(progress);
 
-                // Calculate interpolated values
-                const currentSlope1 = 30 + (30 - 0) * easeInOut(progress1);
-                const currentBlur1 = 5 + (.5 - 2) * easeInOut(progress1);
+            // Calculate interpolated values
+            const currentSlope1 = 25 + (30 - 0) * easeInOut(progress1);
+            const currentBlur1 = 5 + (.5 - 2) * easeInOut(progress1);
 
-                const currentSlope2 = 0 + (30 - 0) * easeInOut(progress2);
-                const currentBlur2 = 2 + (2.5 - 2) * easeInOut(progress2);
+            const currentSlope2 = 0 + (30 - 0) * easeInOut(progress2);
+            const currentBlur2 = 2 + (2.5 - 2) * easeInOut(progress2);
 
-                // Update attributes
-                thresholdEl1.setAttribute('slope', currentSlope1.toString());
-                blurEl1.setAttribute('stdDeviation', currentBlur1.toString());
-                thresholdEl2.setAttribute('slope', currentSlope2.toString());
-                blurEl2.setAttribute('stdDeviation', currentBlur2.toString());
+            // Update attributes
+            thresholdEl1.setAttribute('slope', currentSlope1.toString());
+            blurEl1.setAttribute('stdDeviation', currentBlur1.toString());
+            thresholdEl2.setAttribute('slope', currentSlope2.toString());
+            blurEl2.setAttribute('stdDeviation', currentBlur2.toString());
 
-                if (firstTime) {
-                    firstTime = false;
-                    document.body.classList.remove('loading');
-                }
+            if (firstTime) {
+                firstTime = false;
+                document.body.classList.remove('loading');
+            }
 
 
 
-                if (progress2 < 1) {
-                    requestAnimationFrame(animate);
-                }
-            } else {
+            if (progress2 < 1) {
                 requestAnimationFrame(animate);
             }
+            // } else {
+            // requestAnimationFrame(animate);
+            // }
 
 
         };
