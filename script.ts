@@ -14,7 +14,7 @@ import '@material/web/textfield/filled-text-field.js';
 // import { createHash } from 'crypto';
 
 new Image().src = 'images/bg.webp'; // preload background image
-
+new Image().src = 'images/skyline.svg'
 // Type definitions
 // interface Annotation {
 //     id: string;
@@ -37,6 +37,8 @@ new Image().src = 'images/bg.webp'; // preload background image
 // Global variables
 let confettiLoaded: boolean = false;
 let confettiLoadingPromise: Promise<void> | null = null;
+
+let masterWiggleStrength = 1;
 
 declare global {
     interface Window {
@@ -74,8 +76,15 @@ let noiseKillSwitch = false;
 
 // Main JavaScript functionality for changeyourname.mn
 document.addEventListener('DOMContentLoaded', (): void => {
-    document.fonts.ready.then((): void => {
+    // grab the skyline svg and inline it
+    fetch("/images/skyline.svg")
+        .then(r => r.text())
+        .then(svg => {
+            (document.querySelector("#skyline") as SVGElement).outerHTML = svg;
+        });
 
+
+    document.fonts.ready.then((): void => {
         // const hash = fnv1a(document.body.innerText);
         // console.log(document.body.innerText, hash);
         // TODO: verify hash of page contents to ensure integrity of annotations, and to prevent loading annotations on an outdated version
@@ -92,14 +101,21 @@ document.addEventListener('DOMContentLoaded', (): void => {
 
         let FPS = 7;
         let timeScalar = 1;
+        let wiggleStrength = 5
 
+        // we apply a few different techniques to make this look nice on mobile
         if (document.body.clientWidth < 768) {
+            // tone down the noise (there seems to be a difference chrome v safari)
             document.querySelector('#speckleNoise')?.setAttribute('baseFrequency', ".08");
+            // count on lag for the stutter effect
             FPS = 60
+            // slow down so more frames have the opportunity to be shown
             timeScalar = .75
+            // wiggle less
+            wiggleStrength = 3
         }
 
-        // start with content hidden
+        // start with header card content hidden
         (document.querySelector('.header-card h2') as HTMLElement).style.opacity = "0";
 
         document.querySelectorAll('.header-card .sub-card').forEach((el => {
@@ -113,17 +129,10 @@ document.addEventListener('DOMContentLoaded', (): void => {
         });
 
 
-        // wiggle text
-        let wiggleStrength = document.body.clientWidth < 768 ? 3 : 5
+        // wiggle the landing text
         wiggle(document.querySelector('svg .one'), 1, wiggleStrength, FPS)
         wiggle(document.querySelector('svg .two'), 1, wiggleStrength, FPS)
         wiggle(document.querySelector('svg .three'), 1, wiggleStrength, FPS)
-
-        // wiggle(document.querySelector('.header-card h2'), 1, 2, 5)
-
-        // document.querySelectorAll('.options .option').forEach((el: any) => {
-        //     wiggle(el, 1, 5, 5)
-        // });
 
         // fade in content
         setTimeout(() => {
@@ -140,18 +149,9 @@ document.addEventListener('DOMContentLoaded', (): void => {
 
         const startFps = 5;
         const endFps = 1;
-
         const noiseDuration = 10000; // time to slow down (ms)
         const noiseStartTime = performance.now();
-
         function animateNoise() {
-            // if (noiseKillSwitch) {
-            //     document.querySelector('#speckle')?.remove()
-            //     document.querySelector('#staticFade')?.remove()
-            //     document.querySelector('#gaussianThenThreshold1')?.remove()
-            //     document.querySelector('#gaussianThenThreshold2')?.remove()
-            // }
-
             const now = performance.now();
             const elapsed = now - noiseStartTime;
 
@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', (): void => {
             // const easedProgress = easeInOut(progress);
 
             // Calculate interpolated values
-            const currentSlope1 = 25 + (30 - 0) * easeInOut(progress1);
+            const currentSlope1 = 25 + (45 - 0) * easeInOut(progress1);
             const currentBlur1 = 5 + (.5 - 2) * easeInOut(progress1);
 
             const currentSlope2 = 0 + (30 - 0) * easeInOut(progress2);
@@ -260,6 +260,11 @@ document.addEventListener('DOMContentLoaded', (): void => {
         if (annotations.length === 0) {
             return
         }
+        // if ((annotations[0].target.selector as string[]).join('').length > 1000) {
+        //     // anno.removeAnnotation(annotations[0] as any)
+        //     if (window && window.getSelection) { window.getSelection()?.removeAllRanges(); }
+        //     return
+        // }
 
         const customBody = annotations?.[0]?.bodies?.[0] as { text?: string; sent?: boolean };
 
@@ -332,7 +337,9 @@ document.addEventListener('DOMContentLoaded', (): void => {
                 // ensure annotation is in view (not blocked by centered popover)
                 const annotationTarget = annotations[0].target.selector[0].range.startContainer.parentElement;
                 annotationTarget.style.scrollMarginTop = '-500px';
-                annotationTarget.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                if (annotationTarget.textContent.length < 1000) {
+                    annotationTarget.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
                 console.log(annotations);
             }
         }
@@ -984,14 +991,28 @@ document.addEventListener('DOMContentLoaded', (): void => {
 const accessibilityButton = document.querySelector('#accessibility') as HTMLElement;
 if (accessibilityButton) {
     accessibilityButton.addEventListener('click', (): void => {
-        document.querySelector('#speckle')?.remove()
-        document.querySelector('#staticFade')?.remove()
-        document.querySelector('#gaussianThenThreshold1')?.remove()
-        document.querySelector('#gaussianThenThreshold2')?.remove();
+        removeFancyLandingEffects();
         (document.querySelector('.asw-widget a') as HTMLElement)?.click();
         (document.querySelector('button.asw-btn[data-key="monochrome"]') as HTMLElement)?.click();
         (document.querySelector('button.asw-btn[data-key="stop-animations"]') as HTMLElement)?.click();
     });
+}
+
+setTimeout(() => {
+    if (document.querySelector('html')?.classList.contains('aws-filter')) {
+        removeFancyLandingEffects();
+    }
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        removeFancyLandingEffects();
+    }
+}, 100)
+
+function removeFancyLandingEffects(): void {
+    document.querySelector('#speckle')?.remove()
+    document.querySelector('#staticFade')?.remove()
+    document.querySelector('#gaussianThenThreshold1')?.remove()
+    document.querySelector('#gaussianThenThreshold2')?.remove();
+    masterWiggleStrength = 0;
 }
 
 // SHOW URLS ON PRINT VIEW
@@ -1117,7 +1138,7 @@ function failSubmitComment(comment: string): void {
     window.open(mailto, '_blank');
 }
 
-// shameless LLM usage below
+// pretty shameless LLM usage below
 function wiggle(element, freq = 2, amp = 20, fps = 60) {
     const start = performance.now();
     let lastFrame = -1;
@@ -1161,7 +1182,7 @@ function wiggle(element, freq = 2, amp = 20, fps = 60) {
         const st = frame / fps;
 
         const strength = ease(t, 0, 5, 1, 0);
-        const a = amp * strength;
+        const a = amp * strength * masterWiggleStrength;
 
         const x = noise(st * freq, seedRand) * a;
         const y = noise(st * freq, seedRand * 2) * a;

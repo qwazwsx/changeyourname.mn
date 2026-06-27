@@ -366,7 +366,7 @@ md-text-button {
     /* margin-top:21vw; */
 }
 
- @media screen and (max-width: 1350px) {
+ @media screen and (max-width: 800px) {
     .header-card {
         margin-top: 0px;
     }
@@ -377,7 +377,7 @@ md-text-button {
     
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
     .skyline {
         margin-top:110px;
             height: auto;
@@ -787,6 +787,12 @@ md-text-button {
 } */
 /* Responsive adjustments */
 @media (min-width: 768px) {
+    .options{
+        width: 80%;
+    place-self: center;
+    }
+
+
     .options-container {
         display: grid;
         grid-template-columns: 1fr;
@@ -1166,12 +1172,12 @@ a#moreConfetti {
     transition: all 0.2s ease-in-out;
 }
 
-.support-option:hover {
+/* .support-option:hover {
     background: var(--md-sys-color-surface-container);
     border-color: var(--md-sys-color-outline);
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+} */
 
 .support-icon {
     font-size: 3rem;
@@ -1201,6 +1207,7 @@ a#moreConfetti {
     gap: 0.5rem;
     justify-content: center;
     flex-wrap: wrap;
+    height:75px;
 }
 
 /* Funding Progress Styles */
@@ -2093,4 +2100,24 @@ div.options .option:hover {
     .header-card h2 {
         font-size: 16px;
     }
+}
+
+#runaway-btn{
+    /* position: absolute; */
+  /* transition: transform 0.15s ease; */
+      /* position: fixed; */
+  /* left: 0;
+  top: 0; */
+    /* left:100px;
+    top:100px; */
+    /* display: block; */
+
+
+
+  /* transition: */
+    /* left 0.3s ease, */
+    /* top 0.3s ease; */
+    /* z-index: 999999999999999999; */
+    /* fuck my life */
+    /* margin-top: 390px;  */
 }
