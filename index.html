@@ -300,7 +300,7 @@
 
               <filter id="staticFade" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
                 <!-- expand text shape -->
-                <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="expandedText" />
+                <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="expandedText" />
 
                 <!-- convert blur into hard-ish edge -->
                 <feComponentTransfer in="expandedText" result="paintMask">
@@ -308,11 +308,15 @@
                 </feComponentTransfer>
 
                 <!-- random blobs -->
-                <feTurbulence type="fractalNoise" baseFrequency="1" numOctaves="4" seed="15" result="noise" />
+                <feTurbulence type="fractalNoise" baseFrequency="1" numOctaves="4" seed="15" result="noise" id="staticFadeNoise" />
 
                 <!-- turn noise into splatter shapes -->
                 <feComponentTransfer in="noise" result="splatterNoise">
-                  <feFuncR type="linear" slope="100" intercept="-1" />
+                  <feFuncA type="linear" slope="50" intercept="-1" />
+                  <!-- <feFuncR type="linear" slope="0" intercept="0" />
+                  <feFuncG type="linear" slope="0" intercept="0" />
+                  <feFuncB type="linear" slope="0" intercept="0" /> -->
+
                   <!-- <feFuncG type="linear" slope="3" intercept="-1" /> -->
                   <!-- <feFuncB type="linear" slope="3" intercept="-1" /> -->
                   <!-- <feFuncA type="linear" slope="5" intercept="-2" /> -->
@@ -328,8 +332,8 @@
 
                 <!-- original text + splatter -->
                 <feMerge>
+                  <feMergeNode in="splatter" />
                   <feMergeNode in="SourceGraphic" />
-                  <feMergeNode in="paint" />
                 </feMerge>
               </filter>
 
@@ -352,6 +356,7 @@
                   width="100%"
                   height="100%"
                   result="turbulence"
+                  id="speckleNoise"
                 ></feTurbulence>
                 <feSpecularLighting
                   surfaceScale="14"
@@ -396,7 +401,7 @@
                 font-size="70"
                 font-weight="100"
                 fill="rgb(28, 27, 26)"
-                filter="url(#gaussianThenThreshold1) url(#staticFade) url(#speckle)"
+                filter="url(#gaussianThenThreshold1)  url(#speckle)"
               >
                 Changing your name can feel
               </text>
@@ -411,7 +416,7 @@
                 font-size="65"
                 font-weight="100"
                 fill="rgb(54, 50, 49)"
-                filter="url(#gaussianThenThreshold1) url(#staticFade) url(#speckle)"
+                filter="url(#gaussianThenThreshold1)  url(#speckle)"
               >
                 intimidating and out of reach,
               </text>
@@ -425,9 +430,10 @@
                 font-family="Atkinson Hyperlegible Soft"
                 font-size="65"
                 text-decoration="underline"
-                font-weight="200"
+                font-weight="100"
                 fill="rgb(54, 50, 49)"
-                filter="url(#gaussianThenThreshold2) url(#staticFade) url(#speckle)"
+                filter="url(#gaussianThenThreshold2)  url(#speckle)"
+                opacity=".97"
               >
                 but it doesn't have to be.
               </text>

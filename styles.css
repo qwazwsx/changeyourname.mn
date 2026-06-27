@@ -2082,7 +2082,15 @@ div.options .option:hover {
 
 @media screen and (max-width: 900px) {
     .header-card svg{
-        width: 100%;
-        height:auto;
+        left:-10%;
+        position: relative;
+        width: 120%;
+        /* height:200px; */
+        align-self: center;
+        /* width: 900px; */
+        height: 150px;
     }   
+    .header-card h2 {
+        font-size: 16px;
+    }
 }

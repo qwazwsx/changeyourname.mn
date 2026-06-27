@@ -70,6 +70,7 @@ interface AnnotationState {
 
 //     return hash >>> 0; // unsigned 32-bit
 // }
+let noiseKillSwitch = false;
 
 // Main JavaScript functionality for changeyourname.mn
 document.addEventListener('DOMContentLoaded', (): void => {
@@ -130,6 +131,44 @@ document.addEventListener('DOMContentLoaded', (): void => {
         }, 1000);
 
 
+        const startFps = 5;
+        const endFps = 0;
+
+        const noiseDuration = 3000; // time to slow down (ms)
+        const noiseStartTime = performance.now();
+
+        function animateNoise() {
+            if (noiseKillSwitch) {
+                document.querySelector('#speckle')?.remove()
+                document.querySelector('#staticFade')?.remove()
+                document.querySelector('#gaussianThenThreshold1')?.remove()
+                document.querySelector('#gaussianThenThreshold2')?.remove()
+            }
+
+            const now = performance.now();
+            const elapsed = now - noiseStartTime;
+
+            // 0 -> 1 over duration
+            const t = Math.min(elapsed / noiseDuration, 1);
+
+            // interpolate FPS
+            const fps = startFps + (endFps - startFps) * t;
+            if (Math.abs(endFps - fps) < 0.001) {
+                return
+            }
+            document.querySelector('#speckleNoise')
+                ?.setAttribute('seed', (Math.random() * 1000000).toString());
+
+            document.querySelector('#staticFadeNoise')
+                ?.setAttribute('seed', (Math.random() * 1000000).toString());
+
+            // schedule next frame
+            setTimeout(animateNoise, 1000 / fps);
+        }
+
+        // animateNoise();
+
+
         // animate print effect 
         const thresholdEl1 = document.querySelector('#headerThreshold1');
         const blurEl1 = document.querySelector('#headerBlur1');
@@ -161,8 +200,8 @@ document.addEventListener('DOMContentLoaded', (): void => {
                 const currentSlope1 = 30 + (30 - 0) * easeInOut(progress1);
                 const currentBlur1 = 5 + (.5 - 2) * easeInOut(progress1);
 
-                const currentSlope2 = 0 + (30 - 0) * easeInOut(progress2);
-                const currentBlur2 = 2 + (4 - 2) * easeInOut(progress2);
+                const currentSlope2 = 0 + (45 - 0) * easeInOut(progress2);
+                const currentBlur2 = 2 + (3 - 2) * easeInOut(progress2);
 
                 // Update attributes
                 thresholdEl1.setAttribute('slope', currentSlope1.toString());
@@ -941,6 +980,7 @@ document.addEventListener('DOMContentLoaded', (): void => {
 const accessibilityButton = document.querySelector('#accessibility') as HTMLElement;
 if (accessibilityButton) {
     accessibilityButton.addEventListener('click', (): void => {
+        noiseKillSwitch = true;
         (document.querySelector('.asw-widget a') as HTMLElement)?.click();
         (document.querySelector('button.asw-btn[data-key="monochrome"]') as HTMLElement)?.click();
         (document.querySelector('button.asw-btn[data-key="stop-animations"]') as HTMLElement)?.click();
@@ -1156,3 +1196,8 @@ function fadeIn(el, { duration = 3000, fps = 5 } = {}) {
 
     requestAnimationFrame(tick);
 }
+
+
+document.querySelectorAll('.material-symbols-outlined').forEach((el) => {
+    el.setAttribute('aria-hidden', 'true')
+})
