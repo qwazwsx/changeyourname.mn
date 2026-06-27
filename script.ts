@@ -132,18 +132,18 @@ document.addEventListener('DOMContentLoaded', (): void => {
 
 
         const startFps = 5;
-        const endFps = 0;
+        const endFps = 1;
 
-        const noiseDuration = 3000; // time to slow down (ms)
+        const noiseDuration = 10000; // time to slow down (ms)
         const noiseStartTime = performance.now();
 
         function animateNoise() {
-            if (noiseKillSwitch) {
-                document.querySelector('#speckle')?.remove()
-                document.querySelector('#staticFade')?.remove()
-                document.querySelector('#gaussianThenThreshold1')?.remove()
-                document.querySelector('#gaussianThenThreshold2')?.remove()
-            }
+            // if (noiseKillSwitch) {
+            //     document.querySelector('#speckle')?.remove()
+            //     document.querySelector('#staticFade')?.remove()
+            //     document.querySelector('#gaussianThenThreshold1')?.remove()
+            //     document.querySelector('#gaussianThenThreshold2')?.remove()
+            // }
 
             const now = performance.now();
             const elapsed = now - noiseStartTime;
@@ -153,20 +153,18 @@ document.addEventListener('DOMContentLoaded', (): void => {
 
             // interpolate FPS
             const fps = startFps + (endFps - startFps) * t;
-            if (Math.abs(endFps - fps) < 0.001) {
-                return
-            }
-            document.querySelector('#speckleNoise')
-                ?.setAttribute('seed', (Math.random() * 1000000).toString());
+            // if (Math.abs(endFps - fps) < 0.001) {
+            //     return
+            // }
 
-            document.querySelector('#staticFadeNoise')
+            document.querySelector('#skylineSeed')
                 ?.setAttribute('seed', (Math.random() * 1000000).toString());
 
             // schedule next frame
             setTimeout(animateNoise, 1000 / fps);
         }
 
-        // animateNoise();
+        animateNoise();
 
 
         // animate print effect 
@@ -200,8 +198,8 @@ document.addEventListener('DOMContentLoaded', (): void => {
                 const currentSlope1 = 30 + (30 - 0) * easeInOut(progress1);
                 const currentBlur1 = 5 + (.5 - 2) * easeInOut(progress1);
 
-                const currentSlope2 = 0 + (45 - 0) * easeInOut(progress2);
-                const currentBlur2 = 2 + (3 - 2) * easeInOut(progress2);
+                const currentSlope2 = 0 + (30 - 0) * easeInOut(progress2);
+                const currentBlur2 = 2 + (2.5 - 2) * easeInOut(progress2);
 
                 // Update attributes
                 thresholdEl1.setAttribute('slope', currentSlope1.toString());
