@@ -290,62 +290,149 @@
                 <feGaussianBlur id="headerBlur2" in="SourceAlpha" stdDeviation="0" result="blur" />
 
                 <feComponentTransfer in="blur" result="threshold">
-                  <feFuncA id="headerThreshold2" type="linear" slope="30" intercept="-25" />
+                  <feFuncA id="headerThreshold2" type="linear" slope="1" intercept="-10" />
                 </feComponentTransfer>
 
                 <feFlood flood-color="rgb(64, 62, 61)" result="color" />
                 <feComposite in="color" in2="threshold" operator="in" result="shape" />
                 <feComposite in="shape" operator="over" />
               </filter>
+
+              <filter id="staticFade" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+                <!-- expand text shape -->
+                <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="expandedText" />
+
+                <!-- convert blur into hard-ish edge -->
+                <feComponentTransfer in="expandedText" result="paintMask">
+                  <feFuncA type="linear" slope="8" intercept="-2" />
+                </feComponentTransfer>
+
+                <!-- random blobs -->
+                <feTurbulence type="fractalNoise" baseFrequency="1" numOctaves="4" seed="15" result="noise" />
+
+                <!-- turn noise into splatter shapes -->
+                <feComponentTransfer in="noise" result="splatterNoise">
+                  <feFuncR type="linear" slope="100" intercept="-1" />
+                  <!-- <feFuncG type="linear" slope="3" intercept="-1" /> -->
+                  <!-- <feFuncB type="linear" slope="3" intercept="-1" /> -->
+                  <!-- <feFuncA type="linear" slope="5" intercept="-2" /> -->
+                </feComponentTransfer>
+
+                <!-- clip noise to expanded text area -->
+                <feComposite in="splatterNoise" in2="paintMask" operator="in" result="splatter" />
+
+                <!-- paint color -->
+                <feFlood flood-color="rgb(64,62,61)" result="paintColor" />
+
+                <feComposite in="paintColor" in2="splatter" operator="in" result="paint" />
+
+                <!-- original text + splatter -->
+                <feMerge>
+                  <feMergeNode in="SourceGraphic" />
+                  <feMergeNode in="paint" />
+                </feMerge>
+              </filter>
+
+              <filter id="speckle" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+                <!-- expand text shape -->
+                <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="expandedText" />
+
+                <feComponentTransfer in="expandedText" result="adjExpandedText">
+                  <feFuncA type="linear" slope="5" intercept="-0.5" />
+                </feComponentTransfer>
+
+                <feTurbulence
+                  type="turbulence"
+                  baseFrequency="0.04"
+                  numOctaves="4"
+                  seed="15"
+                  stitchTiles="stitch"
+                  x="0%"
+                  y="0%"
+                  width="100%"
+                  height="100%"
+                  result="turbulence"
+                ></feTurbulence>
+                <feSpecularLighting
+                  surfaceScale="14"
+                  specularConstant="3"
+                  specularExponent="20"
+                  lighting-color="#ffffff"
+                  x="0%"
+                  y="0%"
+                  width="100%"
+                  height="100%"
+                  in="turbulence"
+                  result="specularLighting"
+                >
+                  <feDistantLight azimuth="3" elevation="103"></feDistantLight>
+                </feSpecularLighting>
+
+                <!-- clip noise to expanded text area -->
+                <feComposite in="specularLighting" in2="adjExpandedText" operator="in" result="splatter" />
+
+                <!-- paint color -->
+                <feFlood flood-color="rgb(64,62,61)" result="paintColor" />
+
+                <feComposite in="paintColor" in2="splatter" operator="in" result="paint" />
+
+                <!-- original text + splatter -->
+                <feMerge>
+                  <feMergeNode in="SourceGraphic" />
+                  <feMergeNode in="paint" />
+                </feMerge>
+              </filter>
             </defs>
 
             <!-- <rect width="100%" height="100%" fill="black" /> -->
+            <g filter="">
+              <text
+                class="one"
+                x="50%"
+                y="18%"
+                text-anchor="middle"
+                dominant-baseline="middle"
+                font-family="Atkinson Hyperlegible Soft"
+                font-size="70"
+                font-weight="100"
+                fill="rgb(28, 27, 26)"
+                filter="url(#gaussianThenThreshold1) url(#staticFade) url(#speckle)"
+              >
+                Changing your name can feel
+              </text>
 
-            <text
-              class="one"
-              x="50%"
-              y="18%"
-              text-anchor="middle"
-              dominant-baseline="middle"
-              font-family="Atkinson Hyperlegible Soft"
-              font-size="70"
-              font-weight="100"
-              fill="rgb(28, 27, 26)"
-              filter="url(#gaussianThenThreshold1)"
-            >
-              Changing your name can feel
-            </text>
+              <text
+                class="two"
+                x="50%"
+                y="45%"
+                text-anchor="middle"
+                dominant-baseline="middle"
+                font-family="Atkinson Hyperlegible Soft"
+                font-size="65"
+                font-weight="100"
+                fill="rgb(54, 50, 49)"
+                filter="url(#gaussianThenThreshold1) url(#staticFade) url(#speckle)"
+              >
+                intimidating and out of reach,
+              </text>
 
-            <text
-              class="two"
-              x="50%"
-              y="45%"
-              text-anchor="middle"
-              dominant-baseline="middle"
-              font-family="Atkinson Hyperlegible Soft"
-              font-size="65"
-              font-weight="100"
-              fill="rgb(54, 50, 49)"
-              filter="url(#gaussianThenThreshold1)"
-            >
-              intimidating and out of reach,
-            </text>
-
-            <text
-              class="three"
-              x="50%"
-              y="75%"
-              text-anchor="middle"
-              dominant-baseline="middle"
-              font-family="Atkinson Hyperlegible Soft"
-              font-size="65"
-              text-decoration="underline"
-              font-weight="500"
-              fill="rgb(54, 50, 49)"
-              filter="url(#gaussianThenThreshold2)"
-            >
-              but it doesn't have to be.
-            </text>
+              <text
+                class="three"
+                x="50%"
+                y="75%"
+                text-anchor="middle"
+                dominant-baseline="middle"
+                font-family="Atkinson Hyperlegible Soft"
+                font-size="65"
+                text-decoration="underline"
+                font-weight="200"
+                fill="rgb(54, 50, 49)"
+                filter="url(#gaussianThenThreshold2) url(#staticFade) url(#speckle)"
+              >
+                but it doesn't have to be.
+              </text>
+              <!-- <rect width="100%" height="100%"  opacity="0.15" /> -->
+            </g>
           </svg>
 
           <!-- <p class="body-text"> -->

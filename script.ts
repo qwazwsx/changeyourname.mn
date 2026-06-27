@@ -91,7 +91,9 @@ document.addEventListener('DOMContentLoaded', (): void => {
 
         let FPS = 7;
 
+        // start with content hidden
         (document.querySelector('.header-card h2') as HTMLElement).style.opacity = "0";
+
         document.querySelectorAll('.header-card .sub-card').forEach((el => {
             (el as HTMLElement).style.opacity = "0";
         }))
@@ -103,9 +105,8 @@ document.addEventListener('DOMContentLoaded', (): void => {
         });
 
 
-
+        // wiggle text
         let wiggleStrength = document.body.clientWidth < 768 ? 3 : 5
-
         wiggle(document.querySelector('svg .one'), 1, wiggleStrength, FPS)
         wiggle(document.querySelector('svg .two'), 1, wiggleStrength, FPS)
         wiggle(document.querySelector('svg .three'), 1, wiggleStrength, FPS)
@@ -116,25 +117,20 @@ document.addEventListener('DOMContentLoaded', (): void => {
         //     wiggle(el, 1, 5, 5)
         // });
 
-
-
-
-
+        // fade in content
         setTimeout(() => {
             document.querySelectorAll('.options .option').forEach((el: any) => {
-                fadeIn(el, { duration: 3000, fps: FPS })
+                fadeIn(el, { duration: 3000, fps: 60 })
             });
-            fadeIn(document.querySelector('.header-card h2'), { duration: 3000, fps: FPS });
+            fadeIn(document.querySelector('.header-card h2'), { duration: 3000, fps: 60 });
             document.querySelectorAll('.header-card .sub-card').forEach((el: any) => {
 
-                fadeIn(el, { duration: 3000, fps: FPS });
+                fadeIn(el, { duration: 3000, fps: 60 });
             });
-        }, 1500);
+        }, 1000);
 
 
-
-
-
+        // animate print effect 
         const thresholdEl1 = document.querySelector('#headerThreshold1');
         const blurEl1 = document.querySelector('#headerBlur1');
         const thresholdEl2 = document.querySelector('#headerThreshold2');
@@ -156,17 +152,16 @@ document.addEventListener('DOMContentLoaded', (): void => {
             let elapsed = currentTime - startTime;
             // console.log(elapsed)
             if (Math.floor(elapsed) % 4 == 0 || elapsed < .5) {
-                let progress1 = Math.min(elapsed / duration, 1);
-                let progress2 = Math.min((Math.max(0, elapsed - 1000)) / duration, 1);
-
+                let progress1 = Math.min((Math.max(0, elapsed + 1500)) / duration, 1);
+                let progress2 = Math.min((Math.max(0, (elapsed * .75) + 750)) / duration, 1);
                 // Apply easing
                 // const easedProgress = easeInOut(progress);
 
                 // Calculate interpolated values
-                const currentSlope1 = 100 + (30 - 0) * -1 * easeInOut(progress1);
+                const currentSlope1 = 30 + (30 - 0) * easeInOut(progress1);
                 const currentBlur1 = 5 + (.5 - 2) * easeInOut(progress1);
 
-                const currentSlope2 = 25 + (60 - 0) * easeInOut(progress2);
+                const currentSlope2 = 0 + (30 - 0) * easeInOut(progress2);
                 const currentBlur2 = 2 + (4 - 2) * easeInOut(progress2);
 
                 // Update attributes
@@ -182,7 +177,7 @@ document.addEventListener('DOMContentLoaded', (): void => {
 
 
 
-                if (progress1 < 1) {
+                if (progress2 < 1) {
                     requestAnimationFrame(animate);
                 }
             } else {
@@ -1118,7 +1113,7 @@ function wiggle(element, freq = 2, amp = 20, fps = 60) {
 
         const st = frame / fps;
 
-        const strength = ease(t, 0, 7, 1, 0);
+        const strength = ease(t, 0, 5, 1, 0);
         const a = amp * strength;
 
         const x = noise(st * freq, seedRand) * a;
