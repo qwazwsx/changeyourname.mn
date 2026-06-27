@@ -366,7 +366,7 @@ md-text-button {
     /* margin-top:21vw; */
 }
 
-/* @media screen and (max-width: 1350px) {
+ @media screen and (max-width: 1350px) {
     .header-card {
         margin-top: 0px;
     }
@@ -375,8 +375,8 @@ md-text-button {
             height: 220px;
     }
     
+}
 
-}*/
 @media screen and (max-width: 800px) {
     .skyline {
         margin-top:110px;

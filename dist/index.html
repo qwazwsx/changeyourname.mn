@@ -127,8 +127,8 @@
         ]
       }
     </script>
-    <script type="module" crossorigin src="/assets/index-DnRjgsrU.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-16mQwlub.css">
+    <script type="module" crossorigin src="/assets/index-UQraiIU-.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BGSTSW3g.css">
   </head>
 
   <body class="loading">
@@ -329,9 +329,9 @@ like that. do not redistribute. -->
                   <feFuncA type="discrete" tableValues="0.2 0.8" />
                 </feComponentTransfer> -->
 
-                <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="blurMask" />
+                <feGaussianBlur in="SourceAlpha" stdDeviation="25" result="blurMask" />
                 <feComponentTransfer in="blur" result="threshold">
-                  <feFuncA type="linear" slope="200" intercept="-10" />
+                  <feFuncA type="linear" slope="5" intercept="-1" />
                 </feComponentTransfer>
 
                 <!-- keep noise only where original pixels exist -->
@@ -1608,7 +1608,7 @@ like that. do not redistribute. -->
                   id="speckleNoise"
                 ></feTurbulence>
                 <feSpecularLighting
-                  surfaceScale="10"
+                  surfaceScale="15"
                   specularConstant="3"
                   specularExponent="20"
                   lighting-color="#ffffff"
@@ -1630,10 +1630,12 @@ like that. do not redistribute. -->
 
                 <feComposite in="paintColor" in2="splatter" operator="in" result="paint" />
 
+                <feGaussianBlur in="paint" stdDeviation=".5" result="blurpaint" />
+
                 <!-- original text + splatter -->
                 <feMerge>
                   <feMergeNode in="SourceGraphic" />
-                  <feMergeNode in="paint" />
+                  <feMergeNode in="blurpaint" />
                 </feMerge>
               </filter>
             </defs>
