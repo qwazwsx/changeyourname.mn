@@ -92,6 +92,10 @@ document.addEventListener('DOMContentLoaded', (): void => {
 
         let FPS = 7;
 
+        if (document.body.clientWidth < 768) {
+            document.querySelector('#speckleNoise')?.setAttribute('baseFrequency', ".08");
+        }
+
         // start with content hidden
         (document.querySelector('.header-card h2') as HTMLElement).style.opacity = "0";
 
