@@ -272,36 +272,29 @@
             </div>
           </div>
 
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 250">
+          <svg class="not-annotatable" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 250">
             <defs>
               <filter id="gaussianThenThreshold1">
-                <!-- Extract alpha -->
                 <feGaussianBlur id="headerBlur1" in="SourceAlpha" stdDeviation="0" result="blur" />
 
-                <!-- Threshold the blurred alpha -->
                 <feComponentTransfer in="blur" result="threshold">
                   <feFuncA id="headerThreshold1" type="linear" slope="30" intercept="-25" />
                 </feComponentTransfer>
 
-                <!-- Put it back as black text -->
                 <feFlood flood-color="rgb(64, 62, 61)" result="color" />
                 <feComposite in="color" in2="threshold" operator="in" result="shape" />
-                <!-- <feGaussianBlur in="threshold" stdDeviation="0.25" result="softEdge" /> -->
                 <feComposite in="shape" operator="over" />
               </filter>
+
               <filter id="gaussianThenThreshold2">
-                <!-- Extract alpha -->
                 <feGaussianBlur id="headerBlur2" in="SourceAlpha" stdDeviation="0" result="blur" />
 
-                <!-- Threshold the blurred alpha -->
                 <feComponentTransfer in="blur" result="threshold">
                   <feFuncA id="headerThreshold2" type="linear" slope="30" intercept="-25" />
                 </feComponentTransfer>
 
-                <!-- Put it back as black text -->
                 <feFlood flood-color="rgb(64, 62, 61)" result="color" />
                 <feComposite in="color" in2="threshold" operator="in" result="shape" />
-                <!-- <feGaussianBlur in="threshold" stdDeviation="0.25" result="softEdge" /> -->
                 <feComposite in="shape" operator="over" />
               </filter>
             </defs>
@@ -311,12 +304,12 @@
             <text
               class="one"
               x="50%"
-              y="20%"
+              y="18%"
               text-anchor="middle"
               dominant-baseline="middle"
               font-family="Atkinson Hyperlegible Soft"
               font-size="70"
-              font-weight="200"
+              font-weight="100"
               fill="rgb(28, 27, 26)"
               filter="url(#gaussianThenThreshold1)"
             >
@@ -326,12 +319,12 @@
             <text
               class="two"
               x="50%"
-              y="50%"
+              y="45%"
               text-anchor="middle"
               dominant-baseline="middle"
               font-family="Atkinson Hyperlegible Soft"
-              font-size="68"
-              font-weight="200"
+              font-size="65"
+              font-weight="100"
               fill="rgb(54, 50, 49)"
               filter="url(#gaussianThenThreshold1)"
             >
@@ -345,9 +338,9 @@
               text-anchor="middle"
               dominant-baseline="middle"
               font-family="Atkinson Hyperlegible Soft"
-              font-size="60"
+              font-size="65"
               text-decoration="underline"
-              font-weight="900"
+              font-weight="500"
               fill="rgb(54, 50, 49)"
               filter="url(#gaussianThenThreshold2)"
             >

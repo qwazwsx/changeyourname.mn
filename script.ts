@@ -89,6 +89,8 @@ document.addEventListener('DOMContentLoaded', (): void => {
         //     document.querySelector('.header-card svg')?.setAttribute('viewBox', "0,0,1000,200")
         // }
 
+        let FPS = 7;
+
         (document.querySelector('.header-card h2') as HTMLElement).style.opacity = "0";
         document.querySelectorAll('.header-card .sub-card').forEach((el => {
             (el as HTMLElement).style.opacity = "0";
@@ -104,9 +106,9 @@ document.addEventListener('DOMContentLoaded', (): void => {
 
         let wiggleStrength = document.body.clientWidth < 768 ? 3 : 5
 
-        wiggle(document.querySelector('svg .one'), 1, wiggleStrength, 5)
-        wiggle(document.querySelector('svg .two'), 1, wiggleStrength, 5)
-        wiggle(document.querySelector('svg .three'), 1, wiggleStrength, 5)
+        wiggle(document.querySelector('svg .one'), 1, wiggleStrength, FPS)
+        wiggle(document.querySelector('svg .two'), 1, wiggleStrength, FPS)
+        wiggle(document.querySelector('svg .three'), 1, wiggleStrength, FPS)
 
         // wiggle(document.querySelector('.header-card h2'), 1, 2, 5)
 
@@ -120,12 +122,12 @@ document.addEventListener('DOMContentLoaded', (): void => {
 
         setTimeout(() => {
             document.querySelectorAll('.options .option').forEach((el: any) => {
-                fadeIn(el, { duration: 3000, fps: 5 })
+                fadeIn(el, { duration: 3000, fps: FPS })
             });
-            fadeIn(document.querySelector('.header-card h2'), { duration: 3000, fps: 5 });
+            fadeIn(document.querySelector('.header-card h2'), { duration: 3000, fps: FPS });
             document.querySelectorAll('.header-card .sub-card').forEach((el: any) => {
 
-                fadeIn(el, { duration: 3000, fps: 5 });
+                fadeIn(el, { duration: 3000, fps: FPS });
             });
         }, 1500);
 
@@ -133,67 +135,64 @@ document.addEventListener('DOMContentLoaded', (): void => {
 
 
 
-        // animate document.querySelector('#headerThreshold').setAttribute('slope', 0) to document.querySelector('#headerThreshold').setAttribute('slope', 100) ease in out. simultaneously document.querySelector('#headerBlur').setAttribute('stdDeviation', 2) to document.querySelector('#headerBlur').setAttribute('stdDeviation', 1)
-        (() => {
-            const thresholdEl1 = document.querySelector('#headerThreshold1');
-            const blurEl1 = document.querySelector('#headerBlur1');
-            const thresholdEl2 = document.querySelector('#headerThreshold2');
-            const blurEl2 = document.querySelector('#headerBlur2');
-            let firstTime = true;
+        const thresholdEl1 = document.querySelector('#headerThreshold1');
+        const blurEl1 = document.querySelector('#headerBlur1');
+        const thresholdEl2 = document.querySelector('#headerThreshold2');
+        const blurEl2 = document.querySelector('#headerBlur2');
+        let firstTime = true;
 
-            if (!thresholdEl1 || !blurEl1 || !thresholdEl2 || !blurEl2) {
-                console.error('Target elements not found.');
-                return;
-            }
+        if (!thresholdEl1 || !blurEl1 || !thresholdEl2 || !blurEl2) {
+            console.error('Target elements not found.');
+            return;
+        }
 
-            const duration = 3000; // Duration in milliseconds
-            const startTime = performance.now();
+        const duration = 3000; // Duration in milliseconds
+        const startTime = performance.now();
 
-            // Ease-in-out quadratic function
-            const easeInOut = (t) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+        // Ease-in-out quadratic function
+        const easeInOut = (t) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
 
-            const animate = (currentTime) => {
-                let elapsed = currentTime - startTime;
-                // console.log(elapsed)
-                if (Math.floor(elapsed) % 4 == 0 || elapsed < .5) {
-                    let progress1 = Math.min(elapsed / duration, 1);
-                    let progress2 = Math.min((Math.max(0, elapsed - 1000)) / duration, 1);
+        const animate = (currentTime) => {
+            let elapsed = currentTime - startTime;
+            // console.log(elapsed)
+            if (Math.floor(elapsed) % 4 == 0 || elapsed < .5) {
+                let progress1 = Math.min(elapsed / duration, 1);
+                let progress2 = Math.min((Math.max(0, elapsed - 1000)) / duration, 1);
 
-                    // Apply easing
-                    // const easedProgress = easeInOut(progress);
+                // Apply easing
+                // const easedProgress = easeInOut(progress);
 
-                    // Calculate interpolated values
-                    const currentSlope1 = 30 + (100 - 0) * easeInOut(progress1);
-                    const currentBlur1 = 2 + (0 - 2) * easeInOut(progress1);
+                // Calculate interpolated values
+                const currentSlope1 = 100 + (30 - 0) * -1 * easeInOut(progress1);
+                const currentBlur1 = 5 + (.5 - 2) * easeInOut(progress1);
 
-                    const currentSlope2 = 25 + (100 - 0) * easeInOut(progress2);
-                    const currentBlur2 = 2 + (0 - 2) * easeInOut(progress2);
+                const currentSlope2 = 25 + (60 - 0) * easeInOut(progress2);
+                const currentBlur2 = 2 + (4 - 2) * easeInOut(progress2);
 
-                    // Update attributes
-                    thresholdEl1.setAttribute('slope', currentSlope1.toString());
-                    blurEl1.setAttribute('stdDeviation', currentBlur1.toString());
-                    thresholdEl2.setAttribute('slope', currentSlope2.toString());
-                    blurEl2.setAttribute('stdDeviation', currentBlur2.toString());
+                // Update attributes
+                thresholdEl1.setAttribute('slope', currentSlope1.toString());
+                blurEl1.setAttribute('stdDeviation', currentBlur1.toString());
+                thresholdEl2.setAttribute('slope', currentSlope2.toString());
+                blurEl2.setAttribute('stdDeviation', currentBlur2.toString());
 
-                    if (firstTime) {
-                        firstTime = false;
-                        document.body.classList.remove('loading');
-                    }
-
-
-
-                    if (progress1 < 1) {
-                        requestAnimationFrame(animate);
-                    }
-                } else {
-                    requestAnimationFrame(animate);
+                if (firstTime) {
+                    firstTime = false;
+                    document.body.classList.remove('loading');
                 }
 
 
-            };
 
-            requestAnimationFrame(animate);
-        })();
+                if (progress1 < 1) {
+                    requestAnimationFrame(animate);
+                }
+            } else {
+                requestAnimationFrame(animate);
+            }
+
+
+        };
+
+        requestAnimationFrame(animate);
 
 
 
@@ -1080,14 +1079,24 @@ function failSubmitComment(comment: string): void {
 function wiggle(element, freq = 2, amp = 20, fps = 60) {
     const start = performance.now();
     let lastFrame = -1;
-    let seedRand = Math.random() * Math.random() * 100
+    let seedRand = Math.random() * Math.random() * 1000000
 
-    function noise(t, seed) {
-        return (
-            Math.sin(t * 1.7 + seed) +
-            Math.sin(t * 3.3 + seed * 2) * 0.5 +
-            Math.sin(t * 7.1 + seed * 3) * 0.25
-        ) / 1.75;
+    function noise(t, seed = 0) {
+        const floor = Math.floor(t);
+        const frac = t - floor;
+
+        function random(i) {
+            const x = Math.sin(i * 127.1 + seed * 311.7) * 43758.5453;
+            return x - Math.floor(x);
+        }
+
+        // smoothstep interpolation
+        const smooth = frac * frac * (3 - 2 * frac);
+
+        const a = random(floor);
+        const b = random(floor + 1);
+
+        return (a + (b - a) * smooth) * 2 - 1;
     }
 
     function ease(t, a, b, c, d) {
@@ -1109,12 +1118,12 @@ function wiggle(element, freq = 2, amp = 20, fps = 60) {
 
         const st = frame / fps;
 
-        const strength = ease(t, 0, 5, 1, 0);
+        const strength = ease(t, 0, 7, 1, 0);
         const a = amp * strength;
 
         const x = noise(st * freq, seedRand) * a;
-        const y = noise(st * freq, seedRand) * a;
-        const r = noise(st * freq, seedRand) * (a / 100);
+        const y = noise(st * freq, seedRand * 2) * a;
+        const r = noise(st * freq, seedRand * 3) * (a / 10);
 
         element.style.transform =
             `translate(${x}px, ${y}px) rotate(${r}deg)`;
@@ -1124,6 +1133,8 @@ function wiggle(element, freq = 2, amp = 20, fps = 60) {
 
     requestAnimationFrame(animate);
 }
+
+
 function easeInOut(t) {
     return (1 - Math.cos(Math.PI * t)) / 2;
 }
