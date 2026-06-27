@@ -3,6 +3,10 @@
   <!-- <bark>bark!</bark> -->
 
   <head>
+    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+    <script>
+      eruda.init();
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=0.75, minimum-scale=0.75, maximum-scale=0.75, user-scalable=no" />
     <link rel="icon" type="image/x-icon" href="images/favicon.png" />
@@ -390,9 +394,8 @@
             </defs>
 
             <!-- <rect width="100%" height="100%" fill="black" /> -->
-            <g filter="">
+            <g class="one" filter="url(#speckle)">
               <text
-                class="one"
                 x="50%"
                 y="18%"
                 text-anchor="middle"
@@ -401,13 +404,13 @@
                 font-size="70"
                 font-weight="100"
                 fill="rgb(28, 27, 26)"
-                filter="url(#gaussianThenThreshold1)  url(#speckle)"
+                filter="url(#gaussianThenThreshold1) "
               >
                 Changing your name can feel
               </text>
-
+            </g>
+            <g class="two" filter="url(#speckle)">
               <text
-                class="two"
                 x="50%"
                 y="45%"
                 text-anchor="middle"
@@ -416,13 +419,13 @@
                 font-size="65"
                 font-weight="100"
                 fill="rgb(54, 50, 49)"
-                filter="url(#gaussianThenThreshold1)  url(#speckle)"
+                filter="url(#gaussianThenThreshold1) "
               >
                 intimidating and out of reach,
               </text>
-
+            </g>
+            <g class="three" filter="url(#speckle)">
               <text
-                class="three"
                 x="50%"
                 y="75%"
                 text-anchor="middle"
@@ -432,7 +435,7 @@
                 text-decoration="underline"
                 font-weight="100"
                 fill="rgb(54, 50, 49)"
-                filter="url(#gaussianThenThreshold2)  url(#speckle)"
+                filter="url(#gaussianThenThreshold2)"
                 opacity=".97"
               >
                 but it doesn't have to be.

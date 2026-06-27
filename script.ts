@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', (): void => {
 
                 fadeIn(el, { duration: 3000, fps: 60 });
             });
-        }, 1000);
+        }, 2000);
 
 
         const startFps = 5;
@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', (): void => {
             // console.log(elapsed)
             if (Math.floor(elapsed) % 4 == 0 || elapsed < .5) {
                 let progress1 = Math.min((Math.max(0, elapsed + 1500)) / duration, 1);
-                let progress2 = Math.min((Math.max(0, (elapsed * .75) + 750)) / duration, 1);
+                let progress2 = Math.min((Math.max(0, (elapsed * .75) + 250)) / duration, 1);
                 // Apply easing
                 // const easedProgress = easeInOut(progress);
 
@@ -980,7 +980,10 @@ document.addEventListener('DOMContentLoaded', (): void => {
 const accessibilityButton = document.querySelector('#accessibility') as HTMLElement;
 if (accessibilityButton) {
     accessibilityButton.addEventListener('click', (): void => {
-        noiseKillSwitch = true;
+        document.querySelector('#speckle')?.remove()
+        document.querySelector('#staticFade')?.remove()
+        document.querySelector('#gaussianThenThreshold1')?.remove()
+        document.querySelector('#gaussianThenThreshold2')?.remove();
         (document.querySelector('.asw-widget a') as HTMLElement)?.click();
         (document.querySelector('button.asw-btn[data-key="monochrome"]') as HTMLElement)?.click();
         (document.querySelector('button.asw-btn[data-key="stop-animations"]') as HTMLElement)?.click();
