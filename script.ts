@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', (): void => {
             // tone down the noise (there seems to be a difference chrome v safari)
             document.querySelector('#speckleNoise')?.setAttribute('baseFrequency', ".08");
             // count on lag for the stutter effect
-            FPS = 60
+            FPS = 25
             // slow down so more frames have the opportunity to be shown
             timeScalar = .75
             // wiggle less
