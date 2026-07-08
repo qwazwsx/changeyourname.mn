@@ -78,7 +78,7 @@
       <!-- mix noise with original graphic -->
       <!-- original text + splatter -->
       <feMerge>
-        <feMergeNode in="maskedNoise" />
+        <!-- <feMergeNode in="maskedNoise" /> -->
         <feMergeNode in="SourceGraphic" />
         <feMergeNode in="noisebg" />
 

@@ -33,6 +33,16 @@ new Image().src = 'images/skyline.svg'
 //     };
 // }
 
+// dirty hack 2
+
+document.querySelectorAll('.loader-container, .loading').forEach((el: Element): void => {
+    document.body.classList.remove('loading');
+})
+
+setTimeout(() => {
+    document.body.classList.remove('loading');
+}, 2500)
+
 
 // Global variables
 let confettiLoaded: boolean = false;
@@ -215,6 +225,7 @@ document.addEventListener('DOMContentLoaded', (): void => {
 
             if (firstTime) {
                 firstTime = false;
+
                 document.body.classList.remove('loading');
             }
 

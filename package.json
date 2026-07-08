@@ -20,7 +20,8 @@
   "dependencies": {
     "@material/web": "^2.3.0",
     "@recogito/text-annotator": "^3.4.10",
+    "@vitejs/plugin-legacy": "^8.1.0",
     "sienna-accessibility": "^1.0.0",
-    "vite": "^7.1.7"
+    "vite": "^8.1.3"
   }
 }
