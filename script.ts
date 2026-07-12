@@ -34,13 +34,16 @@ new Image().src = 'images/skyline.svg'
 // }
 
 // dirty hack 2
-
 document.querySelectorAll('.loader-container, .loading').forEach((el: Element): void => {
+    console.log('loader clicked')
     document.body.classList.remove('loading');
 })
 
 setTimeout(() => {
-    document.body.classList.remove('loading');
+    if (document.body.classList.contains('loading')) {
+        console.log('loader timeout')
+        document.body.classList.remove('loading');
+    }
 }, 2500)
 
 
@@ -117,9 +120,7 @@ document.addEventListener('DOMContentLoaded', (): void => {
         if (document.body.clientWidth < 768) {
             // tone down the noise (there seems to be a difference chrome v safari)
             document.querySelector('#speckleNoise')?.setAttribute('baseFrequency', ".08");
-            // count on lag for the stutter effect
-            FPS = 25
-            // slow down so more frames have the opportunity to be shown
+            FPS = 5
             timeScalar = .75
             // wiggle less
             wiggleStrength = 3
@@ -174,8 +175,8 @@ document.addEventListener('DOMContentLoaded', (): void => {
             //     return
             // }
 
-            document.querySelector('#skylineSeed')
-                ?.setAttribute('seed', (Math.random() * 1000000).toString());
+            // document.querySelector('#skylineSeed')
+            //     ?.setAttribute('seed', (Math.random() * 1000000).toString());
 
             // schedule next frame
             setTimeout(animateNoise, 1000 / fps);
@@ -200,9 +201,15 @@ document.addEventListener('DOMContentLoaded', (): void => {
 
         // Ease-in-out quadratic function
         const easeInOut = (t) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-
-        const animate = (currentTime) => {
+        let lastTime = performance.now();
+        const animate = (currentTime: number) => {
             let elapsed = (currentTime * timeScalar) - startTime;
+
+            let delta = performance.now() - lastTime
+            lastTime = performance.now();
+
+            console.log(delta)
+
             // console.log(elapsed)
             // if (elapsed < .5) {
             let progress1 = Math.min((Math.max(0, elapsed + 1500)) / duration, 1);
@@ -211,11 +218,11 @@ document.addEventListener('DOMContentLoaded', (): void => {
             // const easedProgress = easeInOut(progress);
 
             // Calculate interpolated values
-            const currentSlope1 = 25 + (45 - 0) * easeInOut(progress1);
-            const currentBlur1 = 5 + (.5 - 2) * easeInOut(progress1);
+            const currentSlope1 = 25 + (40 - 0) * easeInOut(progress1);
+            const currentBlur1 = 5 + (.25 - 2) * easeInOut(progress1);
 
             const currentSlope2 = 0 + (30 - 0) * easeInOut(progress2);
-            const currentBlur2 = 2 + (2.5 - 2) * easeInOut(progress2);
+            const currentBlur2 = 2 + (4 - 2) * easeInOut(progress2);
 
             // Update attributes
             thresholdEl1.setAttribute('slope', currentSlope1.toString());
@@ -231,7 +238,7 @@ document.addEventListener('DOMContentLoaded', (): void => {
 
 
 
-            if (progress2 < 1) {
+            if (progress2 < 2) {
                 requestAnimationFrame(animate);
             }
             // } else {
@@ -247,6 +254,7 @@ document.addEventListener('DOMContentLoaded', (): void => {
 
 
     });
+
 
     const anno = createTextAnnotator(document.querySelector('.content')!, {
         allowModifierSelect: true,

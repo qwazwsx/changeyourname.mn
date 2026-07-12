@@ -358,7 +358,8 @@ md-text-button {
     margin-left: auto;
     margin-right: auto;
     display: block;
-
+    z-index: -99999;
+    position: sticky;
 
 
     width: 65%;
@@ -1060,12 +1061,12 @@ body:not(.loading) .loader-container {
 }
 
 .loader-text {
-    font-family: 'Atkinson Hyperlegible Soft', 'Roboto', sans-serif;
+    font-family: 'monospaced', 'Roboto', sans-serif;
     font-size: 16px;
     font-weight: 400;
     color: var(--md-sys-color-on-surface, #1d1b20);
     text-align: center;
-    animation: pulse 2s ease-in-out infinite;
+    /* animation: pulse 2s ease-in-out infinite; */
 }
 
 @keyframes spin {
@@ -1802,6 +1803,7 @@ a.more-confetti {
     background-size: 600% 600%;
     /* filter: brightness(1.2); */
     opacity: 0.5;
+    z-index: -9999;
 }
 
 @media screen and (max-width: 767px) {
