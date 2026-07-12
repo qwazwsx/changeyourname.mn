@@ -120,6 +120,11 @@ html.asw-stop-animations * {
     /* max-height: 10000000px; */
     backdrop-filter: blur(1px);
     -webkit-backdrop-filter: blur(1px);
+    transition: transform .3s ease-in-out;
+}
+
+.option.card:hover{
+    transform: translateY(-5px);    
 }
 
 /* App bar styles */
@@ -789,7 +794,7 @@ md-text-button {
 /* Responsive adjustments */
 @media (min-width: 768px) {
     .options{
-        width: 80%;
+        /* width: 80%; */
     place-self: center;
     }
 

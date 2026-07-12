@@ -90,10 +90,12 @@ let noiseKillSwitch = false;
 // Main JavaScript functionality for changeyourname.mn
 document.addEventListener('DOMContentLoaded', (): void => {
     // grab the skyline svg and inline it
+    let skylineLoaded = false;
     fetch("/images/skyline.svg")
         .then(r => r.text())
         .then(svg => {
             (document.querySelector("#skyline") as SVGElement).outerHTML = svg;
+            skylineLoaded = true;
         });
 
 
@@ -126,18 +128,18 @@ document.addEventListener('DOMContentLoaded', (): void => {
             wiggleStrength = 3
         }
 
-        // start with header card content hidden
-        (document.querySelector('.header-card h2') as HTMLElement).style.opacity = "0";
+        // // start with header card content hidden
+        // (document.querySelector('.header-card h2') as HTMLElement).style.opacity = "0";
 
-        document.querySelectorAll('.header-card .sub-card').forEach((el => {
-            (el as HTMLElement).style.opacity = "0";
-        }))
+        // document.querySelectorAll('.header-card .sub-card').forEach((el => {
+        //     (el as HTMLElement).style.opacity = "0";
+        // }))
 
-        document.querySelectorAll('.options .option').forEach((el: any) => {
-            console.log(el)
-            el = el as HTMLElement;
-            el.style.opacity = 0;
-        });
+        // document.querySelectorAll('.options .option').forEach((el: any) => {
+        //     console.log(el)
+        //     el = el as HTMLElement;
+        //     el.style.opacity = 0;
+        // });
 
 
         // wiggle the landing text
@@ -145,17 +147,17 @@ document.addEventListener('DOMContentLoaded', (): void => {
         wiggle(document.querySelector('svg .two'), 1, wiggleStrength, FPS)
         wiggle(document.querySelector('svg .three'), 1, wiggleStrength, FPS)
 
-        // fade in content
-        setTimeout(() => {
-            document.querySelectorAll('.options .option').forEach((el: any) => {
-                fadeIn(el, { duration: 3000, fps: 60 })
-            });
-            fadeIn(document.querySelector('.header-card h2'), { duration: 3000, fps: 60 });
-            document.querySelectorAll('.header-card .sub-card').forEach((el: any) => {
+        // // fade in content
+        // setTimeout(() => {
+        //     document.querySelectorAll('.options .option').forEach((el: any) => {
+        //         fadeIn(el, { duration: 3000, fps: 60 })
+        //     });
+        //     fadeIn(document.querySelector('.header-card h2'), { duration: 3000, fps: 60 });
+        //     document.querySelectorAll('.header-card .sub-card').forEach((el: any) => {
 
-                fadeIn(el, { duration: 3000, fps: 60 });
-            });
-        }, 2000);
+        //         fadeIn(el, { duration: 3000, fps: 60 });
+        //     });
+        // }, 2000);
 
 
         const startFps = 5;
@@ -208,7 +210,9 @@ document.addEventListener('DOMContentLoaded', (): void => {
             let delta = performance.now() - lastTime
             lastTime = performance.now();
 
-            console.log(delta)
+            if (delta > 16) {
+                console.log('dropped frame @ ' + Date.now())
+            }
 
             // console.log(elapsed)
             // if (elapsed < .5) {
@@ -230,9 +234,8 @@ document.addEventListener('DOMContentLoaded', (): void => {
             thresholdEl2.setAttribute('slope', currentSlope2.toString());
             blurEl2.setAttribute('stdDeviation', currentBlur2.toString());
 
-            if (firstTime) {
+            if (firstTime && skylineLoaded) {
                 firstTime = false;
-
                 document.body.classList.remove('loading');
             }
 
@@ -248,6 +251,7 @@ document.addEventListener('DOMContentLoaded', (): void => {
 
         };
 
+        console.log('initial call')
         requestAnimationFrame(animate);
 
 
@@ -1007,17 +1011,41 @@ document.addEventListener('DOMContentLoaded', (): void => {
 });
 
 // ACCESSIBILITY WIDGET
+function loadSiennaScript(): Promise<void> {
+    return new Promise((resolve, reject) => {
+        if (document.querySelector('script[src="sienna.min.js"]')) {
+            resolve();
+            return;
+        }
+
+        const script = document.createElement('script');
+        script.src = 'sienna.min.js';
+        script.defer = true;
+        script.async = true;
+
+        script.addEventListener('load', () => resolve());
+        script.addEventListener('error', () => reject(new Error('Failed to load script')));
+
+        document.head.appendChild(script);
+    });
+}
+
 const accessibilityButton = document.querySelector('#accessibility') as HTMLElement;
 if (accessibilityButton) {
     accessibilityButton.addEventListener('click', (): void => {
-        removeFancyLandingEffects();
-        (document.querySelector('.asw-widget a') as HTMLElement)?.click();
-        (document.querySelector('button.asw-btn[data-key="monochrome"]') as HTMLElement)?.click();
-        (document.querySelector('button.asw-btn[data-key="stop-animations"]') as HTMLElement)?.click();
+        loadSiennaScript().then(() => {
+            setTimeout(() => {
+                removeFancyLandingEffects();
+                (document.querySelector('.asw-widget a') as HTMLElement)?.click();
+                (document.querySelector('button.asw-btn[data-key="monochrome"]') as HTMLElement)?.click();
+                (document.querySelector('button.asw-btn[data-key="stop-animations"]') as HTMLElement)?.click();
+            }, 500)
+        });
     });
 }
 
 setTimeout(() => {
+    // TODO: this is broken now that we lazyload sienna
     if (document.querySelector('html')?.classList.contains('aws-filter')) {
         removeFancyLandingEffects();
     }
@@ -1186,14 +1214,14 @@ function wiggle(element, freq = 2, amp = 20, fps = 60) {
         return c + (d - c) * (x * x * (3 - 2 * x));
     }
 
-    function animate(now) {
+    function animateFrame(now) {
         const t = (now - start) / 1000;
 
         const frame = Math.floor(t * fps);
 
         //  skip rendering if same frame
         if (frame === lastFrame) {
-            requestAnimationFrame(animate);
+            requestAnimationFrame(animateFrame);
             return;
         }
         lastFrame = frame;
@@ -1210,10 +1238,10 @@ function wiggle(element, freq = 2, amp = 20, fps = 60) {
         element.style.transform =
             `translate(${x}px, ${y}px) rotate(${r}deg)`;
 
-        requestAnimationFrame(animate);
+        requestAnimationFrame(animateFrame);
     }
 
-    requestAnimationFrame(animate);
+    requestAnimationFrame(animateFrame);
 }
 
 
