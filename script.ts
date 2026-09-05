@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', (): void => {
         if (document.body.clientWidth < 768) {
             // tone down the noise (there seems to be a difference chrome v safari)
             document.querySelector('#speckleNoise')?.setAttribute('baseFrequency', ".08");
-            FPS = 5
+            FPS = 15
             timeScalar = .75
             // wiggle less
             wiggleStrength = 3
@@ -177,8 +177,8 @@ document.addEventListener('DOMContentLoaded', (): void => {
             //     return
             // }
 
-            // document.querySelector('#skylineSeed')
-            //     ?.setAttribute('seed', (Math.random() * 1000000).toString());
+            document.querySelector('#skylineSeed')
+                ?.setAttribute('seed', (Math.random() * 1000000).toString());
 
             // schedule next frame
             setTimeout(animateNoise, 1000 / fps);
@@ -191,6 +191,7 @@ document.addEventListener('DOMContentLoaded', (): void => {
         const blurEl1 = document.querySelector('#headerBlur1');
         const thresholdEl2 = document.querySelector('#headerThreshold2');
         const blurEl2 = document.querySelector('#headerBlur2');
+        const thirdText = document.querySelector('g.three text')
         let firstTime = true;
 
         if (!thresholdEl1 || !blurEl1 || !thresholdEl2 || !blurEl2) {
@@ -210,8 +211,8 @@ document.addEventListener('DOMContentLoaded', (): void => {
             let delta = performance.now() - lastTime
             lastTime = performance.now();
 
-            if (delta > 16) {
-                console.log('dropped frame @ ' + Date.now())
+            if (delta > (1000 / 10)) {
+                console.log('dropped frame delta: ' + delta + '/100 @ ' + Date.now())
             }
 
             // console.log(elapsed)
@@ -239,11 +240,21 @@ document.addEventListener('DOMContentLoaded', (): void => {
                 document.body.classList.remove('loading');
             }
 
+            thirdText?.setAttribute('letter-spacing', `${(easeInOut(progress2 - .25)) * .2}em`);
 
 
-            if (progress2 < 2) {
-                requestAnimationFrame(animate);
+
+
+            if (progress2 < 1) {
+                setTimeout(() => {
+                    requestAnimationFrame(animate);
+                }, 1000 / 10);
             }
+
+
+
+
+
             // } else {
             // requestAnimationFrame(animate);
             // }

@@ -58,7 +58,7 @@
         this.rel = 'stylesheet';
       "
     />
-    <link
+    <!-- <link
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=block"
       rel="preload"
       as="style"
@@ -66,7 +66,7 @@
         this.onload = null;
         this.rel = 'stylesheet';
       "
-    />
+    /> -->
 
     <script type="application/ld+json">
       {
@@ -129,8 +129,8 @@
         ]
       }
     </script>
-    <script type="module" crossorigin src="/assets/index-C4UqFgIy.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-DLllrhFm.css">
+    <script type="module" crossorigin src="/assets/index-CxDsTvvD.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DwYR3JQN.css">
   </head>
 
   <body class="loading">
@@ -577,8 +577,8 @@ like that. do not redistribute. -->
               This is
               <b>not an exhaustive guide</b>
               for
-              <i>every situation</i>, but rather a <b>brief primer</b> (30 pages 🙃) designed to make it as easy as possible for the majority of
-              people.
+              <i>every situation</i>, but rather a <b>brief primer</b> (almost 30 pages 🙃) designed to make it as easy as possible for the majority
+              of people.
             </p>
           </div>
           <!-- <p class="subtitle">It's going to take some time, but you can do it little by little :3</p> -->
@@ -2619,7 +2619,15 @@ like that. do not redistribute. -->
     </div>
     <!-- External JavaScript -->
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZQTGQ207FY" defer></script>
+    <script>
+      setTimeout(() => {
+        const gtagScript = document.createElement("script");
+        gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-ZQTGQ207FY";
+        gtagScript.async = true;
+        gtagScript.defer = true;
+        document.head.appendChild(gtagScript);
+      }, 5000);
+    </script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
