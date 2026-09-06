@@ -60,6 +60,8 @@
 :root,
 body {
     --mdc-typography-font-family: 'Atkinson Hyperlegible Soft', 'Roboto', sans-serif;
+    --md-ref-typeface-brand: 'Atkinson Hyperlegible Soft', 'Roboto', sans-serif;
+    --md-ref-typeface-plain: 'Atkinson Hyperlegible Soft', 'Roboto', sans-serif;
 }
 
 body {
@@ -725,6 +727,10 @@ md-text-button {
     /* display: block; */
 }
 
+/* md-filled-button { */
+/* --md-filled-button-font-family: 'Atkinson Hyperlegible Soft', 'Roboto', sans-serif; */
+/* } */
+
 /* Celebration Button */
 .celebration-button-container {
     display: flex;
@@ -755,13 +761,13 @@ md-text-button {
     0%,
     100% {
         transform: scale(1);
-        font-weight: 100;
+        /* font-weight: 100; */
         /* letter-spacing: -0.05em; */
     }
 
     50% {
         transform: scale(1.05);
-        font-weight: 900;
+        /* font-weight: 900; */
         /* letter-spacing: 51em; */
     }
 }
