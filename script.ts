@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', (): void => {
             const currentSlope1 = 25 + (40 - 0) * easeInOut(progress1);
             const currentBlur1 = 5 + (.25 - 2) * easeInOut(progress1);
 
-            const currentSlope2 = 0 + (30 - 0) * easeInOut(progress2);
+            const currentSlope2 = 0 + (35 - 0) * easeInOut(progress2);
             const currentBlur2 = 2 + (4 - 2) * easeInOut(progress2);
 
             // Update attributes
