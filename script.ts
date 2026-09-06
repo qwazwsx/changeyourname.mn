@@ -240,7 +240,7 @@ document.addEventListener('DOMContentLoaded', (): void => {
                 document.body.classList.remove('loading');
             }
 
-            thirdText?.setAttribute('letter-spacing', `${(easeInOut(progress2 - .25)) * .2}em`);
+            thirdText?.setAttribute('letter-spacing', `${(easeInOut(progress2 - .25)) * .15}em`);
 
 
 
