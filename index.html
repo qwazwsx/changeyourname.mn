@@ -49,7 +49,7 @@
     <!-- Material Design 3 CSS -->
     <link
       rel="preload"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block&icon_names=accessibility,account_balance,add_notes,attach_money,badge,balance,bolt,bug_report,celebration,check_circle,close,code,coffee,comment,construction,contract_edit,credit_card,delete,download,drive_file_rename_outline,edit_document,email,expand_less,expand_more,favorite,flight,gavel,hourglass_top,id_card,info,language,local_hospital,local_police,mail,menu,open_in_new,picture_as_pdf,receipt_long,report,rocket_launch,save,search,security,send,share,shield,transgender,upload_file,verified,visibility,volunteer_activism,warning"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block&icon_names=accessibility,account_balance,add_notes,attach_money,badge,balance,bolt,bug_report,celebration,check_circle,close,code,coffee,comment,construction,contract_edit,credit_card,delete,download,drive_file_rename_outline,edit_document,email,expand_less,expand_more,favorite,flight,gavel,hourglass_top,id_card,info,language,local_hospital,local_police,mail,menu,open_in_new,paid,picture_as_pdf,receipt_long,report,rocket_launch,save,search,security,send,share,shield,transgender,upload_file,verified,visibility,volunteer_activism,warning"
       as="style"
       onload="
         this.onload = null;
@@ -1113,7 +1113,7 @@ like that. do not redistribute. -->
             <div class="centered">
               <md-filled-button onclick="window.open('https://minnesota.tylertech.cloud/SRL/SRL', '_blank')">
                 <span class="material-symbols-outlined" slot="icon">open_in_new</span>
-                Open EFS (E-File) Website
+                Open Official Fee Waiver Form Generator
               </md-filled-button>
             </div>
 
@@ -1189,7 +1189,7 @@ like that. do not redistribute. -->
                 for 2026! In the meantime, you should be able to get by using the existing instructions. Thanks y'all. &lt;3
               </p>
             </div>
-            <div class="sub-card sub-card--primary">
+            <div class="sub-card sub-card--primary" id="eFile-payment-account">
               <h3>Setup Your Account</h3>
               <ol>
                 <li>
@@ -1202,48 +1202,103 @@ like that. do not redistribute. -->
                     Register for E-file Account
                   </md-filled-button>
                 </div>
-                <li>Click "Actions", then "Payment Account". Add a payment method.</li>
+                <li>
+                  Add a payment method to your account. You will need this to pay the filing fees. While you do not need a payment method first to
+                  create a draft and upload files, you need to have a payment method (or fee waiver) on file when you actually submit your forms to
+                  the courts.
+                </li>
+                <ul>
+                  <li>
+                    Click the <span class="material-symbols-outlined"> paid </span> (dollar sign) icon on the left navigation bar. Next, click "Add
+                    Payment Account" to add a new payment method. You can give it any name you wish (e.g. My Debit Card). Be sure to select "credit
+                    card" as the account type, even if you're using a debit card. Next, you will be prompted to enter your card information.
+                  </li>
+                </ul>
               </ol>
-              <div class="image-container">
+              <div
+                class="image-container"
+                style="width: 100%; display: flex; justify-content: space-evenly; flex-direction: row; flex-wrap: wrap; gap: 10px"
+              >
                 <img
-                  src="images/eFile_home.png"
-                  width="964"
-                  height="509"
+                  src="images/efile2_payment_accounts.webp"
+                  width="437"
+                  height="282"
                   loading="lazy"
-                  alt="eFile system home page"
-                  style="width: 100%; height: auto; max-width: 964px"
+                  alt="eFile system prompts to add payment accounts on the home screen"
+                  style="width: 100%; max-width: 437px"
                 />
-                <p class="image-caption">The eFile system home page where you'll register your account</p>
+                <img
+                  src="images/efile2_payment_accounts_added.webp"
+                  width="960"
+                  height="399"
+                  loading="lazy"
+                  alt="eFile system payment accounts screen showing a payment account has been added"
+                  style="width: 670px; height: auto; max-width: 960px"
+                />
+                <!-- <p class="image-caption">The eFile system payment accounts interface</p> -->
               </div>
             </div>
             <div class="sub-card sub-card--secondary">
-              <h3>Create a new case envelope</h3>
+              <h3>Create a new case</h3>
               <ol>
-                <li>Click "Start a New Case"</li>
+                <li>Click "Start Filing"</li>
+                <li>Select "Start a New Case"</li>
                 <li>Enter your County. Select "Civil" and "Change of Name"</li>
-                <li>Enter your current legal name and address as the Petitioner</li>
+                <ul>
+                  <li>
+                    If you are in a well populated county (e.g. Hennepin, Ramsey) there may be several options for the different types of court in the
+                    "Court Location" dropdown. Select the civil court option here too if applicable.
+                  </li>
+                </ul>
+
+                <div class="image-container">
+                  <img
+                    src="images/efile2_file1.webp"
+                    width="530"
+                    height="278"
+                    loading="lazy"
+                    alt="eFile case information screen"
+                    style="width: 100%; height: auto; max-width: 530px"
+                  />
+                  <!-- <p class="image-caption">Enter your current legal name when creating the case</p> -->
+                </div>
+                <li>
+                  Under Petitioner, click "Add Party Details". Enter your <u>current legal name (deadname)</u> and your residential address. This
+                  address must be inside of the county you are filing in. Check the "I am this party" box.
+                  <u>"Attorney" should say "Pro Se", which means you are filing on your own behalf.</u>
+                  <div class="image-container">
+                    <img
+                      src="images/efile2_file2.webp"
+                      width="620"
+                      height="121"
+                      loading="lazy"
+                      alt="eFile completed parties screen"
+                      style="width: 100%; height: auto; max-height: 200px"
+                    />
+                    <p class="image-caption">Enter your current legal name, your deadname, when creating the case</p>
+                  </div>
+                </li>
+                <!-- <li>Check "I am this Party"</li> -->
               </ol>
-              <div class="image-container">
-                <img
-                  src="images/eFile_name.png"
-                  width="837"
-                  height="834"
-                  loading="lazy"
-                  alt="eFile case setup with name fields"
-                  style="width: 100%; height: auto; max-width: 837px"
-                />
-                <p class="image-caption">Enter your current legal name when creating the case</p>
-              </div>
             </div>
             <div class="sub-card sub-card--tertiary">
               <h3>Upload your Documents (1/3)</h3>
               <ol>
                 <li>Now we can upload our documents. Under Filing Code, enter "Application for Name Change"</li>
-                <li>Under Filing Description, enter "NAM102 Application for Name Change or Other Relief"</li>
+                <li class="not-annotatable">Under Filing Description, enter "NAM102 Application for Name Change or Other Relief"</li>
                 <li>Client Reference Number can be any number. Just enter 0.</li>
                 <li>Comments to Court must say "Public"</li>
+                <ul>
+                  <li>
+                    This means the document is available to the public. There is an option of having the records sealed, but this requires special
+                    permission from the court and is apparently difficult. I'm in talks with people in the know and may have a guide for sealing and
+                    expungement in the future. My contacts also say that lawyers are working to change the law to make this the default for Trans
+                    people. You can have a record sealed after your name change is complete, but this is a separate process.
+                    <b>If you must have your records sealed (made not public), you should seek legal counsel.</b>
+                  </li>
+                </ul>
                 <li>Enter your email under Courtesy Copies</li>
-                <li>Upload the completed document "NAM102 Application for Name Change or Other Relief" as a .PDF</li>
+                <li class="not-annotatable">Upload the completed document "NAM102 Application for Name Change or Other Relief" as a .PDF</li>
                 <li>Add "Civil Filing Fee". This is about $300.</li>
                 <li>Save your changes</li>
               </ol>
@@ -1253,10 +1308,10 @@ like that. do not redistribute. -->
                   width="843"
                   height="848"
                   loading="lazy"
-                  alt="eFile document upload interface"
+                  alt="(outdated) eFile document upload interface"
                   style="width: 100%; height: auto; max-width: 843px"
                 />
-                <p class="image-caption">The document upload interface in the eFile system</p>
+                <p class="image-caption">An outdated screenshot showing the document upload interface</p>
               </div>
             </div>
             <div class="sub-card sub-card--tertiary">
@@ -1264,11 +1319,11 @@ like that. do not redistribute. -->
               <ol>
                 <li>There should now be a button that says "Add Another Filing", click it.</li>
                 <li>Now we can add the next document. Use Filing Code "Consent to Criminal Background Check".</li>
-                <li>Description: "NAM103 Criminal History Check Release".</li>
+                <li class="not-annotatable">Description: "NAM103 Criminal History Check Release".</li>
                 <li>Reference Number: 1.</li>
                 <li>Comments: Public.</li>
                 <li>Courtesy Copies: enter your email again.</li>
-                <li>Upload the completed document "NAM103 Criminal History Check Release" as a .PDF.</li>
+                <li class="not-annotatable">Upload the completed document "NAM103 Criminal History Check Release" as a .PDF.</li>
                 <li>Do not add any Services and Fees.</li>
                 <li>Save.</li>
               </ol>
@@ -1278,21 +1333,36 @@ like that. do not redistribute. -->
               <ol>
                 <li>Add another Filing.</li>
                 <li>Filing Code: Proposed Order or Document.</li>
-                <li>Description: "NAM107 Proposed Order Granting Name Change".</li>
+                <li class="not-annotatable">Description: "NAM107 Proposed Order Granting Name Change".</li>
                 <li>Reference Number: 2.</li>
                 <li>Comments: Public.</li>
                 <li>Courtesy Copies: enter your email again.</li>
-                <li>Upload the completed document "NAM107 Proposed Order Granting Name Change" as a .PDF.</li>
+                <li class="not-annotatable">Upload the completed document "NAM107 Proposed Order Granting Name Change" as a .PDF.</li>
                 <li>Do not add any Services and Fees.</li>
                 <li>Click save.</li>
               </ol>
             </div>
+            <div class="image-container">
+              <img
+                src="images/efile2_filing_completed.webp"
+                width="959"
+                height="476"
+                loading="lazy"
+                alt="eFile filings page, showing all three documents uploaded and ready for submission"
+                style="width: 100%; height: auto; max-width: 959px"
+              />
+              <p class="image-caption">
+                You should have all 3 documents uploaded, with their filing codes and descriptions exactly as described above.
+              </p>
+            </div>
+
             <div class="sub-card sub-card--primary">
               <h3>Finish Filing</h3>
               <ol>
                 <li>Ignore the "Service Contacts" section.</li>
-                <li>Select your payment account and save.</li>
-                <li>Click "Summary" at the bottom.</li>
+                <li>Continue to the "Fees" page.</li>
+                <li>Select the <a href="#eFile-payment-account">payment account you set up earlier</a> and save.</li>
+                <li>Continue to "Summary".</li>
                 <li>Double check your information and click "Submit".</li>
               </ol>
               <p>
@@ -1300,7 +1370,7 @@ like that. do not redistribute. -->
                 This will place a hold on your selected payment method. It will only go through once your files are accepted. If there are any
                 problems, you will have to resubmit, and another hold will be placed on your card. Holds are returned after about two weeks.
               </p>
-              <div class="image-container">
+              <!-- <div class="image-container">
                 <img
                   src="images/eFile_allDocuments.png"
                   width="843"
@@ -1310,7 +1380,7 @@ like that. do not redistribute. -->
                   style="width: 100%; height: auto; max-width: 843px"
                 />
                 <p class="image-caption">All three documents uploaded and ready for submission</p>
-              </div>
+              </div> -->
             </div>
             <div class="sub-card sub-card--warning">
               <p>
@@ -1806,7 +1876,7 @@ like that. do not redistribute. -->
                   alt="eFile certified copy request form"
                   style="width: 100%; height: auto; max-width: 837px"
                 />
-                <p class="image-caption">Requesting certified copies through the eFile system</p>
+                <p class="image-caption">(outdated screenshot) Requesting certified copies through the eFile system circa 2025</p>
               </div>
             </div>
             <div class="sub-card sub-card--tertiary">
@@ -2030,9 +2100,15 @@ like that. do not redistribute. -->
               </ul>
               <p>
                 <strong>For sex marker changes:</strong>
-                Alongside your eye color, height, and weight-- sex is a self designated descriptor. This means you can simply provide your
-                self-identified sex without needing additional documentation.
+                Alongside your eye color, height, and weight-- sex is a self designated descriptor. This means you can simply provide your sex ("F",
+                "M", "X") without needing additional documentation.
               </p>
+              <ul>
+                <li>
+                  Due to a variety of complicated factors, the X marker, while easy to obtain, is a complicated risk-benefit decision that should be
+                  made with the help of a lawyer. <b>If you are seeking an X marker, I recommend you consult with a lawyer before proceeding.</b>
+                </li>
+              </ul>
               <div class="resources">
                 <md-outlined-button
                   onclick="
@@ -2413,6 +2489,22 @@ like that. do not redistribute. -->
                 If you experience discrimination, I encourage you to speak out and file a complaint.
                 <b>Your voice can help improve the process for others</b>
                 and hold institutions accountable. Change happens when people advocate for themselves and their community.
+              </p>
+              <hr />
+              <p>The content that proceeds comes with a content warning for the following topics: SA</p>
+              <a class="consent-btn">(peek)</a>
+              <p class="consentscreen" style="line-height: 1.5em">
+                In mid 2025, while traveling for work, I experienced an <span class="consent">assault</span> during
+                <span class="consent">TSA</span> screening at a Michigan airport. I was told I was selected for
+                <span class="consent">additional screening</span> due to my appearance, clothing, and perceived transgender status. After I objected
+                to being screened by a <span class="consent">male officer</span>, I was taken to a <span class="consent">private room</span> and
+                repeatedly told that officers would touch my genitals to determine whether I had a penis. When I objected, I was told that
+                <span class="consent">law enforcement</span> would become involved and that if I left, police would physically stop and search me and
+                I could face <span class="consent">criminal charges</span>. After approximately an hour and a half of intense distress, I ultimately
+                <span class="consent">complied</span> because I believed I had <span class="consent">no safe alternative</span>. I want to emphasize
+                that compliance under threats and coercion is not the same thing as voluntary consent. The experience was deeply
+                <span class="consent">traumatic</span> and has had a lasting impact on me. As such I
+                <span class="consent">no longer feel comfortable traveling</span> for work.
               </p>
             </div>
           </div>

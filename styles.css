@@ -960,7 +960,7 @@ a {
 }
 
 a:hover {
-    background-color: #7cbdff29;
+    background-color: #7cbdff29 !important;
 
 }
 
@@ -973,9 +973,10 @@ a:visited {
     margin: 20px 0;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
     width: 100%;
     max-width: 100%;
+    text-align: center;
 }
 
 .image-container amp-img {
@@ -1608,6 +1609,8 @@ md-linear-progress {
 
 a[href^="#"] {
     color: black;
+    background-color: #bbbbbb45;
+    transition: background-color 0.3s ease-in-out;
 }
 
 
@@ -2143,4 +2146,24 @@ div.options .option:hover {
     /* z-index: 999999999999999999; */
     /* fuck my life */
     /* margin-top: 390px;  */
+}
+
+
+.consentscreen {
+    background-color: black;
+    transition: background-color 1.5s ease;
+    padding: 8px;
+    border-radius: 4px
+}
+
+.consentscreen:hover,
+.consentscreen:focus,
+.consentscreen:active {
+    background-color: var(--md-sys-color-primary-container);
+    border-color: var(--md-sys-color-primary);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.consentscreen .peeked {
+    color: white;
 }

@@ -1287,3 +1287,15 @@ function fadeIn(el, { duration = 3000, fps = 5 } = {}) {
 document.querySelectorAll('.material-symbols-outlined').forEach((el) => {
     el.setAttribute('aria-hidden', 'true')
 })
+
+document.querySelector('.consent-btn')?.addEventListener('mouseenter', () => {
+    document.querySelectorAll('.consent').forEach((el) => {
+        el.classList.add('peeked')
+    })
+})
+
+document.querySelector('.consent-btn')?.addEventListener('mouseleave', () => {
+    document.querySelectorAll('.consent').forEach((el) => {
+        el.classList.remove('peeked')
+    })
+})
