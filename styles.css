@@ -1609,7 +1609,7 @@ md-linear-progress {
 
 a[href^="#"] {
     color: black;
-    background-color: #bbbbbb45;
+    background-color: #cbe6ff45;
     transition: background-color 0.3s ease-in-out;
 }
 
@@ -2149,11 +2149,18 @@ div.options .option:hover {
 }
 
 
+.consent-txt {
+    text-align: center;
+    width: 100%;
+}
+
 .consentscreen {
-    background-color: black;
+    background-color: #1c1b1a;
     transition: background-color 1.5s ease;
     padding: 8px;
-    border-radius: 4px
+    border-radius: 4px;
+    display: inline-block;
+
 }
 
 .consentscreen:hover,
@@ -2166,4 +2173,20 @@ div.options .option:hover {
 
 .consentscreen .peeked {
     color: white;
+}
+
+.consent-btn,
+.anti-consent-btn,
+.undo-anti-consent-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.hidden-anti-consent-text {
+    display: none;
+}
+
+.hidden-anti-consent-container {
+    text-align: center;
 }

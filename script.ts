@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', (): void => {
             // tone down the noise (there seems to be a difference chrome v safari)
             document.querySelector('#speckleNoise')?.setAttribute('baseFrequency', ".08");
             FPS = 15
-            timeScalar = .75
+            // timeScalar = .75
             // wiggle less
             wiggleStrength = 3
         }
@@ -213,6 +213,7 @@ document.addEventListener('DOMContentLoaded', (): void => {
 
             if (delta > (1000 / 10)) {
                 console.log('dropped frame delta: ' + delta + '/100 @ ' + Date.now())
+
             }
 
             // console.log(elapsed)
@@ -649,42 +650,7 @@ document.addEventListener('DOMContentLoaded', (): void => {
         }
     }
 
-    // saves the value of an element (or specified ID and value) to local storage AND cookies
-    function save(idOrElement: string | HTMLElement, value?: any): void {
-        let id: string;
-        let val: any;
 
-        if (typeof idOrElement === 'object' && idOrElement !== null) {
-            id = idOrElement.id;
-            val = (idOrElement as any).value;
-        } else {
-            id = idOrElement;
-            val = value;
-        }
-
-        // Save to localStorage
-        localStorage.setItem(id, val);
-        // Save to cookies
-        document.cookie = `${id}=${val}; path=/; max-age=31536000`; // 1 year
-    }
-
-    // load the value of an element from localstorage or cookies
-    function load(id: string): string | null {
-        // Load from localStorage
-        let value = localStorage.getItem(id);
-        if (value === null) {
-            // If not found in localStorage, try cookies
-            const cookies = document.cookie.split('; ');
-            for (const cookie of cookies) {
-                const [key, val] = cookie.split('=');
-                if (key === id) {
-                    value = val;
-                    break;
-                }
-            }
-        }
-        return value;
-    }
 
     // Smooth scrolling for anchor links with nav bar offset
     document.addEventListener('click', (e: Event): void => {
@@ -1284,6 +1250,44 @@ function fadeIn(el, { duration = 3000, fps = 5 } = {}) {
 }
 
 
+
+// saves the value of an element (or specified ID and value) to local storage AND cookies
+function save(idOrElement: string | HTMLElement, value?: any): void {
+    let id: string;
+    let val: any;
+
+    if (typeof idOrElement === 'object' && idOrElement !== null) {
+        id = idOrElement.id;
+        val = (idOrElement as any).value;
+    } else {
+        id = idOrElement;
+        val = value;
+    }
+
+    // Save to localStorage
+    localStorage.setItem(id, val);
+    // Save to cookies
+    document.cookie = `${id}=${val}; path=/; max-age=31536000`; // 1 year
+}
+
+// load the value of an element from localstorage or cookies
+function load(id: string): string | null {
+    // Load from localStorage
+    let value = localStorage.getItem(id);
+    if (value === null) {
+        // If not found in localStorage, try cookies
+        const cookies = document.cookie.split('; ');
+        for (const cookie of cookies) {
+            const [key, val] = cookie.split('=');
+            if (key === id) {
+                value = val;
+                break;
+            }
+        }
+    }
+    return value;
+}
+
 document.querySelectorAll('.material-symbols-outlined').forEach((el) => {
     el.setAttribute('aria-hidden', 'true')
 })
@@ -1298,4 +1302,25 @@ document.querySelector('.consent-btn')?.addEventListener('mouseleave', () => {
     document.querySelectorAll('.consent').forEach((el) => {
         el.classList.remove('peeked')
     })
+})
+
+if (load('anti-consent') === 'true') {
+    document.querySelectorAll('.sensitive-content').forEach((el) => {
+        el.parentElement?.removeChild(el)
+        document.querySelector('.hidden-anti-consent-text')?.classList.remove('hidden-anti-consent-text')
+    })
+}
+
+document.querySelector('.anti-consent-btn')?.addEventListener('click', () => {
+    document.querySelectorAll('.sensitive-content').forEach((el) => {
+        el.parentElement?.removeChild(el)
+        document.querySelector('.hidden-anti-consent-text')?.classList.remove('hidden-anti-consent-text')
+        save('anti-consent', 'true')
+    })
+})
+
+document.querySelector('.undo-anti-consent-btn')?.addEventListener('click', () => {
+    save('anti-consent', 'false')
+    window.location.reload();
+
 })
